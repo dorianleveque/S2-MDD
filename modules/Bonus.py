@@ -4,7 +4,7 @@
 ##	     The Legend Of Zelda - A Link to the Rogue		##
 ##	    Un projet de Methode de Developpement (MDD) 	##
 ##								##
-##			      Arrow.py				##
+##			      Bonus.py				##
 ##								##
 ## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     01/04/2016 ##
 ##################################################################
