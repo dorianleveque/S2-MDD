@@ -1,4 +1,13 @@
 # -*- coding: utf-8 -*-
+##################################################################
+##								##
+##	     The Legend Of Zelda - A Link to the Rogue		##
+##	    Un projet de Methode de Developpement (MDD) 	##
+##								##
+##			     Dungeon.py	        		##
+##								##
+## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     01/04/2016 ##
+##################################################################
 
 def create(name):
         d = dict()
