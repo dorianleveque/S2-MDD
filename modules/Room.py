@@ -17,7 +17,31 @@ def create(dungeonName, roomName):
         return r
 
 def show(r):
+        goto(0,0)
         
+        # Affichage du fond
+        for y in range(0, len(r["background"])):
+                for x in range(0, len(r["background"][y])):
+                        goto(x, y)
+                        sys.stdout.write(r["background"][y][x])
+        
+        # Affichage des coffres
+        for currentChest in r["chests"]:
+                x, y = Chest.getPosition(currentChest)
+                goto(x, y)
+                Chest.show(currentChest)
+        
+        # Affichage des mobs
+        for currentMob in r["mobs"]:
+                x, y = Mob.getPosition(currentMob)
+                goto(x, y)
+                Mob.show(currentMob)
+        
+        # Affichage des projectiles
+        for currentArrow in r["arrows"]:
+                x, y = Arrow.getPosition(currentArrow)
+                goto(x, y)
+                Arrow.show(currentArrow)
 
 def getChestByPosition(r, x, y):
         # On parcourt la liste des coffres de la salle
