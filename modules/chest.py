@@ -9,6 +9,9 @@
 ## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     01/04/2016 ##
 ##################################################################
 
+# Modules personnalisés
+import Bow
+import Bonus
 
 def create(x,y,donne): 
         
