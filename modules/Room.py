@@ -9,7 +9,13 @@
 ## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     01/04/2016 ##
 ##################################################################
 
-from xml.dom.minidom import parse;
+# Modules système
+from xml.dom.minidom import parse
+
+# Modules personnalisés
+import Chest
+import Arrow
+import Mob
 
 def create(dungeonName, roomName):
         
