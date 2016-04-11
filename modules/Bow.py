@@ -10,22 +10,22 @@
 ##################################################################
 
 def create():
-
+        return
 
 def getName(b):
         return name
 
 def setName(b, name):
-        
+        return
 
 def getDamage(b):
         return damage
 
 def setDamage(b, name):
-
+        return
 
 def getSprite(b):
         return sprite
 
 def setSprite(b, name):
-
+        return

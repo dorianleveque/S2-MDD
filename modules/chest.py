@@ -13,17 +13,17 @@
 import Bow
 import Bonus
 
-def create(x,y,donne): 
-        
-        
-def addItem(c,i): 
+def create(x,y,donne):
+        return
 
+def addItem(c,i):
+        return
 
 def getPosition(c):
         return (x,y)
 
 def setPosition(c,x,y):
-        
+        return
 
 def getContent(c):
         return c["content"]

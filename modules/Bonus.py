@@ -10,17 +10,16 @@
 ##################################################################
 
 def create():
-
+        return
 
 def getName(b):
         return name
         
 def setName(b, name):
-
+        return
 
 def getAmount(b):
         return amount
         
 def setAmount(b, amount):
-
-
+        return
