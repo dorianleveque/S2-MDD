@@ -32,8 +32,6 @@ def create(dungeonName, roomName):
         return r
 
 def show(r):
-        goto(0,0)
-        
         # Affichage du fond
         for y in range(0, len(r["background"])):
                 for x in range(0, len(r["background"][y])):
