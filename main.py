@@ -49,8 +49,6 @@ def show():
 
 def run():        
         while True:
-                time.sleep(0.2)
-
                 interact()
                 move()
         
@@ -73,27 +71,27 @@ def interact():
         global direction
        
         #gestion des evenements clavier
-        if isData():                                     #si une touche est appuyee
+        if isData():                                    #si une touche est appuyee
                 read = sys.stdin.read(1)
                 if read == "\x1b": 
-                        quit()                           # \x1b = touche echap / appel de la fonction qui permet de quitter le jeu
+                        quit()                          # \x1b = touche echap / appel de la fonction qui permet de quitter le jeu
                 elif read == "z": 
-                        direction = "Up"                 # le joueur se déplace vers Direction Haut
+                        direction = "Up"                # le joueur se déplace vers Direction Haut
                 elif read == "q": 
-                        direction = "Left"               # le joueur se déplace vers Direction Gauche
+                        direction = "Left"              # le joueur se déplace vers Direction Gauche
                 elif read == "s": 
-                        direction = "Down"               # le joueur se déplace vers Direction Bas
+                        direction = "Down"              # le joueur se déplace vers Direction Bas
                 elif read == "d": 
-                        direction = "Right"              # le joueur se déplace vers Direction Droite
-                #elif read == "p":                       # appel de la fonction pause
+                        direction = "Right"             # le joueur se déplace vers Direction Droite
+                #elif read == "p":                      # appel de la fonction pause
                 #elif read == "\x08": 
-               # sys.stdout.flush()
+        termios.tcflush(sys.stdin, termios.TCIOFLUSH)   # Permet de vider, le buffer des touches d'entree
 
                 
 
 def isData():
         #recuperation des elements clavier
-        return select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], [])
+        return select.select([sys.stdin], [], [], termios.TCIOFLUSH) == ([sys.stdin], [], [])
 
 def quit():
         #restauration des parametres du terminal
