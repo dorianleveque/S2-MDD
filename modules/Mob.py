@@ -15,6 +15,9 @@ def create():
 def move(m):
         return
 
+def show(m):
+        return
+
 def getType(m):
         return type
         
