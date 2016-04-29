@@ -16,18 +16,67 @@ from xml.dom.minidom import parse
 import Chest
 import Arrow
 import Mob
+import Utils
 
 def create(dungeonName, roomName):
-        
-        path = "./../assets/rooms/" + dungeonName + "/" + roomName + ".xml"
-        doc = parse(path)
-        rootBeacon = doc.documentElement
-        
+        # -- Initialisation du dictionnaire --
         r = dict()
         r["upRoom"]=None
         r["downRoom"]=None
         r["leftRoom"]=None
         r["rightRoom"]=None
+        
+        # -- Parsage du fichier XML correspondant --
+        path = "./../assets/rooms/" + dungeonName + "/" + roomName + ".xml"
+        doc = parse(path)
+        rootBeacon = doc.documentElement
+
+        # Récupération du background
+        background = rootBeacon.getElementsByTagName("background")[0].firstChild.nodeValue
+        for line in background:
+                r["background"].append(list(line))
+
+        # Récupération des mobs
+        mobs = rootBeacon.getElementsByTagName("mobs")
+        nb_mobs = mobs.length
+        for i in range(nb_mobs):
+                mob = Mob.create()
+                Mob.setType(mob, mobs[i].getAttribute("type"))
+                Mob.setPosition(mob, int(mobs[i].getAttribute("x")), int(mobs[i].getAttribute("y")))
+                Mob.setHealth(mob, int(mobs[i].getAttribute("health")))
+                Mob.setStrength(mob, float(mobs[i].getAttribute("strength")))
+                Mob.setResistance(mob, float(mobs[i].getAttribute("resistance")))
+                Mob.setDamage(mob, int(mobs[i].getAttribute("damage")))
+                Mob.setSprite(mob, mobs[i].firstChild.nodeValue)
+                r["mobs"].append(mob)
+        
+        # Récupération des coffres
+        chests = rootBeacon.getElementsByTagName("chests")
+        nb_chests = chests.length
+        for i in range(nb_chests):
+                chest = Chest.create()
+                Chest.setPosition(chest, int(chests[i].getAttribute("x")), int(chests[i].getAttribute("y")))
+                
+                # Ajout des items
+                items = chests[i].childNodes
+                
+                if item.nodeName == "bonus":
+                        bonus = Bonus.create()
+                        
+                        chests.setContent(c, Chest.getContent(c).append(bonus))
+                elif item.nodeName == "bow":
+                        bow = Bow.create()
+                        
+                        chests.setContent(c, Chest.getContent(c).append(bonus))
+                
+                /*Mob.setType(mob, mobs[i].getAttribute("type"))
+                Mob.setPosition(mob, int(mobs[i].getAttribute("x")), int(mobs[i].getAttribute("y")))
+                Mob.setHealth(mob, int(mobs[i].getAttribute("health")))
+                Mob.setStrength(mob, float(mobs[i].getAttribute("strength")))
+                Mob.setResistance(mob, float(mobs[i].getAttribute("resistance")))
+                Mob.setDamage(mob, int(mobs[i].getAttribute("damage")))
+                Mob.setSprite(mob, mobs[i].firstChild.nodeValue)
+                r["mobs"].append(mob)*/
 
         return r
 
@@ -95,3 +144,11 @@ def getRightRoom(r):
 
 def setRightRoom(r, right_room):
         r["rightRoom"] = right_room
+
+# Tests
+if __name__ == __main__:
+        room = create("forest", "forest_1")
+        goto(0, 0)
+        room.show()
+
+        
