@@ -10,7 +10,7 @@
 ##################################################################
 
 def goto(x, y):
-        s_x = str(int(x+1))
-        s_y = str(int(y+1))
+        s_x = str(int(x))
+        s_y = str(int(y))
         txt = "\033[" + s_y + ";" + s_x + "H"
         sys.stdout.write(txt)

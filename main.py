@@ -39,7 +39,6 @@ def init():
         #interaction clavier
         tty.setcbreak(sys.stdin.fileno())
         
-        run()
 
 
 def show():
@@ -99,4 +98,6 @@ def quit():
         
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
         sys.exit()
+
 init()
+run()
