@@ -39,13 +39,13 @@ def setHealth(m, health):
 def getStrength(m):
         return strength
         
-def setStrenght(m, strength):
+def setStrength(m, strength):
         return
 
 def getResistance(m):
         return resistance
         
-def setResistence(m, resistance):
+def setResistance(m, resistance):
         return
 
 def getDamage(m):

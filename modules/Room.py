@@ -21,6 +21,10 @@ import Utils
 def create(dungeonName, roomName):
         # -- Initialisation du dictionnaire --
         r = dict()
+        r["background"]=[]
+        r["mobs"]=[]
+        r["chests"]=[]
+        r["arrows"]=[]
         r["upRoom"]=None
         r["downRoom"]=None
         r["leftRoom"]=None
@@ -37,7 +41,7 @@ def create(dungeonName, roomName):
                 r["background"].append(list(line))
 
         # Récupération des mobs
-        mobs = rootBeacon.getElementsByTagName("mobs")
+        mobs = rootBeacon.getElementsByTagName("mob")
         nb_mobs = mobs.length
         for i in range(nb_mobs):
                 mob = Mob.create()
@@ -51,7 +55,7 @@ def create(dungeonName, roomName):
                 r["mobs"].append(mob)
         
         # Récupération des coffres
-        chests = rootBeacon.getElementsByTagName("chests")
+        chests = rootBeacon.getElementsByTagName("chest")
         nb_chests = chests.length
         for i in range(nb_chests):
                 chest = Chest.create()
@@ -60,24 +64,18 @@ def create(dungeonName, roomName):
                 # Ajout des items
                 items = chests[i].childNodes
                 
-                if item.nodeName == "bonus":
-                        bonus = Bonus.create()
-                        
-                        chests.setContent(c, Chest.getContent(c).append(bonus))
-                elif item.nodeName == "bow":
-                        bow = Bow.create()
-                        
-                        chests.setContent(c, Chest.getContent(c).append(bonus))
-                
-                /*Mob.setType(mob, mobs[i].getAttribute("type"))
-                Mob.setPosition(mob, int(mobs[i].getAttribute("x")), int(mobs[i].getAttribute("y")))
-                Mob.setHealth(mob, int(mobs[i].getAttribute("health")))
-                Mob.setStrength(mob, float(mobs[i].getAttribute("strength")))
-                Mob.setResistance(mob, float(mobs[i].getAttribute("resistance")))
-                Mob.setDamage(mob, int(mobs[i].getAttribute("damage")))
-                Mob.setSprite(mob, mobs[i].firstChild.nodeValue)
-                r["mobs"].append(mob)*/
-
+                for item in items:
+                        if item.nodeName == "bonus":
+                                bonus = Bonus.create()
+                                Bonus.setName(bonus, item.getAttribute("name"))
+                                Bonus.setAmount(bonus, item.getAttribute("amount"))
+                                Chest.addItem(chest, bonus)
+                        elif item.nodeName == "bow":
+                                bow = Bow.create()
+                                Bow.setName(bow, item.getAttribute("name"))
+                                Bow.setDamage(bow, int(item.getAttribute("damage")))
+                                Bow.setSprite(bow, item.firstChild.nodeValue)
+                                Chest.addItem(chest, bow)
         return r
 
 def show(r):
@@ -146,7 +144,7 @@ def setRightRoom(r, right_room):
         r["rightRoom"] = right_room
 
 # Tests
-if __name__ == __main__:
+if __name__ == "__main__":
         room = create("forest", "forest_1")
         goto(0, 0)
         room.show()
