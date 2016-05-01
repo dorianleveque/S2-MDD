@@ -10,16 +10,21 @@
 ##################################################################
 
 def create():
+        bonus = dict()
+        bonus["name"] = ""
+        bonus["amount"] = 
         return
 
 def getName(b):
-        return name
+        return b["name"]
         
 def setName(b, name):
+        b["name"] = name
         return
 
 def getAmount(b):
-        return amount
+        return b["amount"]
         
 def setAmount(b, amount):
+        b["amount"] = 
         return
