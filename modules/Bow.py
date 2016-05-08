@@ -10,22 +10,27 @@
 ##################################################################
 
 def create():
+        bow = dict()
+        bow[""]
         return
 
 def getName(b):
-        return name
+        return b["name"]
 
 def setName(b, name):
+        b["name"] = name
         return
 
 def getDamage(b):
-        return damage
+        return b["damage"]
 
-def setDamage(b, name):
+def setDamage(b, damage):
+        b["damage"] = damage
         return
 
 def getSprite(b):
-        return sprite
+        return b["sprite"]
 
-def setSprite(b, name):
+def setSprite(b, sprite):
+        b["sprite"] = sprite
         return
