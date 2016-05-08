@@ -56,8 +56,8 @@ def show():
         x, y = Player.getPosition(player)
         Utils.goto(x,y)
         sys.stdout.write("Link")
-        
-        
+
+
 
 def run():     
         cmp = 0
@@ -67,7 +67,8 @@ def run():
                 if cmp%10==0 : 
                         show()
                 time.sleep(0.02)
-        
+
+
 def move():
         global player, direction      
        
@@ -109,11 +110,12 @@ def interact():
         while isData():
                 sys.stdin.read(5)
                 #termios.tcflush(sys.stdin, termios.TCIFLUSH)   # Permet de vider, le buffer des touches d'entree
-                
+
 
 def isData():
         #recuperation des elements clavier
         return select.select([sys.stdin], [], [], 0.0) == ([sys.stdin], [], [])
+
 
 def quit():
         global old_settings
@@ -124,5 +126,7 @@ def quit():
         os.system('setterm -cursor on')
         
         sys.exit()
+
+
 init()
 run()

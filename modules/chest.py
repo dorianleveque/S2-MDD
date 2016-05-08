@@ -13,16 +13,23 @@
 import Bow
 import Bonus
 
-def create(x,y,donne):
+def create():
+        chest = dict()
+        chest["content"]=None
+        chest["x"]=-1
+        chest["y"]=-1
         return
 
-def addItem(c,i):
+def addItem(c, i):
+        c["content"].append(i)
         return
 
 def getPosition(c):
-        return (x,y)
+        return (c["x"], c["y"])
 
-def setPosition(c,x,y):
+def setPosition(c, x, y):
+        c["x"] = x
+        c["y"] = y
         return
 
 def getContent(c):
@@ -30,3 +37,7 @@ def getContent(c):
         
 def isInside(c, Item):    #test du getContent
         return true
+
+if __name__ == "__main__":
+        chest = create()
+        setPosition(chest, 5, 4)
