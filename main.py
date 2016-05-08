@@ -19,7 +19,7 @@ import termios
 sys.path.append('./modules/')
 
 # Modules personnalisés
-import Game
+#import Game
 import Utils
 import Player
 
@@ -39,31 +39,51 @@ def init():
         #interaction clavier
         tty.setcbreak(sys.stdin.fileno())
         
+        #cacher le curseur
+        os.system('setterm -cursor off')
+        os.system('setterm -repeat off')
 
 
 def show():
-        #affichage du joueur
-        sys.stdout.write("O\n")
+        #effacer la console 
+        sys.stdout.write("\033[1;1H")
+        sys.stdout.write("\033[2J")
+        #os.system('setterm -clear all')
+       
         
+        #affichage du joueur)
+        #deplacement du joueur:
+        x, y = Player.getPosition(player)
+        Utils.goto(x,y)
+        sys.stdout.write("Link")
 
-def run():        
+
+
+def run():     
+        cmp = 0
         while True:
                 interact()
                 move()
-        
+                if cmp%10==0 : 
+                        show()
+                time.sleep(0.02)
+
+
 def move():
         global player, direction      
        
         #deplacement du joueur:
         x, y = Player.getPosition(player)
+        dt = 0.25
 
-        if direction == 'Up': Player.setPosition(player, x, y+1)
-        if direction == 'Down': Player.setPosition(player, x, y-1)
-        if direction == 'Right': Player.setPosition(player, x+1, y)
-        if direction == 'Left': Player.setPosition(player, x-1, y)
+        if direction == 'Up': Player.setPosition(player, x, y-1*dt)
+        if direction == 'Down': Player.setPosition(player, x, y+1*dt)
+        if direction == 'Right': Player.setPosition(player, x+2*dt, y)
+        if direction == 'Left': Player.setPosition(player, x-2*dt, y)
         direction = " "
 
-        print Player.getPosition(player)    
+        
+        #print Player.getPosition(player)    
         
 
 def interact(): 
@@ -84,20 +104,29 @@ def interact():
                         direction = "Right"             # le joueur se déplace vers Direction Droite
                 #elif read == "p":                      # appel de la fonction pause
                 #elif read == "\x08": 
-        termios.tcflush(sys.stdin, termios.TCIOFLUSH)   # Permet de vider, le buffer des touches d'entree
+        
+        
+        
+        while isData():
+                sys.stdin.read(5)
+                #termios.tcflush(sys.stdin, termios.TCIFLUSH)   # Permet de vider, le buffer des touches d'entree
 
-                
 
 def isData():
         #recuperation des elements clavier
-        return select.select([sys.stdin], [], [], termios.TCIOFLUSH) == ([sys.stdin], [], [])
+        return select.select([sys.stdin], [], [], 0.0) == ([sys.stdin], [], [])
+
 
 def quit():
-        #restauration des parametres du terminal
         global old_settings
-        
+        #restauration des parametres du terminal
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
+        
+        #rendre visible le curseur
+        os.system('setterm -cursor on')
+        
         sys.exit()
+
 
 init()
 run()
