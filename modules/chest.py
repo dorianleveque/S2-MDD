@@ -18,7 +18,7 @@ def create():
         chest["content"]=None
         chest["x"]=-1
         chest["y"]=-1
-        return
+        return chest
 
 def addItem(c, i):
         c["content"].append(i)

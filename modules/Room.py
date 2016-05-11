@@ -82,26 +82,53 @@ def show(r):
         # Affichage du fond
         for y in range(0, len(r["background"])):
                 for x in range(0, len(r["background"][y])):
-                        goto(x, y)
+                        Utils.goto((x, y)
                         sys.stdout.write(r["background"][y][x])
+        
+        # Affichage des portes
+        if r["upRoom"] != None:
+                x = round(len(r["background"][0]) / 2) - 4
+                y = 0
+                drawBlankRectangle(x, y, 8, 2)
+
+        if r["downRoom"] != None:
+                x = round(len(r["background"][0]) / 2) - 4
+                y = len(r["background"]) - 2
+                drawBlankRectangle(x, y, 8, 2)
+
+        if r["leftRoom"] != None:
+                x = 0
+                y = round(len(r["background"]) / 2) - 4
+                drawBlankRectangle(x, y, 2, 8)
+
+        if r["rightRoom"] != None:
+                x = len(r["background"][0]) - 2
+                y = round(len(r["background"]) / 2) - 4
+                drawBlankRectangle(x, y, 2, 8)
         
         # Affichage des coffres
         for currentChest in r["chests"]:
                 x, y = Chest.getPosition(currentChest)
-                goto(x, y)
+                Utils.goto((x, y)
                 Chest.show(currentChest)
         
         # Affichage des mobs
         for currentMob in r["mobs"]:
                 x, y = Mob.getPosition(currentMob)
-                goto(x, y)
+                Utils.goto((x, y)
                 Mob.show(currentMob)
         
         # Affichage des projectiles
         for currentArrow in r["arrows"]:
                 x, y = Arrow.getPosition(currentArrow)
-                goto(x, y)
+                Utils.goto((x, y)
                 Arrow.show(currentArrow)
+
+def drawBlankRectangle(x, y, w, h):
+        for i_y in range(0, h):
+                for i_x in range(0, w):
+                        Utils.goto((x + i_x, y + i_y)
+                        sys.stdout.write(" ")
 
 def getChestByPosition(r, x, y):
         # On parcourt la liste des coffres de la salle
@@ -146,7 +173,8 @@ def setRightRoom(r, right_room):
 # Tests
 if __name__ == "__main__":
         room = create("forest", "forest_1")
-        goto(0, 0)
-        room.show()
+        Utils.goto((0, 0)
+        setUpRoom(room, "anotherRoom")
+        show(room)
 
         
