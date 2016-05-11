@@ -77,7 +77,7 @@ def setTextForm(form):
                 os.system("setterm -"+i+" on")
         return
 
-def resetText():
+def resetTextFormat():
         sys.stdout.write("\033[0m")
         #os.system("setterm -default")
 
@@ -87,7 +87,7 @@ if __name__=="__main__":
         form = "bold, underline, half-bright"
         setTextForm(form)
         sys.stdout.write("salut\n")
-        resetText()
+        resetTextFormat()
         sys.stdout.write("coucou\n")
         
         #Test 2
@@ -96,7 +96,7 @@ if __name__=="__main__":
         form = ""
         setTextForm(form)
         sys.stdout.write("salut\n")
-        resetText()
+        resetTextFormat()
         sys.stdout.write("coucou\n")
         
         #Test 3
@@ -104,15 +104,16 @@ if __name__=="__main__":
         print "Test 3"
         setTextColor('blue', 'white')
         sys.stdout.write("salut\n")
-        resetText()
+        resetTextFormat()
         sys.stdout.write("coucou\n")
         
         #Test 4
         print "-------------\nTest 4"
         print "Test 4"
         setTextColor('yellow', 'red')
+        goto(20,10)
         sys.stdout.write("salut\n")
-        resetText()
+        resetTextFormat()
         sys.stdout.write("coucou\n")
         
         
