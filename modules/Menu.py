@@ -35,11 +35,11 @@ def create():
         windowSize = windowNodes.length
         
         for i in range(windowSize):
-                node = windowNodes[i]
-                
                 #Permet de recuperer le nom de la fenetre pour chaque balise i
-                windowName = node.getAttribute("name")
-                #print node.attributes.keys()  #permet de recuperer le nom de chaque attribut
+                windowTag = windowNodes[i]
+                                
+                windowName = windowTag.getAttribute("name")
+                #print windowTag.attributes.keys()  #permet de recuperer le nom de chaque attribut
                 
                 
                 
@@ -51,55 +51,66 @@ def create():
                 background["content"] = []
                 background["color"] = []
                 
-                backgroundNode = rootElement.getElementsByTagName("background")[i]
-
-                background["content"] = backgroundNode.firstChild.nodeValue          #Recuperation du texte stocke entre les balises
+                backgroundTag = windowTag.getElementsByTagName("background")[0]
+                container = backgroundTag.firstChild.nodeValue
+                
+                ##for line in container:
+                        ##background["content"].append(line)
+                #print container,
+                        
+                
+                
+                background["content"] = container
+                #backgroundTag.firstChild.nodeValue          #Recuperation du texte stocke entre les balises
 
                 
-                if backgroundNode.hasAttributes():
-                        color = backgroundNode.getAttribute("color")
-                        backgroundColor = backgroundNode.getAttribute("backgroundColor")
+                if backgroundTag.hasAttributes():
+                        color = backgroundTag.getAttribute("color")
+                        backgroundColor = backgroundTag.getAttribute("backgroundColor")
                         background["color"] = (color, backgroundColor)
-                
+                else:
+                        background["color"] = (" "," ")
                
                
                 #Recuperation des textes de la fenetre
                 texts=[]
-                textNodes = node.getElementsByTagName("text")                       # Balises de texte dans liste textNodes
-                numberText = textNodes.length                                       # Nombre de balises text de la fenetre
+                textTag = windowTag.getElementsByTagName("text")                       # Balises de texte dans liste textTag
+                numberText = textTag.length                                       # Nombre de balises text de la fenetre
                 for t in range(numberText):
-                        # la variable nodeT stocke, a chaque tour de boucle une balise text dans l'ordre où elle se trouve dans le fichier
-                        nodeT = textNodes[t]                                     
+                        # la variable thisText stocke, a chaque tour de boucle une balise text dans l'ordre où elle se trouve dans le fichier
+                        thisText = textTag[t]                                     
                         text=dict()
                         
-                        text["content"] = nodeT.firstChild.nodeValue
-                        x = nodeT.getAttribute("x")
-                        y = nodeT.getAttribute("y")
+                        text["content"] = thisText.firstChild.nodeValue
+                        x = thisText.getAttribute("x")
+                        y = thisText.getAttribute("y")
                         text["position"] = (x,y)
                         
-                        color = nodeT.getAttribute("color")
-                        backgroundColor = nodeT.getAttribute("backgroundColor")
+                        color = thisText.getAttribute("color")
+                        backgroundColor = thisText.getAttribute("backgroundColor")
                         text["color"] = (color, backgroundColor)
                         
-                        text["form"] = nodeT.getAttribute("form")
+                        text["form"] = thisText.getAttribute("form")
                         
                         texts.append(text)
+                
+                
                 
                 #Recuperation des buttons de la fenetre
                 button=dict()
                 button["selected"]=None
                 button["list"]=[]
                 
-                buttonNodes = node.getElementsByTagName("button")
-                numberButton = buttonNodes.length
+                buttonTag = windowTag.getElementsByTagName("button")
+                numberButton = buttonTag.length
                 for b in range(numberButton):
-                        # la variable nodeB stocke, a chaque tour de boucle une balise button dans l'ordre où elle se trouve dans le fichier
-                        nodeB = buttonNodes[b]
-                        buttonName = nodeB.firstChild.nodeValue
+                        # la variable thisButton stocke, a chaque tour de boucle une balise button dans l'ordre où elle se trouve dans le fichier
+                        thisButton = buttonTag[b]
+                        buttonName = thisButton.firstChild.nodeValue
                         button["list"].append(buttonName)
                         
                         #Attribuer un bouton de selectionner pour l'initialisation dans chacune des fenetres
-                        button["selected"]=buttonNodes[0].firstChild.nodeValue
+                        button["selected"]=buttonTag[0].firstChild.nodeValue
 
                 data = {"background": background, "texts": texts, "buttons": button}
                 
@@ -153,27 +164,31 @@ def setCurrentWindow(menu, windowName):
                         menu["current"].update({"name": name, "data": data})  #current["Name"], current["data"]
                         break
 
-def getBackgroundWindowContent(menu):
-        return menu["windows"]["frameWork"]["background"]["content"]
+def getBackgroundWindow(menu):
+        return menu["windows"]["frame"]["background"]
 
-def getBackgroundWindowColor(menu):
-        return menu["windows"]["frameWork"]["background"]["color"]
 
 
 # Affiche la fenetre courante
 def show(menu):
+       
+        
         #Afficher le fond de la fenetre
         Utils.goto(0,0)                                                         # A reutiliser pour affichage
-        background = getBackgroundWindowContent(menu)
-        color, backgroundColor = getBackgroundWindowColor(menu)
+        background = getBackgroundWindow(menu)["content"]
+        color, backgroundColor = getBackgroundWindow(menu)["color"]
         Utils.setTextColor(color, backgroundColor)
         sys.stdout.write(background)
+
+        Utils.resetTextFormat()    
         
         Utils.goto(0,0)  
         foreground = getCurrentWindowBackgroundContent(menu)
         color, backgroundColor = getCurrentWindowBackgroundColor(menu)
         Utils.setTextColor(color, backgroundColor)
         sys.stdout.write(foreground)
+         
+
         
         
         #affichage des boutons
@@ -215,10 +230,10 @@ def show(menu):
 
 #def addTransition():
 
-if __name__=="__main__":
+if __name__ == "__main__":
         #initialisation
         menu = create()
-        setCurrentWindow(menu,"mainMenu")
+        setCurrentWindow(menu,"options")
         
         #print menu["current"]
         #print getCurrentWindowName(menu)
