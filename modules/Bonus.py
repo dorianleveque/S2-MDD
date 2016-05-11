@@ -12,7 +12,7 @@
 def create():
         bonus = dict()
         bonus["name"] = ""
-        bonus["amount"] = 
+        bonus["amount"] = -1
         return
 
 def getName(b):
@@ -26,5 +26,5 @@ def getAmount(b):
         return b["amount"]
         
 def setAmount(b, amount):
-        b["amount"] = 
+        b["amount"] = amount
         return
