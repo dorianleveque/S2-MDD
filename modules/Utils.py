@@ -14,7 +14,7 @@ import os
 #os.system(env TERM=xterm-256color fish)
 
 def goto(x=0, y=0):
-        s_x = str(int(x))
+        s_x = str(int(x)+1)
         s_y = str(int(y))
         txt = "\033[" + s_y + ";" + s_x + "H"
         sys.stdout.write(txt)

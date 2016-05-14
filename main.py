@@ -66,6 +66,8 @@ def init():
         
 
 def run():
+        n = 0
+        global game, menu
         while True:
                 
                 currentWindowName = Menu.getCurrentWindowName(menu)
@@ -73,10 +75,13 @@ def run():
                         if refresh==True:
                                 Menu.show(menu)
                 else:
-                        Game.show(game)
+                        if(n % 10):
+                                Menu.show(menu)
+                                Game.show(game)
                 interact()
                 #move()
-                time.sleep(0.2)
+                time.sleep(0.1)
+                n += 1
         
 #def move():
         #global player, direction      

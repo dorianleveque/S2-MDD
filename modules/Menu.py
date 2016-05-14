@@ -53,16 +53,10 @@ def create():
                 background["color"] = []
                 
                 backgroundTag = windowTag.getElementsByTagName("background")[0]
-                container = backgroundTag.firstChild.nodeValue.split("\n")
+                container = backgroundTag.firstChild.nodeValue.split("\n")  #Recuperation du texte stocke entre les balises
 
                 for line in container:
                         background["content"].append(list(line))
-                #print background["content"]
-                        
-                
-                
-                #background["content"] = container
-                #backgroundTag.firstChild.nodeValue          #Recuperation du texte stocke entre les balises
 
                 
                 if backgroundTag.hasAttributes():
@@ -186,8 +180,9 @@ def show(menu):
        
         for y in range(0, len(background)):
                 for x in range(0, len(background[y])):
-                        Utils.goto(x,y)                                                         # A reutiliser pour affichage
-                        sys.stdout.write(background[y][x]+"\n")
+                        if background[y][x] != " ":
+                                Utils.goto(x,y)                                                         # A reutiliser pour affichage
+                                sys.stdout.write(background[y][x])
 
         Utils.resetTextFormat()    
          
@@ -196,9 +191,9 @@ def show(menu):
         Utils.setTextColor(color, backgroundColor)
         
         for y in range(0, len(foreground)):
-                for x in range(1, len(foreground[y])):
-                        Utils.goto(x+2,y+1)                                                         # A reutiliser pour affichage
-                        sys.stdout.write(foreground[y][x]+"\n")
+                for x in range(0, len(foreground[y])):
+                        Utils.goto(x+2,y)                                                         # A reutiliser pour affichage
+                        sys.stdout.write(foreground[y][x+1])
         Utils.resetTextFormat()   
         
 
@@ -213,10 +208,10 @@ def show(menu):
                 Utils.goto(70,y*2+38)                                                         # A reutiliser pour affichage
                 if button[y] == getCurrentWindowButtonSelected(menu):
                         Utils.setTextColor("black", "white")
-                        sys.stdout.write("> "+button[y]+" <\n")
+                        sys.stdout.write("> "+button[y]+"\n")
                 else : 
                         Utils.resetTextFormat() 
-                        sys.stdout.write(" "+button[y]+"\n")
+                        sys.stdout.write("  "+button[y]+"\n")
         
         
         
