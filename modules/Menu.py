@@ -172,7 +172,7 @@ def getBackgroundWindow(menu):
 
 # Affiche la fenetre courante
 def show(menu):
-       
+      
         #Afficher le fond de la fenetre
         background = getBackgroundWindow(menu)["content"]
         color, backgroundColor = getBackgroundWindow(menu)["color"]
@@ -182,7 +182,7 @@ def show(menu):
                 for x in range(0, len(background[y])):
                         if background[y][x] != " ":
                                 Utils.goto(x,y)                                                         # A reutiliser pour affichage
-                                sys.stdout.write(background[y][x])
+                                sys.stdout.write(background[y][x]+"\n")
 
         Utils.resetTextFormat()    
          
@@ -192,8 +192,8 @@ def show(menu):
         
         for y in range(0, len(foreground)):
                 for x in range(0, len(foreground[y])):
-                        Utils.goto(x+2,y)                                                         # A reutiliser pour affichage
-                        sys.stdout.write(foreground[y][x+1])
+                        Utils.goto(x+2,y+1)                                                         # A reutiliser pour affichage
+                        sys.stdout.write(foreground[y][x]+"\n")
         Utils.resetTextFormat()   
         
 
@@ -205,14 +205,14 @@ def show(menu):
         
         
         for y in range(0, len(button)):
-                Utils.goto(70,y*2+38)                                                         # A reutiliser pour affichage
+                Utils.goto(70,y*2+28)                                                         # A reutiliser pour affichage
                 if button[y] == getCurrentWindowButtonSelected(menu):
                         Utils.setTextColor("black", "white")
                         sys.stdout.write("> "+button[y]+"\n")
                 else : 
-                        Utils.resetTextFormat() 
+                        Utils.resetTextFormat()
                         sys.stdout.write("  "+button[y]+"\n")
-        
+                Utils.resetTextFormat()        
         
         
         #affichage des textes
@@ -233,6 +233,7 @@ def show(menu):
 
 
 def interact(menu, key):
+        
         # Changer le bouton selectionne de la fenetre     
         buttonSelected = getCurrentWindowButtonSelected(menu)
         buttonList = getCurrentWindowButtonList(menu)
@@ -248,15 +249,20 @@ def interact(menu, key):
         # Valider le choix de la fenetre
         elif key == "d": 
                 changeWindow(menu) # Changement de fenetre
+                
         
         
 
 def changeWindow(menu):
+        
         buttonSelected = getCurrentWindowButtonSelected(menu)
         
         if buttonSelected == "Retour":
                 transitionSize = len(getTransition(menu))
                 setCurrentWindow(menu, menu["transitions"][transitionSize-1])
+        if buttonSelected == "Quit":
+                quit() 
+        
         else:
                 addTransition(menu, getCurrentWindowName(menu))
                 setCurrentWindow(menu, buttonSelected)
