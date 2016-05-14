@@ -27,7 +27,7 @@ def create():
         
         return game
 
-def show(g):        
+def show(g):
         # Affichage de l'interface
         
         # Affichage du donjon
