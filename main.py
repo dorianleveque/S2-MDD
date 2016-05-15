@@ -96,7 +96,6 @@ def interact():
         while isData():
                 sys.stdin.read(5)
                 #termios.tcflush(sys.stdin, termios.TCIFLUSH)   # Permet de vider, le buffer des touches d'entree
-                
 
 def isData():
         #recuperation des elements clavier

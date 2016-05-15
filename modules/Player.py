@@ -9,15 +9,24 @@
 ## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     09/04/2016 ##
 ##################################################################
 
-# Modules personnalis�s
+# Modules systèmes
+import sys
+
+# Modules personnalisés
 import Chest
 import Utils
 
 def create():
         #creation d'un joueur:
         player=dict()
-        player["x"] = 0
-        player["y"] = 0  
+        player["x"] = 1
+        player["y"] = 1
+        player["health"] = 100
+        player["xp"] = 0
+        player["strength"] = 1
+        player["resistance"] = 1
+        player["inventory"] = Chest.create()
+        player["sprite"] = 'P'
        
         return player
 
@@ -43,39 +52,61 @@ def move(player, direction):
         if direction == "left":
                 player["x"] += -1
 
+def show(p):
+        Utils.goto(p["x"]+3, p["y"]+3)
+        sys.stdout.write(p["sprite"])
 
-#def getHealth(p):
-#        return Health
+def getHealth(p):
+        return p["health"]
 
-#def setHealth(p, health):
-        
+def setHealth(p, health):
+        p["health"] = health
+        return
 
-#def getXp(p):
-#        return Xp
+def getXp(p):
+        return p["xp"]
 
-#def setXp(p):
-        
+def setXp(p, xp):
+        p["xp"] = xp
+        return
 
-#def getStrength(p):
-#        return strength
+def getStrength(p):
+        return p["strength"]
 
-#def setStrength(p, strength):
-        
+def setStrength(p, strength):
+        p["strength"] = strength
+        return
 
-#def getResistance(p):
-#        return resistence
+def getResistance(p):
+        return p["resistance"]
 
-#def setResistence(p, resistence):
-        
+def setResistence(p, resistance):
+        p["resistance"] = resistance
+        return
 
-#def getDamage(p):
- #       return damage
+def getDamage(p):
+        return Bow.getDamage(getSelectedBow(p))
 
 #def setDamage(p, damage):
-        
+        bow = getSelectedBow(p)
+        Bow.setDamage(bow)
 
-#def getSelectedBow(p):
-#        return
+def getSelectedBow(p):
+        return Chest.getContent(p["inventory"])[p["selectedBow"]]
 
-#def getInventory(p):
- #       return
+def getInventory(p):
+       return p["inventory"]
+
+def getSprite(p):
+       return p["sprite"]
+
+def setSprite(p, sprite):
+       p["sprite"] = sprite
+       return
+
+if __name__ == "__main__":
+       p = create()
+       show(p)
+       move(p, "right")
+       move(p, "right")
+       show(p)

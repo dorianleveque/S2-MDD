@@ -177,12 +177,12 @@ def show(menu):
         background = getBackgroundWindow(menu)["content"]
         color, backgroundColor = getBackgroundWindow(menu)["color"]
         Utils.setTextColor(color, backgroundColor)
-       
-        for y in range(0, len(background)):
+
+        for y in range(0, len(background)):                                                   # Affichage optimisé du background
+                Utils.goto(0, y)
                 for x in range(0, len(background[y])):
-                        if background[y][x] != " ":
-                                Utils.goto(x,y)                                                         # A reutiliser pour affichage
-                                sys.stdout.write(background[y][x].encode("utf-8")+"\n")
+                        sys.stdout.write(background[y][x].encode("utf-8"))
+                sys.stdout.write('\n')
 
         Utils.resetTextFormat()    
          
@@ -192,15 +192,17 @@ def show(menu):
         
         for y in range(0, len(foreground)):
                 for x in range(0, len(foreground[y])):
-                        Utils.goto(x+2,y+1)                                                         # A reutiliser pour affichage
-                        sys.stdout.write(foreground[y][x].encode("utf-8")+"\n")
+                        if foreground[y][x] != " ":
+                                Utils.goto(x+2,y+1)                                           # A reutiliser pour affichage
+                                sys.stdout.write(foreground[y][x].encode("utf-8"))
+                sys.stdout.write('\n')
         Utils.resetTextFormat()   
         
 
         button = getCurrentWindowButtonList(menu)
         # affichage des bouttons en ligne 
         #for x in range(0, len(button)):
-                #Utils.goto(x*30+20,40)                                                         # A reutiliser pour affichage
+                #Utils.goto(x*30+20,40)                                                       # A reutiliser pour affichage
                 #sys.stdout.write(button[x]+"\n")
         
         

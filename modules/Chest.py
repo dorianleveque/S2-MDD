@@ -15,7 +15,7 @@ import Bonus
 
 def create():
         chest = dict()
-        chest["content"]=None
+        chest["content"]=[]
         chest["x"]=-1
         chest["y"]=-1
         return chest

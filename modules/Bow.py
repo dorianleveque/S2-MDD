@@ -11,8 +11,10 @@
 
 def create():
         bow = dict()
-        bow[""]
-        return
+        bow["name"] = ""
+        bow["damage"] = 0
+        bow["sprite"] = ''
+        return bow
 
 def getName(b):
         return b["name"]

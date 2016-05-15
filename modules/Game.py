@@ -23,7 +23,7 @@ def create():
         game["dungeon"] = Dungeon.create("forest")
         
         Dungeon.generate(game["dungeon"])
-        Player.setPosition(game["player"], 5, 5)
+        Player.setPosition(game["player"], 0, 0)
         
         return game
 
@@ -34,25 +34,25 @@ def show(g):
         Dungeon.show(g["dungeon"])
         
         # Affichage du joueur
-        #Player.show(g["player"])
-        
-        
-        x, y = Player.getPosition(g["player"])
-        Utils.goto(x,y)
-        sys.stdout.write("Link\n")
-
+        Player.show(g["player"])
 
 def interact(g, key):
-                if key == "z": 
-                        direction = "up"                # le joueur se déplace vers Direction Haut
-                elif key == "q": 
-                        direction = "left"              # le joueur se déplace vers Direction Gauche
-                elif key == "s": 
-                        direction = "down"              # le joueur se déplace vers Direction Bas
-                elif key == "d": 
-                        direction = "right"             # le joueur se déplace vers Direction Droite
-                
+        direction = ""
+
+        if key == "z": 
+                direction = "up"                # le joueur se déplace vers Direction Haut
+        elif key == "q": 
+                direction = "left"              # le joueur se déplace vers Direction Gauche
+        elif key == "s": 
+                direction = "down"              # le joueur se déplace vers Direction Bas
+        elif key == "d": 
+                direction = "right"             # le joueur se déplace vers Direction Droite
+        
+        if direction != "":
                 Player.move(g["player"], direction)
-                
-                #elif key == "p":                      # appel de la fonction pause
-                        
+        
+        #elif key == "p":                      # appel de la fonction pause
+                return "pause"
+
+def collide(g):
+        Player.getPosition(g["player"])
