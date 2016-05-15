@@ -31,7 +31,7 @@ def show(g):
         # Affichage de l'interface
         
         # Affichage du donjon
-        #Dungeon.show(g["dungeon"])
+        Dungeon.show(g["dungeon"])
         
         # Affichage du joueur
         #Player.show(g["player"])
