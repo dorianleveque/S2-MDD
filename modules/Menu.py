@@ -182,7 +182,7 @@ def show(menu):
                 for x in range(0, len(background[y])):
                         if background[y][x] != " ":
                                 Utils.goto(x,y)                                                         # A reutiliser pour affichage
-                                sys.stdout.write(background[y][x]+"\n")
+                                sys.stdout.write(background[y][x].encode("utf-8")+"\n")
 
         Utils.resetTextFormat()    
          
@@ -193,7 +193,7 @@ def show(menu):
         for y in range(0, len(foreground)):
                 for x in range(0, len(foreground[y])):
                         Utils.goto(x+2,y+1)                                                         # A reutiliser pour affichage
-                        sys.stdout.write(foreground[y][x]+"\n")
+                        sys.stdout.write(foreground[y][x].encode("utf-8")+"\n")
         Utils.resetTextFormat()   
         
 
@@ -208,10 +208,10 @@ def show(menu):
                 Utils.goto(70,y*2+28)                                                         # A reutiliser pour affichage
                 if button[y] == getCurrentWindowButtonSelected(menu):
                         Utils.setTextColor("black", "white")
-                        sys.stdout.write("> "+button[y]+"\n")
+                        sys.stdout.write("> "+button[y].encode("utf-8")+"\n")
                 else : 
                         Utils.resetTextFormat()
-                        sys.stdout.write("  "+button[y]+"\n")
+                        sys.stdout.write("  "+button[y].encode("utf-8")+"\n")
                 Utils.resetTextFormat()        
         
         
@@ -226,7 +226,7 @@ def show(menu):
                 Utils.setTextForm(form)
                 Utils.setTextColor(color, backgroundColor)
                 
-                sys.stdout.write(texte+"\n")
+                sys.stdout.write(texte.encode("utf-8")+"\n")
                 Utils.resetTextFormat()
                 
         
