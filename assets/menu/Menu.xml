@@ -176,9 +176,9 @@
                  /     \    __________________________________________________
                 /_______\   \________________________________________________/
 </background>
-<button x="60" y="20">Resume game</button>
+<button x="60" y="20">Resume</button>
 <button x="60" y="22">Options</button>
-<button x="60" y="22">Restart (comming soon)</button>
+<button x="60" y="24">Restart (comming soon)</button>
 </windows>
 
 <windows name="Start game">

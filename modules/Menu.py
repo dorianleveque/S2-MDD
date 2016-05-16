@@ -154,6 +154,13 @@ def setCurrentWindow(menu, windowName):
 # Renvoie le nom de la fenetre courante
 def getCurrentWindowName(menu):
         return menu["current"]["name"]
+
+# Savoir si on se trouve dans la fenetre de jeu
+def gameWindow(menu):
+        if getCurrentWindowName(menu) == "Start game":
+                return True
+        else:
+                return False
 # ---------------------
 # Renvoie le cadre 
 def getFrame(menu):
@@ -272,8 +279,14 @@ def interact(menu, key):
                         setButtonSelected(menu, buttonList[index+1]["name"])
         
         # Valider le choix de la fenetre
-        elif key == "d": 
-                changeWindow(menu) # Changement de fenetre
+        elif key == "d":
+                if gameWindow(menu) == False:
+                        changeCurrentWindow(menu, getButtonSelected(menu)) # Changement de fenetre
+                
+        elif key == "p":
+                if gameWindow(menu):
+                        changeCurrentWindow(menu, "Pause")
+
 
 
 
@@ -284,20 +297,21 @@ def getTransition(menu):
         return menu["transitions"]
 
 
-def changeWindow(menu):
-        
-        buttonSelected = getButtonSelected(menu)
-        
-        if buttonSelected == "Return" or buttonSelected == "Resume":
+def changeCurrentWindow(menu, windowName):
+       
+        if windowName == "Return" or windowName == "Resume":
                 transitionSize = len(getTransition(menu))
                 setCurrentWindow(menu, menu["transitions"][transitionSize-1])
-        if buttonSelected == "Quit":
+                menu["transitions"].remove(str(menu["transitions"][transitionSize-1]))
+        if windowName == "Quit":
                 quit() 
         
         else:
                 addTransition(menu, getCurrentWindowName(menu))
-                setCurrentWindow(menu, buttonSelected)
-
+                setCurrentWindow(menu, windowName)
+        # test
+        Utils.goto(50,2)
+        sys.stdout.write(str(menu["transitions"]))
 
 
 if __name__ == "__main__":

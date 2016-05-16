@@ -30,7 +30,7 @@ def create():
 
 def show(g):        
         # Affichage de l'interface
-        
+        Utils.setTextColor("white","black")
         # Affichage du donjon
         Dungeon.show(g["dungeon"])
         
