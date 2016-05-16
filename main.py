@@ -54,17 +54,16 @@ def run():
         n = 0
         global game, menu
         while True:
-                
-                currentWindowName = Menu.getCurrentWindowName(menu)
-                if currentWindowName != "Game":
-                        if refresh==True:
-                                Menu.show(menu)
-                else:
+
+                if Menu.gameWindow(menu):
                         if(n % 10):
                                 #effacer la console 
-                                sys.stdout.write("\033[2J")
+                                #sys.stdout.write("\033[2J")
                                 Menu.show(menu)
                                 Game.show(game)
+                else:
+                        if refresh==True:
+                                Menu.show(menu)
                 interact()
                 #move()
                 time.sleep(0.02)
@@ -79,17 +78,16 @@ def interact():
         if isData():                                    #si une touche est appuyee
                 read = sys.stdin.read(1)
                 
-                currentWindowName = Menu.getCurrentWindowName(menu)
-                
-                if currentWindowName != "Game":
+                if Menu.gameWindow(menu):
                         Menu.interact(menu, read)
-                else:
                         Game.interact(game, read)
+                        
+                else:
+                        Menu.interact(menu, read)
                         
                 if read == "\x1b": 
                         quit()                          # \x1b = touche echap / appel de la fonction qui permet de quitter le jeu
-
-                #elif read == "\x08": 
+                        
                 refresh = True
                 
                 

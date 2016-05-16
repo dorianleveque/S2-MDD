@@ -70,9 +70,8 @@ def setTextColor(color="white", backgroundColor="black"):
         #os.system("setterm -background "+backgroundColor)
         return
 
-def setTextForm(form):
-        parametres = form        
-        for i in parametres.split(", "):
+def setTextForm(formList):
+        for i in formList:
                 os.system("setterm -"+i+" on")
         return
 
@@ -83,7 +82,7 @@ def resetTextFormat():
 if __name__=="__main__":
         #Test 1
         print "Test 1"
-        form = "bold, underline, half-bright"
+        form = ["bold", "underline", "half-bright"]
         setTextForm(form)
         sys.stdout.write("salut\n")
         resetTextFormat()
