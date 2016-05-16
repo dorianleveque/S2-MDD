@@ -54,38 +54,59 @@ def recursiveGeneration(d, remainingRooms, currentRoom, roomLevel, roomsTotalNum
                 # Calcule la probabilité
                 depthDrivenCoefficient = math.exp(-(roomLevel * depthCoefficient))
                 remainingRoomDrivenCoefficient = remainingRoomCoefficient*(len(remainingRooms) / roomsTotalNumber)
-                probability = round(depthDrivenCoefficient*remainingRoomDrivenCoefficient*random.rand())
+                probability = int(round(depthDrivenCoefficient*remainingRoomDrivenCoefficient*random.random()+0.5, 0))
                 
                 if(roomLevel >= 7):     # Sécurité afin d'éviter d'avoir des donjons trop profonds
                         p = 0
-                
-                if(probability == 1):
+
+                if((probability == 1) and (len(remainingRooms) != 0)):
                         if door == "up":
                                 if(Room.getUpRoom(currentRoom) == None):
                                         upRoom = pickUpRandomRoom(remainingRooms)
                                         Room.setUpRoom(currentRoom, upRoom)
+                                        Room.setDownRoom(upRoom, currentRoom)
                                         recursiveGeneration(d, remainingRooms, upRoom, roomLevel + 1, roomsTotalNumber)
                         elif door == "down":
                                 if(Room.getDownRoom(currentRoom) == None):
                                         downRoom = pickUpRandomRoom(remainingRooms)
                                         Room.setDownRoom(currentRoom, downRoom)
+                                        Room.setUpRoom(downRoom, currentRoom)
                                         recursiveGeneration(d, remainingRooms, downRoom, roomLevel + 1, roomsTotalNumber)
                         elif door == "left":
                                 if(Room.getLeftRoom(currentRoom) == None):
                                         leftRoom = pickUpRandomRoom(remainingRooms)
                                         Room.setLeftRoom(currentRoom, leftRoom)
+                                        Room.setRightRoom(leftRoom, currentRoom)
                                         recursiveGeneration(d, remainingRooms, leftRoom, roomLevel + 1, roomsTotalNumber)
                         elif door == "right":
                                 if(Room.getRightRoom(currentRoom) == None):
                                         rightRoom = pickUpRandomRoom(remainingRooms)
                                         Room.setRightRoom(currentRoom, rightRoom)
+                                        Room.setLeftRoom(rightRoom, currentRoom)
                                         recursiveGeneration(d, remainingRooms, rightRoom, roomLevel + 1, roomsTotalNumber)
+        
+        Room.drawDoors(currentRoom)
 
 # Renvoie une salle prise aléatoirement dans la liste des salles restantes et l'enleve de la liste
 def pickUpRandomRoom(remainingRooms):
-        room = remainingRooms[random.randint(0, len(remainingRooms) - 1)]
-        remainingRooms.remove(room)
+        index = random.randint(0, len(remainingRooms) - 1)
+        room = remainingRooms[index]
+        del remainingRooms[index]
         return room
                                         
 def show(d):
         Room.show(d["currentRoom"])
+
+def getCurrentRoom(d):
+        return d["currentRoom"]
+
+def setCurrentRoom(d, currentRoom):
+        d["currentRoom"] = currentRoom
+        return
+
+def getName(d):
+        return d["name"]
+
+def setName(d, name):
+        d["name"] = name
+        return

@@ -67,7 +67,7 @@ def run():
                                 Game.show(game)
                 interact()
                 #move()
-                time.sleep(0.1)
+                time.sleep(0.02)
                 n += 1   
         
 

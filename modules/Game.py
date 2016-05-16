@@ -14,6 +14,7 @@ import sys
 
 # Modules personnalisés
 import Dungeon
+import Room
 import Player
 import Utils
 
@@ -37,22 +38,51 @@ def show(g):
         Player.show(g["player"])
 
 def interact(g, key):
-        direction = ""
+        x, y = Player.getPosition(g["player"])
+        x+=1
+        y+=1
+        currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
 
-        if key == "z": 
-                direction = "up"                # le joueur se déplace vers Direction Haut
-        elif key == "q": 
-                direction = "left"              # le joueur se déplace vers Direction Gauche
-        elif key == "s": 
-                direction = "down"              # le joueur se déplace vers Direction Bas
-        elif key == "d": 
-                direction = "right"             # le joueur se déplace vers Direction Droite
-        
-        if direction != "":
-                Player.move(g["player"], direction)
+        #DEBUG
+        Utils.goto(100, 100)
+        sys.stdout.write(Room.get(currentRoom, x+1, y))
+
+        if (key == "z") and (Room.get(currentRoom, x, y-1) == " "): 
+                y = y - 1             # le joueur se déplace vers Direction Haut
+        elif (key == "q") and (Room.get(currentRoom, x-1, y) == " "): 
+                x = x - 1             # le joueur se déplace vers Direction Gauche
+        elif (key == "s") and (Room.get(currentRoom, x, y+1) == " "): 
+                y = y + 1             # le joueur se déplace vers Direction Bas
+        elif (key == "d") and (Room.get(currentRoom, x+1, y) == " "): 
+                x = x + 1             # le joueur se déplace vers Direction Droite
+
+        Player.setPosition(g["player"], x-1, y-1)
+        switchRoom(g)
         
         #elif key == "p":                      # appel de la fonction pause
-                return "pause"
+#                return "pause"
 
-def collide(g):
-        Player.getPosition(g["player"])
+def switchRoom(g):
+        x, y = Player.getPosition(g["player"])
+        currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
+
+        if x < 0:
+                Dungeon.setCurrentRoom(g["dungeon"], Room.getLeftRoom(currentRoom))
+                x = 79
+        
+        if x > 79: # Taille max en x des salles
+                Dungeon.setCurrentRoom(g["dungeon"], Room.getRightRoom(currentRoom))
+                x = 0
+
+        if y < 0:
+                Dungeon.setCurrentRoom(g["dungeon"], Room.getUpRoom(currentRoom))
+                y = 39
+
+        if y > 39: # Taille max en y des salles
+                Dungeon.setCurrentRoom(g["dungeon"], Room.getDownRoom(currentRoom))
+                y = 0
+
+        Player.setPosition(g["player"], x, y)
+
+
+
