@@ -12,6 +12,7 @@
 # Modules système
 from xml.dom.minidom import parse
 import sys
+
 # Modules personnalisés
 import Chest
 import Arrow
@@ -36,7 +37,9 @@ def create(dungeonName, roomName):
         rootBeacon = doc.documentElement
 
         # Récupération du background
-        background = rootBeacon.getElementsByTagName("background")[0].firstChild.nodeValue.split("\n")
+        background = rootBeacon.getElementsByTagName("background")[0].firstChild.nodeValue.split("\n", 41)
+        del background[0]
+        del background[-1]
         for line in background:
                 r["background"].append(list(line))
 
@@ -82,28 +85,29 @@ def show(r):
         # Affichage du fond
         for y in range(0, len(r["background"])):
                 for x in range(0, len(r["background"][y])):
-                        Utils.goto(x+2, y+1)
-                        sys.stdout.write(r["background"][y][x].encode("utf-8"))
+                        if r["background"][y][x] != " ":
+                                Utils.goto(x+2, y+2)
+                                sys.stdout.write(r["background"][y][x].encode("utf-8"))
         
         # Affichage des portes
         if r["upRoom"] != None:
-                x = round(len(r["background"][0]) / 2) - 2
-                y = 1
+                x = round(len(r["background"][1]) / 2, 1) - 4
+                y = 0
                 drawBlankRectangle(x, y, 8, 2)
 
         if r["downRoom"] != None:
-                x = round(len(r["background"][0]) / 2) - 2
-                y = len(r["background"]) - 1
+                x = round(len(r["background"][1]) / 2, 1) - 4
+                y = len(r["background"]) - 2
                 drawBlankRectangle(x, y, 8, 2)
 
         if r["leftRoom"] != None:
-                x = 2
-                y = round(len(r["background"]) / 2) - 3
+                x = 0
+                y = round(len(r["background"]) / 2, 1) - 4
                 drawBlankRectangle(x, y, 2, 8)
 
         if r["rightRoom"] != None:
-                x = len(r["background"][0])
-                y = round(len(r["background"]) / 2) - 3
+                x = len(r["background"][1]) - 2
+                y = round(len(r["background"]) / 2, 1) - 4
                 drawBlankRectangle(x, y, 2, 8)
         
         # Affichage des coffres
@@ -124,11 +128,13 @@ def show(r):
                 Utils.goto(x+2, y+1)
                 Arrow.show(currentArrow)
 
-def drawBlankRectangle(x, y, w, h):
+def drawDoors(r):
+
+
+def drawDoor(r, x, y, w, h):
         for i_y in range(0, h):
                 for i_x in range(0, w):
-                        Utils.goto(x + i_x, y + i_y)
-                        sys.stdout.write(" \n")
+                       r["background"][y+i_y][x+i_x] = " "
 
 def getChestByPosition(r, x, y):
         # On parcourt la liste des coffres de la salle
@@ -169,6 +175,14 @@ def getRightRoom(r):
 
 def setRightRoom(r, right_room):
         r["rightRoom"] = right_room
+
+def get(r, x, y):
+        if getMobByPosition(r, x, y) != None:
+                return "M"
+        elif getChestByPosition(r, x, y) != None:
+                return "C"
+        else:
+                return r["background"][y][x].encode("utf-8")
 
 # Tests
 if __name__ == "__main__":
