@@ -93,7 +93,7 @@ def pickUpRandomRoom(remainingRooms):
         room = remainingRooms[index]
         del remainingRooms[index]
         return room
-                                        
+
 def show(d):
         Room.show(d["currentRoom"])
 

@@ -89,27 +89,6 @@ def show(r):
                                 Utils.goto(x+2, y+2)
                                 sys.stdout.write(r["background"][y][x].encode("utf-8"))
         
-        # Affichage des portes
-        if r["upRoom"] != None:
-                x = round(len(r["background"][1]) / 2, 1) - 4
-                y = 0
-                drawBlankRectangle(x, y, 8, 2)
-
-        if r["downRoom"] != None:
-                x = round(len(r["background"][1]) / 2, 1) - 4
-                y = len(r["background"]) - 2
-                drawBlankRectangle(x, y, 8, 2)
-
-        if r["leftRoom"] != None:
-                x = 0
-                y = round(len(r["background"]) / 2, 1) - 4
-                drawBlankRectangle(x, y, 2, 8)
-
-        if r["rightRoom"] != None:
-                x = len(r["background"][1]) - 2
-                y = round(len(r["background"]) / 2, 1) - 4
-                drawBlankRectangle(x, y, 2, 8)
-        
         # Affichage des coffres
         for currentChest in r["chests"]:
                 x, y = Chest.getPosition(currentChest)
@@ -129,7 +108,26 @@ def show(r):
                 Arrow.show(currentArrow)
 
 def drawDoors(r):
+        # Affichage des portes
+        if r["upRoom"] != None:
+                x = round(len(r["background"][1]) / 2, 1) - 4
+                y = 0
+                drawDoor(r, x, y, 8, 2)
 
+        if r["downRoom"] != None:
+                x = round(len(r["background"][1]) / 2, 1) - 4
+                y = len(r["background"]) - 2
+                drawDoor(r, x, y, 8, 2)
+
+        if r["leftRoom"] != None:
+                x = 0
+                y = round(len(r["background"]) / 2, 1) - 4
+                drawDoor(x, y, 2, 8)
+
+        if r["rightRoom"] != None:
+                x = len(r["background"][1]) - 2
+                y = round(len(r["background"]) / 2, 1) - 4
+                drawDoor(r, x, y, 2, 8)
 
 def drawDoor(r, x, y, w, h):
         for i_y in range(0, h):
