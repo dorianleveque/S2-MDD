@@ -53,8 +53,8 @@ def move(player, direction):
                 player["x"] += -1
 
 def show(p):
-        Utils.goto(p["x"]+3, p["y"]+3)
-        sys.stdout.write(p["sprite"])
+        Utils.goto(p["x"]+2, p["y"]+2)
+        sys.stdout.write(p["sprite"]+'\n')
 
 def getHealth(p):
         return p["health"]

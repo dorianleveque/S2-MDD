@@ -132,7 +132,7 @@ def drawDoors(r):
 def drawDoor(r, x, y, w, h):
         for i_y in range(0, h):
                 for i_x in range(0, w):
-                       r["background"][y+i_y][x+i_x] = " "
+                       r["background"][int(y+i_y)][int(x+i_x)] = " "
 
 def getChestByPosition(r, x, y):
         # On parcourt la liste des coffres de la salle
@@ -155,24 +155,28 @@ def getUpRoom(r):
 
 def setUpRoom(r, up_room):
         r["upRoom"] = up_room
+        drawDoors(r)
 
 def getDownRoom(r):
         return r["downRoom"]
 
 def setDownRoom(r, down_room):
         r["downRoom"] = down_room
+        drawDoors(r)
 
 def getLeftRoom(r):
         return r["leftRoom"]
 
 def setLeftRoom(r, left_room):
         r["leftRoom"] = left_room
+        drawDoors(r)
 
 def getRightRoom(r):
         return r["rightRoom"]
 
 def setRightRoom(r, right_room):
         r["rightRoom"] = right_room
+        drawDoors(r)
 
 def get(r, x, y):
         if getMobByPosition(r, x, y) != None:
