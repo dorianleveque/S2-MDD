@@ -1,6 +1,5 @@
 <menu>
-<windows name="frame">
-<background color="white">
+<frame name="frame">
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 ░░                                                                                                               ░░
 ░░                                                                                                               ░░
@@ -41,12 +40,12 @@
 ░░                                                                                                               ░░
 ░░                                                                                                               ░░
 ░░                                                                                                               ░░
+░░                                                                                                               ░░
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-</background>
-</windows>
+</frame>
                 
 <windows name="mainMenu">
-<background color="red">
+<background color="yellow">
 
                                                      /@
                                      __        __   /\/
@@ -80,15 +79,15 @@
                                     =
 </background>
 
-<text x="3" y="39" color="white" >Date version : 12/05/2016</text>
-<text x="3" y="40" color="red" form="bold">Version: Alpha | Prototype 1</text>
-<textsz x="65" y="36" color="white" form="bold">Press escape to quit</textsz>
+<text x="3" y="41" color="red" backgroundColor="black" form="bold, underline">Version: Alpha | Prototype 1</text>
+<text x="70" y="36" color="white" backgroundColor="black" form="bold">Press escape to quit</text>
+<text x="45" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | validate : Press 'd'</text>
 
-<button>Game</button>
-<button>Options</button>
-<button>Help</button>
-<button>Credits</button>
-<button>Quit</button>
+<button x="70" y="28">Start game</button>
+<button x="70" y="30">Options</button>
+<button x="70" y="32">Help</button>
+<button x="70" y="34">Credits</button>
+<buttons x="70" y="36">Quit</buttons>
 
 
 </windows>
@@ -102,9 +101,9 @@
                  / / /       \ \ \ \   _____  \  |  __   __  |\   /  /  ___  \  \    \   \   / /  __  |
                 / / /         \ \ \ | |     \  \ | /  | |  \ | | |  /  /   \  \  |    \   | | /  /  \ |
                 | | |         | | | | |      |  ||/   | |   \| | | /  /     \  \ |     \  | ||  |    \|
-                | | |         | | | | |_____/  /      | |      | | |  |     |  | | |\   \ | | \  \
-                |   |         |   | |  _______/       | |      | | |  |     |  | | | \   \| |   \  \
-                | | |         | | | | |               | |      | | |  |     |  | | |  \     |     \  \
+                | | |         | | | | |_____/  /      | |      | | |  |     |  | | |\   \ | | \   \
+                |   |         |   | |  _______/       | |      | | |  |     |  | | | \   \| |  \    \
+                | | |         | | | | |               | |      | | |  |     |  | | |  \     |    \   \
                 | | |         | | | | |               | |      | | \  \     /  / | |   \    ||\    |  |
                 \ \ \         / / / | |               | |      | |  \  \___/  /  | |    \   || \__/  /
                  \ \ \       / / / /___\             /___\    /___\  \_______/  /___\    \__||______/
@@ -112,7 +111,7 @@
                    \___________/  \_________________________________________________________________/
 </background>
 
-<button>Retour</button>
+<button x="100" y="40">Return</button>
 </windows>
 
 <windows name="Credits">
@@ -124,16 +123,16 @@
                  / / /         \ |\   _____  \\   _____ |\   ____ \  \   / |  __   __  |  /  __  |
                 / / /           \| | |     \  \| |     \| | |    \ \  | |  | /  | |  \ | /  /  \ |
                 | | |              | |      | || |        | |     \ \ | |  |/   | |   \||  |    \|
-                | | |              | |_____/  /| |_____/| | |      | || |       | |      \  \
-                |   |              |     ____/ |  _____ | | |      | || |       | |        \  \
-                | | |              | |\  \     | |     \| | |      | || |       | |          \  \
+                | | |              | |_____/  /| |_____/| | |      | || |       | |      \   \
+                |   |              |     ____/ |  _____ | | |      | || |       | |       \    \
+                | | |              | |\  \     | |     \| | |      | || |       | |         \   \
                 | | |              | | \  \    | |        | |     / / | |       | |     |\    |  |
                 \ \ \           /| | |  \  \_  | |_____/| | |____/ /  | |       | |     | \__/  /
                  \ \ \_________/ |/___\  \___\/_________|/________/  /___\     /___\    |______/
                   \              | ______________________________________________________________
                    \_____________| \____________________________________________________________/
 </background>
-<button>Retour</button>
+<button x="100" y="40">Return</button>
 </windows>
         
 <windows name="Help">
@@ -154,10 +153,35 @@
                                 | | |      | | |   ___________________________________
                                /_____\    /_____\  \_________________________________/
 </background>
-<button>Retour</button>
+<text x="6" y="20" color="yellow" backgroundColor="dark gray" form="bold, underline">--> What is this game ?</text>
+<text x="6" y="21" color="light gray" backgroundColor="dark gray">This game is a Zelda, and the goal is ...</text>
+<button x="100" y="40">Return</button>
 </windows>
 
-<windows name="Game">
+<windows name="Pause">
+<background>
+
+                ______________
+                \      ____   \
+                 \    |    \   \   ___     ______ _____    ______  __________ 
+                  | | |     |   |  \  \    \    / \   /   /  __  | \   _____ |
+                  | | |     | | |  / _ \    |  |   | |   /  /  \ |  | |     \|
+                  | | |     |   | / / \ \   |  |   | |  |  |    \|  | | 
+                  |   |____/   / / /___\ \  |  |   | |   \   \      | |_____/|
+                  |    _______/  |  ___  |  |  |   | |    \    \    |  _____ |
+                  | | |          | /   \ |  |  |   | |      \   \   | |     \|
+                  | | |          | |   | |  |  |   | |  |\    |  |  | |      
+                  | | |          | |   | |  |  \___/ /  | \__/  /   | |_____/|
+                  | | |         /___\ /___\  \______/   |______/   /_________|
+                 /     \    __________________________________________________
+                /_______\   \________________________________________________/
+</background>
+<button x="60" y="20">Resume</button>
+<button x="60" y="22">Options</button>
+<button x="60" y="24">Restart (comming soon)</button>
+</windows>
+
+<windows name="Start game">
 <background color="white">
                                                                                 ░░
                                                                                 ░░
@@ -198,7 +222,7 @@
                                                                                 ░░
                                                                                 ░░
                                                                                 ░░
+                                                                                ░░
 </background>
 </windows>
-
 </menu>
