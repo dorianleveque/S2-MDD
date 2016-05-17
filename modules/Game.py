@@ -30,7 +30,7 @@ def create():
 
 def show(g):        
         # Affichage de l'interface
-        
+        Utils.setTextColor("white","black")
         # Affichage du donjon
         Dungeon.show(g["dungeon"])
         
@@ -52,8 +52,8 @@ def interact(g, key):
 
         if(Room.get(currentRoom, x, y - 1) == " "):
 
-        Player.setPosition(g["player"], x, y)
-        switchRoom(g)
+                Player.setPosition(g["player"], x, y)
+                switchRoom(g)
         
         #elif key == "p":                      # appel de la fonction pause
 #                return "pause"
