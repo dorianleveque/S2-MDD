@@ -15,7 +15,6 @@ import sys
 import select
 # Modules personnalisés
 import Utils
-import Game
 
 
 # constructeur du menu #
@@ -298,20 +297,18 @@ def getTransition(menu):
 
 
 def changeCurrentWindow(menu, windowName):
-       
+
         if windowName == "Return" or windowName == "Resume":
-                #transitionSize = len(getTransition(menu))
+                index = menu["transitions"]
                 setCurrentWindow(menu, menu["transitions"][-1]) 
                 del menu["transitions"][-1]
-        if windowName == "Quit":
+
+        elif windowName == "Quit":
                 quit() 
         
-        else:
+        elif windowName != ' ':
                 addTransition(menu, getCurrentWindowName(menu))
                 setCurrentWindow(menu, windowName)
-        # test
-        Utils.goto(50,60)
-        sys.stdout.write(str(menu["transitions"]))
 
 
 if __name__ == "__main__":
