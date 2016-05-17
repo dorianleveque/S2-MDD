@@ -300,9 +300,9 @@ def getTransition(menu):
 def changeCurrentWindow(menu, windowName):
        
         if windowName == "Return" or windowName == "Resume":
-                transitionSize = len(getTransition(menu))
-                setCurrentWindow(menu, menu["transitions"][transitionSize-1])
-                menu["transitions"].remove(str(menu["transitions"][transitionSize-1]))
+                #transitionSize = len(getTransition(menu))
+                setCurrentWindow(menu, menu["transitions"][-1]) 
+                del menu["transitions"][-1]
         if windowName == "Quit":
                 quit() 
         
@@ -310,7 +310,7 @@ def changeCurrentWindow(menu, windowName):
                 addTransition(menu, getCurrentWindowName(menu))
                 setCurrentWindow(menu, windowName)
         # test
-        Utils.goto(50,2)
+        Utils.goto(50,60)
         sys.stdout.write(str(menu["transitions"]))
 
 

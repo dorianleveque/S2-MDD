@@ -24,7 +24,7 @@ def create():
         game["dungeon"] = Dungeon.create("forest")
         
         Dungeon.generate(game["dungeon"])
-        Player.setPosition(game["player"], 1, 1)
+        Player.setPosition(game["player"], 40, 20)
         
         return game
 
@@ -50,10 +50,10 @@ def interact(g, key):
         elif (key == "d") and (Room.get(currentRoom, x+1, y) == " "): 
                 x = x + 1             # le joueur se déplace vers Direction Droite
 
-        if(Room.get(currentRoom, x, y - 1) == " "):
+        #if(Room.get(currentRoom, x, y - 1) == " "):
 
-                Player.setPosition(g["player"], x, y)
-                switchRoom(g)
+        Player.setPosition(g["player"], x, y)
+        switchRoom(g)
         
         #elif key == "p":                      # appel de la fonction pause
 #                return "pause"
@@ -62,19 +62,19 @@ def switchRoom(g):
         x, y = Player.getPosition(g["player"])
         currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
 
-        if x < 0:
+        if x < 1:
                 Dungeon.setCurrentRoom(g["dungeon"], Room.getLeftRoom(currentRoom))
                 x = 79
         
-        if x > 79: # Taille max en x des salles
+        if x > 78: # Taille max en x des salles
                 Dungeon.setCurrentRoom(g["dungeon"], Room.getRightRoom(currentRoom))
                 x = 0
 
-        if y < 0:
+        if y < 1:
                 Dungeon.setCurrentRoom(g["dungeon"], Room.getUpRoom(currentRoom))
                 y = 37
 
-        if y > 37: # Taille max en y des salles
+        if y > 38: # Taille max en y des salles
                 Dungeon.setCurrentRoom(g["dungeon"], Room.getDownRoom(currentRoom))
                 y = 0
 

@@ -122,12 +122,12 @@ def drawDoors(r):
         if r["leftRoom"] != None:
                 x = 0
                 y = round(len(r["background"]) / 2, 1) - 4
-                drawDoor(x, y, 2, 8)
+                drawDoor(x, y, 3, 8)
 
         if r["rightRoom"] != None:
-                x = len(r["background"][1]) - 2
+                x = len(r["background"][1]) - 3
                 y = round(len(r["background"]) / 2, 1) - 4
-                drawDoor(r, x, y, 2, 8)
+                drawDoor(r, x, y, 3, 8)
 
 def drawDoor(r, x, y, w, h):
         for i_y in range(0, h):
