@@ -50,7 +50,7 @@ def interact(g, key):
         elif (key == "d") and (Room.get(currentRoom, x+1, y) == " "): 
                 x = x + 1             # le joueur se déplace vers Direction Droite
 
-        if(Room.get(currentRoom, x, y - 1) == " ")
+        if(Room.get(currentRoom, x, y - 1) == " "):
 
         Player.setPosition(g["player"], x, y)
         switchRoom(g)
