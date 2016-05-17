@@ -46,7 +46,7 @@ def init():
         #os.system('setterm -repeat off')
         
 
-        Menu.setCurrentWindow(menu,"mainMenu")
+        Menu.setCurrentWindow(menu,"Main menu")
         
         
 
@@ -92,7 +92,7 @@ def interact():
                 
                 
         while isData():
-                sys.stdin.read(5)
+                sys.stdin.read(10)
                 #termios.tcflush(sys.stdin, termios.TCIFLUSH)   # Permet de vider, le buffer des touches d'entree
 
 def isData():
