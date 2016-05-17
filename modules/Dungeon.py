@@ -55,11 +55,12 @@ def recursiveGeneration(d, remainingRooms, currentRoom, roomLevel, roomsTotalNum
                 depthDrivenCoefficient = math.exp(-(roomLevel * depthCoefficient))
                 remainingRoomDrivenCoefficient = remainingRoomCoefficient*(len(remainingRooms) / roomsTotalNumber)
                 probability = int(round(depthDrivenCoefficient*remainingRoomDrivenCoefficient*random.random()+0.5, 0))
+                #probability = int(round(random.random(), 0))
                 
                 if(roomLevel >= 7):     # Sécurité afin d'éviter d'avoir des donjons trop profonds
                         p = 0
 
-                if((probability == 1) and (len(remainingRooms) != 0)):
+                if((probability >= 1) and (len(remainingRooms) != 0)):
                         if door == "up":
                                 if(Room.getUpRoom(currentRoom) == None):
                                         upRoom = pickUpRandomRoom(remainingRooms)
