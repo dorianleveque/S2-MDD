@@ -40,8 +40,6 @@ def create():
         menu["current"].update(frameData)
         
         
-        
-        
         # recuperation des noms et des données de chaque fenetre pour la creation du dictionnaire menu
         windowNodes = rootElement.getElementsByTagName("windows")       # windowNodes est une liste de toutes les balises windows
         windowSize = windowNodes.length
@@ -124,11 +122,16 @@ def create():
                         dataButton = dict()
                         
                         dataButton["name"] = thisButton.firstChild.nodeValue
+                        
                         x = thisButton.getAttribute("x")
                         y = thisButton.getAttribute("y")
                         dataButton["position"] = (x,y)
                         
-                        #buttonName = thisButton.firstChild.nodeValue
+                        dataButton["target"] = []
+                        target = thisButton.getAttribute("target")
+                        for i in target.split(", "):
+                                dataButton["target"].append(i)
+                        
                         button["list"].append(dataButton)
                         
                         #Attribuer un bouton de selectionner pour l'initialisation dans chacune des fenetres
@@ -156,7 +159,7 @@ def getCurrentWindowName(menu):
 
 # Savoir si on se trouve dans la fenetre de jeu
 def gameWindow(menu):
-        if getCurrentWindowName(menu) == "Start game":
+        if getCurrentWindowName(menu) == "game":
                 return True
         else:
                 return False
@@ -208,7 +211,7 @@ def showBackground(menu):
 
 # Renvoie la liste des boutons
 def getButtonList(menu):
-        return menu["current"]["data"]["buttons"]["list"]       # renvoie un dictionnaire {'name'= nom du bouton, 'position' = tupple (x,y)}
+        return menu["current"]["data"]["buttons"]["list"]       # renvoie un dictionnaire {'name'= nom du bouton affiche dans terminal, 'position' = tupple (x,y), 'target' = liste de nom de fenetre}
 
 # Renvoie le bouton selectionne 
 def getButtonSelected(menu):
@@ -258,57 +261,72 @@ def showTexts(menu):
 
 
 def interact(menu, key):
+   
+
+        if key == "z": 
+                changeSelectedButton(menu, "buttonUp")
+
+        elif key == "s":
+                changeSelectedButton(menu, "buttonDown")
+        
+        elif key == "d":
+                changeSelectedButton(menu, "confirm")
+                
+        elif key == "p":
+                if gameWindow(menu):
+                        target = []
+                        target.append("pause")
+                        changeCurrentWindow(menu, target)
+
+def changeSelectedButton(menu, action):
         
         # Changer le bouton selectionne de la fenetre     
         buttonSelected = getButtonSelected(menu)
         buttonList = getButtonList(menu)
         
-        # Recherche du numero d'index dans buttonList
+        # Recherche de l'index dans buttonList
         index = 0
         for i in range(0, len(buttonList)):
                 if buttonList[i]["name"] == buttonSelected:
                         break
-                index += 1      
-
-        if key == "z": 
+                index += 1
+        
+        if action == "buttonUp":
                 if index-1 >= 0:
                         setButtonSelected(menu, buttonList[index-1]["name"])
-        elif key == "s":
+                        
+        elif action == "buttonDown":
                 if index+1 <= len(buttonList)-1:
                         setButtonSelected(menu, buttonList[index+1]["name"])
         
         # Valider le choix de la fenetre
-        elif key == "d":
+        elif action == "confirm":
                 if gameWindow(menu) == False:
-                        changeCurrentWindow(menu, getButtonSelected(menu)) # Changement de fenetre
-                
-        elif key == "p":
-                if gameWindow(menu):
-                        changeCurrentWindow(menu, "Pause")
+                        changeCurrentWindow(menu, buttonList[index]["target"])                  # Changement de fenetre
 
 
+def addPreviousWindow(menu, previousWindow):
+        menu["transitions"].append(previousWindow)
 
-
-def addTransition(menu, nextWindow):
-        menu["transitions"].append(nextWindow)
-
-def getTransition(menu):
+def getPreviousWindow(menu):
         return menu["transitions"]
 
 
-def changeCurrentWindow(menu, windowName):
-
-        if windowName == "Return" or windowName == "Resume":
-                index = menu["transitions"]
-                setCurrentWindow(menu, menu["transitions"][-1]) 
-                del menu["transitions"][-1]
-
-        elif windowName == "Quit":
-                quit() 
+def changeCurrentWindow(menu, buttonTargetList):
         
-        elif windowName != ' ':
-                addTransition(menu, getCurrentWindowName(menu))
-                setCurrentWindow(menu, windowName)
+        # Recherche dans la liste du bouton selectionne si celui-ci contient plus de 1 cible (target). On pourra considerer
+        # ainsi qu'il s'agit du bouton retour.
+        
+        if len(buttonTargetList) >= 2: 
+                index = getPreviousWindow(menu)
+                setCurrentWindow(menu, index[-1]) 
+                del index[-1]
+        
+        elif len(buttonTargetList) == 1:
+                if buttonTargetList[0] != ' ':
+                        addPreviousWindow(menu, getCurrentWindowName(menu))
+                        setCurrentWindow(menu, buttonTargetList[0])
+
 
 
 if __name__ == "__main__":
@@ -317,8 +335,8 @@ if __name__ == "__main__":
         setCurrentWindow(menu,"mainMenu")
         
         print menu["current"]
-        setCurrentWindow(menu,"Options")
-        print menu["current"]
+        ##setCurrentWindow(menu,"Options")
+        #print menu["current"]
         #print getCurrentWindowName(menu)
         #print getCurrentWindowData(menu)
         #print getCurrentWindowBackgroundContent(menu)
