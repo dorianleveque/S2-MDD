@@ -44,7 +44,7 @@
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 </frame>
                 
-<windows name="Main menu">
+<windows name="mainMenu">
 <background color="yellow">
 
                                                      /@
@@ -81,40 +81,40 @@
 
 <text x="3" y="41" color="red" backgroundColor="black" form="bold, underline">Version: Alpha | Prototype 1</text>
 <text x="70" y="36" color="white" backgroundColor="black" form="bold">Press escape to quit</text>
-<text x="45" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | validate : Press 'd'</text>
+<text x="45" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | confirm : Press 'd'</text>
 
-<button x="70" y="28">Start game</button>
-<button x="70" y="30">Options</button>
-<button x="70" y="32">Help</button>
-<button x="70" y="34">Credits</button>
-<buttons x="70" y="36">Quit</buttons>
+<button x="70" y="28" target="game">Start game</button>
+<button x="70" y="30" target="options">Options</button>
+<button x="70" y="32" target="help">Help</button>
+<button x="70" y="34" target="credits">Credits</button>
+<buttons x="70" y="36" target="quit">Quit Game</buttons>
 
 
 </windows>
         
-<windows name="Options">
+<windows name="options">
 <background color="white">
 
-                    ___________
-                   /   _____   \
-                  /   /     \   \  ___________    ___________ _____   _______   _____    _____  ______
-                 / / /       \ \ \ \   _____  \  |  __   __  |\   /  /  ___  \  \    \   \   / /  __  |
-                / / /         \ \ \ | |     \  \ | /  | |  \ | | |  /  /   \  \  |    \   | | /  /  \ |
-                | | |         | | | | |      |  ||/   | |   \| | | /  /     \  \ |     \  | ||  |    \|
-                | | |         | | | | |_____/  /      | |      | | |  |     |  | | |\   \ | | \   \
-                |   |         |   | |  _______/       | |      | | |  |     |  | | | \   \| |  \    \
-                | | |         | | | | |               | |      | | |  |     |  | | |  \     |    \   \
-                | | |         | | | | |               | |      | | \  \     /  / | |   \    ||\    |  |
-                \ \ \         / / / | |               | |      | |  \  \___/  /  | |    \   || \__/  /
-                 \ \ \       / / / /___\             /___\    /___\  \_______/  /___\    \__||______/
-                  \   \_____/   / ___________________________________________________________________
-                   \___________/  \_________________________________________________________________/
+                ___________
+               /   _____   \
+              /   /     \   \  ___________    ___________ _____   _______   _____    _____  ______
+             / / /       \ \ \ \   _____  \  |  __   __  |\   /  /  ___  \  \    \   \   / /  __  |
+            / / /         \ \ \ | |     \  \ | /  | |  \ | | |  /  /   \  \  |    \   | | /  /  \ |
+            | | |         | | | | |      |  ||/   | |   \| | | /  /     \  \ |     \  | ||  |    \|
+            | | |         | | | | |_____/  /      | |      | | |  |     |  | | |\   \ | | \   \
+            |   |         |   | |  _______/       | |      | | |  |     |  | | | \   \| |  \    \
+            | | |         | | | | |               | |      | | |  |     |  | | |  \     |    \   \
+            | | |         | | | | |               | |      | | \  \     /  / | |   \    ||\    |  |
+            \ \ \         / / / | |               | |      | |  \  \___/  /  | |    \   || \__/  /
+             \ \ \       / / / /___\             /___\    /___\  \_______/  /___\    \__||______/
+              \   \_____/   / ___________________________________________________________________
+               \___________/  \_________________________________________________________________/
 </background>
-
-<button x="100" y="40">Return</button>
+<text x="40" y="26" color="light gray">Comming sonn ... (in Prototype 2)</text>
+<button x="100" y="40" target="mainMenu, pause">Return</button>
 </windows>
 
-<windows name="Credits">
+<windows name="credits">
 <background color="white">
 
                     _____________
@@ -132,10 +132,11 @@
                   \              | ______________________________________________________________
                    \_____________| \____________________________________________________________/
 </background>
-<button x="100" y="40">Return</button>
+<text x="40" y="26" color="light gray">Comming sonn ... (in Prototype 2)</text>
+<button x="100" y="40" target="mainMenu">Return</button>
 </windows>
         
-<windows name="Help">
+<windows name="help">
 <background color="white">
 
                                _______    _______
@@ -155,10 +156,10 @@
 </background>
 <text x="6" y="20" color="yellow" backgroundColor="dark gray" form="bold, underline">--> What is this game ?</text>
 <text x="6" y="21" color="light gray" backgroundColor="dark gray">This game is a Zelda, and the goal is ...</text>
-<button x="100" y="40">Return</button>
+<button x="100" y="40" target="mainMenu">Return</button>
 </windows>
 
-<windows name="Pause">
+<windows name="pause">
 <background>
 
                       ______________
@@ -176,13 +177,13 @@
                        /     \    __________________________________________________
                       /_______\   \________________________________________________/
 </background>
-<button x="60" y="20">Resume</button>
-<button x="60" y="22">Options</button>
-<button x="60" y="24">Main menu</button>
-<button x="60" y="26">Restart (comming soon)</button>
+<button x="50" y="20" target="game">Resume game</button>
+<button x="50" y="22" target="options">Options</button>
+<button x="50" y="24" target="mainMenu">Return to title menu</button>
+<button x="50" y="26" target=" ">Restart (comming soon in Prototype 2)</button>
 </windows>
 
-<windows name="Start game">
+<windows name="game">
 <background color="white">
                                                                                 ░░
                                                                                 ░░
