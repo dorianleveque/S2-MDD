@@ -10,7 +10,6 @@
 ##################################################################
 
 import sys
-import os
 
 def goto(x=0, y=0):
         s_x = str(int(x)+1)
@@ -18,7 +17,9 @@ def goto(x=0, y=0):
         txt = "\033[" + s_y + ";" + s_x + "H"
         sys.stdout.write(txt)
 
-def setTextColor(color="white", backgroundColor="black"):
+def write(text, color="white", backgroundColor="black", textForm = []):
+        
+        # appliquer de la couleur si indique en parametre
         foreground = dict()
         foreground["black"] = 30
         foreground["red"] = 31
@@ -65,53 +66,34 @@ def setTextColor(color="white", backgroundColor="black"):
                         backColor = str(int(background[b]))
                         sys.stdout.write("\033["+backColor+"m")
                         break
-
-        #os.system("setterm -foreground "+color)
-        #os.system("setterm -background "+backgroundColor)
-        return
-
-def setTextForm(formList):
-        for i in formList:
-                os.system("setterm -"+i+" on")
-        return
-
-def resetTextFormat():
+        
+        # appliquer une mise en forme si indique en parametre
+        form = dict()
+        form["bold"] = 1
+        form["underline"] = 4
+        
+        for i in textForm:
+                for f in form:
+                        if f == i:
+                                param = str(int(form[f]))
+                                sys.stdout.write("\033["+param+"m")
+                
+        # ecrire dans le terminal:
+        sys.stdout.write(text.encode("utf-8"))
+        
+        # Re-initialisation de la mise en forme et des couleurs
         sys.stdout.write("\033[0m")
-        #os.system("setterm -default")
+
 
 if __name__=="__main__":
         #Test 1
-        print "Test 1"
-        form = ["bold", "underline", "half-bright"]
-        setTextForm(form)
-        sys.stdout.write("salut\n")
-        resetTextFormat()
-        sys.stdout.write("coucou\n")
+
+        goto(1,20)
+        write("test1\n", "red", "white", ["bold"])
         
-        #Test 2
-        print "-------------\nTest 2"
-        print "Test 2"
-        form = ""
-        setTextForm(form)
-        sys.stdout.write("salut\n")
-        resetTextFormat()
-        sys.stdout.write("coucou\n")
+        goto(10,50)
+        write("test2\n", "blue", "light gray", ["underline"])
         
-        #Test 3
-        print "-------------\nTest 3"
-        print "Test 3"
-        setTextColor('blue', 'white')
-        sys.stdout.write("salut\n")
-        resetTextFormat()
-        sys.stdout.write("coucou\n")
-        
-        #Test 4
-        print "-------------\nTest 4"
-        print "Test 4"
-        setTextColor('yellow', 'red')
-        goto(20,10)
-        sys.stdout.write("salut\n")
-        resetTextFormat()
-        sys.stdout.write("coucou\n")
-        
+        goto(12,60)
+        write("test3\n", "green", "black", ["bold", "underline"])
         

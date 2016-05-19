@@ -10,7 +10,6 @@
 ##################################################################
 
 # Modules système
-import sys
 
 # Modules personnalisés
 import Utils
@@ -32,7 +31,7 @@ def move(m):
 
 def show(m):
         Utils.goto(m["x"], m["y"])
-        sys.stdout.write(m["sprite"])
+        Utils.write(m["sprite"])
         return
 
 def getType(m):

@@ -10,13 +10,11 @@
 ##################################################################
 
 # Modules systeme
-import sys
 
 # Modules personnalisés
 import Dungeon
 import Room
 import Player
-import Utils
 
 def create():
         game = dict()
@@ -29,8 +27,6 @@ def create():
         return game
 
 def show(g):        
-        # Affichage de l'interface
-        Utils.setTextColor("white","black")
         # Affichage du donjon
         Dungeon.show(g["dungeon"])
         

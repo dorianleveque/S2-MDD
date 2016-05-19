@@ -45,7 +45,7 @@
 </frame>
                 
 <windows name="mainMenu">
-<background color="yellow">
+<background color="yellow" backgroundColor="black">
 
                                                      /@
                                      __        __   /\/
@@ -79,7 +79,7 @@
                                     =
 </background>
 
-<text x="3" y="41" color="red" backgroundColor="black" form="bold, underline">Version: Alpha | Prototype 1</text>
+<text x="3" y="41" color="red" backgroundColor="black" form="bold">Version: Alpha | Prototype 1</text>
 <text x="70" y="36" color="white" backgroundColor="black" form="bold">Press escape to quit</text>
 <text x="45" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | confirm : Press 'd'</text>
 
@@ -110,7 +110,7 @@
               \   \_____/   / ___________________________________________________________________
                \___________/  \_________________________________________________________________/
 </background>
-<text x="40" y="26" color="light gray">Comming sonn ... (in Prototype 2)</text>
+<text x="40" y="26" color="light gray" backgroundColor="black">Comming soon ... (in Prototype 2)</text>
 <button x="100" y="40" target="mainMenu, pause">Return</button>
 </windows>
 
@@ -132,7 +132,7 @@
                   \              | ______________________________________________________________
                    \_____________| \____________________________________________________________/
 </background>
-<text x="40" y="26" color="light gray">Comming sonn ... (in Prototype 2)</text>
+<text x="40" y="26" color="light gray" backgroundColor="black">Comming soon ... (in Prototype 2)</text>
 <button x="100" y="40" target="mainMenu">Return</button>
 </windows>
         
@@ -154,8 +154,7 @@
                                 | | |      | | |   ___________________________________
                                /_____\    /_____\  \_________________________________/
 </background>
-<text x="6" y="20" color="yellow" backgroundColor="dark gray" form="bold, underline">--> What is this game ?</text>
-<text x="6" y="21" color="light gray" backgroundColor="dark gray">This game is a Zelda, and the goal is ...</text>
+<text x="40" y="26" color="light gray" backgroundColor="black">Comming soon ... (in Prototype 2)</text>
 <button x="100" y="40" target="mainMenu">Return</button>
 </windows>
 

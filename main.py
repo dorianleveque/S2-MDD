@@ -21,7 +21,6 @@ import termios
 # Modules personnalisés
 sys.path.append('./modules/')
 import Game
-import Utils
 import Player
 import Menu
 
@@ -65,7 +64,6 @@ def run():
                         if refresh==True:
                                 Menu.show(menu)
                 interact()
-                #move()
                 time.sleep(0.02)
                 n += 1   
         
