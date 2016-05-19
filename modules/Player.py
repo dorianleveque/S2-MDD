@@ -10,7 +10,6 @@
 ##################################################################
 
 # Modules systèmes
-import sys
 
 # Modules personnalisés
 import Chest
@@ -54,7 +53,7 @@ def move(player, direction):
 
 def show(p):
         Utils.goto(p["x"]+2, p["y"]+2)
-        sys.stdout.write(p["sprite"]+'\n')
+        Utils.write(p["sprite"]+'\n')
 
 def getHealth(p):
         return p["health"]

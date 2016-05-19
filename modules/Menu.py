@@ -11,7 +11,6 @@
 
 # Modules système
 from xml.dom.minidom import parse
-import sys
 import select
 # Modules personnalisés
 import Utils
@@ -186,27 +185,25 @@ def show(menu):
         
 def showFrame(menu):
         # Afficher le cadre de la fenetre
-        Utils.setTextColor("white", "black")
         
         frame = getFrame(menu)
         for y in range(0, len(frame)):
                 Utils.goto(0, y)
                 for x in range(0, len(frame[y])):
-                        sys.stdout.write(frame[y][x].encode("utf-8"))
-                sys.stdout.write('\n')
+                        Utils.write(frame[y][x], 'white', 'black')
+                Utils.write("\n")
+
 
 def showBackground(menu):      
         # Afficher le fond de la fenetre courante
         color, backgroundColor = getBackgroundColor(menu)
-        Utils.setTextColor(color, backgroundColor)
-        
         background = getBackground(menu)
+        
         for y in range(0, len(background)):
                 for x in range(0, len(background[y])):
                         if background[y][x] != " ":
                                 Utils.goto(x+2,y+1)                                           # A reutiliser pour affichage
-                                sys.stdout.write(background[y][x].encode("utf-8"))
-                sys.stdout.write('\n')
+                                Utils.write(background[y][x]+"\n", color, backgroundColor)
 
 
 # Renvoie la liste des boutons
@@ -230,12 +227,9 @@ def showButtons(menu):
                 
                 Utils.goto(x,y)
                 if name == getButtonSelected(menu):
-                        Utils.setTextColor("black", "white")
-                        sys.stdout.write("> "+name.encode("utf-8")+"\n")
+                        Utils.write("> "+name+"\n", "black", "white")
                 else : 
-                        Utils.setTextColor("white", "black")
-                        sys.stdout.write("  "+name.encode("utf-8")+"\n")
-                Utils.resetTextFormat()        
+                        Utils.write("  "+name+"\n", "white", "black")      
 
 # Renvoie les textes avec leurs parametres
 def getTexts(menu):
@@ -243,21 +237,15 @@ def getTexts(menu):
                                                                 # {'text'= texte, 'position'=(x,y), 'color'=(color, backgroundColor), 'form'=forme du texte}
 
 def showTexts(menu):
-        Utils.resetTextFormat()
         # Afficher les texts de la fenetre
         for t in list(getTexts(menu)):
-                Utils.resetTextFormat()
                 text = t["text"]
                 color, backgroundColor = t["color"]
                 form = t["form"]
                 x, y = t["position"]
 
                 Utils.goto(x,y)
-                Utils.setTextForm(form)
-                Utils.setTextColor(color, backgroundColor)
-                
-                sys.stdout.write(text.encode("utf-8")+"\n")
-                
+                Utils.write(text+"\n", color, backgroundColor, form)
 
 
 def interact(menu, key):
