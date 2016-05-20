@@ -81,13 +81,14 @@ def create(dungeonName, roomName):
         return r
 
 def show(r):
+        # Refresh doors
+        drawDoors(r)
+
         # Affichage du fond
         for y in range(0, len(r["background"])):
                 for x in range(0, len(r["background"][y])):
-                        if r["background"][y][x] != " ":
-                                Utils.goto(x+2, y+2)
-                                Utils.write(r["background"][y][x]+"\n")
-                                
+                        Utils.goto(x+2, y+2)
+                        Utils.write(r["background"][y][x]+"\n")
         
         # Affichage des coffres
         for currentChest in r["chests"]:
@@ -110,19 +111,19 @@ def show(r):
 def drawDoors(r):
         # Affichage des portes
         if r["upRoom"] != None:
-                x = round(len(r["background"][1]) / 2, 1) - 4
+                x = round(len(r["background"][1]) / 2, 1) - 8
                 y = 0
-                drawDoor(r, x, y, 8, 2)
+                drawDoor(r, x, y, 16, 2)
 
         if r["downRoom"] != None:
-                x = round(len(r["background"][1]) / 2, 1) - 4
+                x = round(len(r["background"][1]) / 2, 1) - 8
                 y = len(r["background"]) - 2
-                drawDoor(r, x, y, 8, 2)
+                drawDoor(r, x, y, 16, 2)
 
         if r["leftRoom"] != None:
                 x = 0
                 y = round(len(r["background"]) / 2, 1) - 4
-                drawDoor(x, y, 3, 8)
+                drawDoor(r, x, y, 3, 8)
 
         if r["rightRoom"] != None:
                 x = len(r["background"][1]) - 3
@@ -155,28 +156,28 @@ def getUpRoom(r):
 
 def setUpRoom(r, up_room):
         r["upRoom"] = up_room
-        drawDoors(r)
+        #drawDoors(r)
 
 def getDownRoom(r):
         return r["downRoom"]
 
 def setDownRoom(r, down_room):
         r["downRoom"] = down_room
-        drawDoors(r)
+        #drawDoors(r)
 
 def getLeftRoom(r):
         return r["leftRoom"]
 
 def setLeftRoom(r, left_room):
         r["leftRoom"] = left_room
-        drawDoors(r)
+        #drawDoors(r)
 
 def getRightRoom(r):
         return r["rightRoom"]
 
 def setRightRoom(r, right_room):
         r["rightRoom"] = right_room
-        drawDoors(r)
+        #drawDoors(r)
 
 def get(r, x, y):
         if getMobByPosition(r, x, y) != None:

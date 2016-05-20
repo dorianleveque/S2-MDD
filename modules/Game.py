@@ -58,21 +58,21 @@ def switchRoom(g):
         x, y = Player.getPosition(g["player"])
         currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
 
-        if x < 1:
+        if x < 2:
                 Dungeon.setCurrentRoom(g["dungeon"], Room.getLeftRoom(currentRoom))
-                x = 79
+                x = 78
         
         if x > 78: # Taille max en x des salles
                 Dungeon.setCurrentRoom(g["dungeon"], Room.getRightRoom(currentRoom))
-                x = 0
+                x = 2
 
-        if y < 1:
+        if y < 2:
                 Dungeon.setCurrentRoom(g["dungeon"], Room.getUpRoom(currentRoom))
-                y = 37
+                y = 38
 
         if y > 38: # Taille max en y des salles
                 Dungeon.setCurrentRoom(g["dungeon"], Room.getDownRoom(currentRoom))
-                y = 0
+                y = 2
 
         Player.setPosition(g["player"], x, y)
 
