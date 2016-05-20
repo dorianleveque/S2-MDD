@@ -54,6 +54,14 @@ def interact(g, key):
         #elif key == "p":                      # appel de la fonction pause
 #                return "pause"
 
+#def collider(g):
+        ## Permet de gerer les colisions des entites 
+        
+
+#def move(g):
+        # Permet de deplacer les entite
+
+
 def switchRoom(g):
         x, y = Player.getPosition(g["player"])
         currentRoom = Dungeon.getCurrentRoom(g["dungeon"])

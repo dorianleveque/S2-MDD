@@ -185,13 +185,13 @@ def show(menu):
         
 def showFrame(menu):
         # Afficher le cadre de la fenetre
-        
-        frame = getFrame(menu)
-        for y in range(0, len(frame)):
-                Utils.goto(0, y)
-                for x in range(0, len(frame[y])):
-                        Utils.write(frame[y][x], 'white', 'black')
-                Utils.write("\n")
+        if not gameWindow(menu):
+                frame = getFrame(menu)
+                for y in range(0, len(frame)):
+                        Utils.goto(0, y)
+                        for x in range(0, len(frame[y])):
+                                Utils.write(frame[y][x], 'white', 'black')
+                        Utils.write("\n")
 
 
 def showBackground(menu):      
@@ -202,7 +202,7 @@ def showBackground(menu):
         for y in range(0, len(background)):
                 for x in range(0, len(background[y])):
                         if background[y][x] != " ":
-                                Utils.goto(x+2,y+1)                                           # A reutiliser pour affichage
+                                Utils.goto(x,y)                                           # A reutiliser pour affichage
                                 Utils.write(background[y][x]+"\n", color, backgroundColor)
 
 
