@@ -93,7 +93,7 @@
 </windows>
         
 <windows name="options">
-<background color="white">
+<background color="white" backgroundColor="black">
 
                 ___________
                /   _____   \
@@ -115,7 +115,7 @@
 </windows>
 
 <windows name="credits">
-<background color="white">
+<background color="white" backgroundColor="black">
 
                     _____________
                    /             |
@@ -137,7 +137,7 @@
 </windows>
         
 <windows name="help">
-<background color="white">
+<background color="white" backgroundColor="black">
 
                                _______    _______
                                \     /    \     /
@@ -159,7 +159,7 @@
 </windows>
 
 <windows name="pause">
-<background>
+<background color="white" backgroundColor="black">
 
                       ______________
                       \      ____   \
@@ -183,47 +183,49 @@
 </windows>
 
 <windows name="game">
-<background color="white">
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
-                                                                                ░░
+<background color="white" backgroundColor="black">
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░                                                                                ░░                             ░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 </background>
 </windows>
 </menu>
