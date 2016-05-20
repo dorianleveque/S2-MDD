@@ -18,8 +18,8 @@ import Utils
 def create():
         #creation d'un joueur:
         player=dict()
-        player["x"] = 1
-        player["y"] = 1
+        player["x"] = 2
+        player["y"] = 2
         player["health"] = 100
         player["xp"] = 0
         player["strength"] = 1
