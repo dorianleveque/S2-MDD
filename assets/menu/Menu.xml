@@ -79,7 +79,7 @@
                                       =
 </background>
 
-<text x="3" y="41" color="red" backgroundColor="black" form="bold">Version: Alpha | Prototype 1</text>
+<text x="3" y="41" color="red" backgroundColor="black" form="bold">Version: Alpha | Prototype 2</text>
 <text x="70" y="36" color="white" backgroundColor="black" form="bold">Press escape to quit</text>
 <text x="45" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | confirm : Press 'd'</text>
 
