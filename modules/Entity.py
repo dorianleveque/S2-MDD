@@ -14,16 +14,15 @@
 # Modules personnalisés
 import Utils
 
-def create():
-        #creation d'un joueur:
+def create(x, y, health, xp, strength, resistance, sprite):
+        # creation d'une entité :
         entity=dict()
-        entity["x"] = 
-        entity["y"] = 
-        entity["health"] = 100
-        entity["xp"] = 0
-        entity["strength"] = 1
-        entity["resistance"] = 1
-        entity["inventory"] = Chest.create()
+        entity["x"] = x
+        entity["y"] = y
+        entity["health"] = health
+        entity["xp"] = xp
+        entity["strength"] = strength
+        entity["resistance"] = resistance
         entity["sprite"] = 'P'
         
         return entity
@@ -48,61 +47,48 @@ def move(entity, direction):
         if direction == "left":
                 entity["x"] += -1
 
-def show(p):
-        Utils.goto(p["x"]+2, p["y"]+2)
-        Utils.write(p["sprite"]+'\n')
+def show(e):
+        Utils.goto(e["x"]+2, e["y"]+2)
+        Utils.write(e["sprite"]+'\n')
 
-def getHealth(p):
-        return p["health"]
+def getHealth(e):
+        return e["health"]
 
-def setHealth(p, health):
-        p["health"] = health
+def setHealth(e, health):
+        e["health"] = health
         return
 
-def getXp(p):
-        return p["xp"]
+def getXp(e):
+        return e["xp"]
 
-def setXp(p, xp):
-        p["xp"] = xp
+def setXp(e, xp):
+        e["xp"] = xp
         return
 
-def getStrength(p):
-        return p["strength"]
+def getStrength(e):
+        return e["strength"]
 
-def setStrength(p, strength):
-        p["strength"] = strength
+def setStrength(e, strength):
+        e["strength"] = strength
         return
 
-def getResistance(p):
-        return p["resistance"]
+def getResistance(e):
+        return e["resistance"]
 
-def setResistance(p, resistance):
-        p["resistance"] = resistance
+def setResistance(e, resistance):
+        e["resistance"] = resistance
         return
 
-def getDamage(p):
-        return Bow.getDamage(getSelectedBow(p))
+def getSprite(e):
+       return e["sprite"]
 
-#def setDamage(p, damage):
-        bow = getSelectedBow(p)
-        Bow.setDamage(bow)
-
-def getSelectedBow(p):
-        return Chest.getContent(p["inventory"])[p["selectedBow"]]
-
-def getInventory(p):
-       return p["inventory"]
-
-def getSprite(p):
-       return p["sprite"]
-
-def setSprite(p, sprite):
-       p["sprite"] = sprite
+def setSprite(e, sprite):
+       e["sprite"] = sprite
        return
 
 if __name__ == "__main__":
        e = create()
-       show(p)
+       show(e)
        move(e, "right")
        move(e, "right")
        show(e)
