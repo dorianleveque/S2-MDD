@@ -23,7 +23,7 @@ def create(x, y, health, xp, strength, resistance, sprite):
         entity["xp"] = xp
         entity["strength"] = strength
         entity["resistance"] = resistance
-        entity["sprite"] = 'P'
+        entity["sprite"] = sprite
         
         return entity
 
@@ -87,8 +87,9 @@ def setSprite(e, sprite):
        return
 
 if __name__ == "__main__":
-       e = create()
+       e = create(2, 2, 300, 0, 1, 1, "Test")
        show(e)
        move(e, "right")
        move(e, "right")
        show(e)
+
