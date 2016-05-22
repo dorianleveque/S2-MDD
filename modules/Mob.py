@@ -13,25 +13,20 @@
 
 # Modules personnalisés
 import Utils
+import Entity
 
 def create():
         mob = dict()
         mob["type"] = ""
-        mob["x"] = -1
-        mob["y"] = -1
-        mob["health"] = -1
-        mob["strength"] = -1
-        mob["resistance"] = -1
+        mob["entity"] = Entity.create(-1, -1, -1, -1, -1, -1, "")
         mob["damage"] = -1
-        mob["sprite"] = ""
         return mob
 
-def move(m):
+def live(m):
         return
 
 def show(m):
-        Utils.goto(m["x"], m["y"])
-        Utils.write(m["sprite"])
+        Entity.show(m)
         return
 
 def getType(m):
@@ -42,32 +37,31 @@ def setType(m, type):
         return
 
 def getPosition(m):
-        return (m["x"], m["y"])
+        return Entity.getPosition(m["entity"])
      
 def setPosition(m, x, y):
-        m["x"] = x
-        m["y"] = y
+        Entity.setPosition(m["entity"], x, y)
         return
 
 def getHealth(m):
-        return m["health"]
+        return Entity.getHealth(m["entity"]) 
         
 def setHealth(m, health):
-        m["health"] = health
+        Entity.setHealth(m["entity"], health)
         return
 
 def getStrength(m):
-        return m["strength"]
+        return Entity.getStrength(m["entity"])
         
 def setStrength(m, strength):
-        m["strength"] = strength
+        Entity.setStrength(m["entity"], strength)
         return
 
-def getResistance(m):
-        return m["resistance"]
-        
+def getResistance(m):              
+        return Entity.getResistance(m["entity"])
+
 def setResistance(m, resistance):
-        m["resistance"] = resistance
+        Entity.setResistance(m["entity"], resistance)
         return
 
 def getDamage(m):
@@ -78,8 +72,8 @@ def setDamage(m, damage):
         return
 
 def getSprite(m):
-        return m["sprite"]
+        return Entity.getSprite(m["entity"])
         
 def setSprite(m, sprite):
-        m["sprite"] = sprite
+        Entity.setSprite(m["entity"], sprite)
         return
