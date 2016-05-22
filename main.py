@@ -65,8 +65,7 @@ def run():
                                 Menu.show(menu)
                 interact()
                 time.sleep(0.02)
-                n += 1   
-        
+                n += 1
 
 def interact(): 
         global direction, refresh, game
