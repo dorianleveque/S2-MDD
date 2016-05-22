@@ -45,9 +45,7 @@ def init():
         #os.system('setterm -repeat off')
         
 
-        Menu.setCurrentWindow(menu,"mainMenu")
-        
-        
+        Menu.setCurrentWindow(menu, "mainMenu")
 
 def run():
         n = 0
