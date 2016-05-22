@@ -18,6 +18,7 @@ import Utils
 def create():
         #creation d'un joueur:
         player=dict()
+        player['entity'] = Entity.create()
         player["x"] = 2
         player["y"] = 2
         player["health"] = 100
@@ -39,7 +40,6 @@ def getPosition(player):
 def setPosition(player,x,y):
         player["x"] = x
         player["y"] = y
-
 
 def move(player, direction):
         if direction == "up":
@@ -79,7 +79,7 @@ def setStrength(p, strength):
 def getResistance(p):
         return p["resistance"]
 
-def setResistence(p, resistance):
+def setResistance(p, resistance):
         p["resistance"] = resistance
         return
 

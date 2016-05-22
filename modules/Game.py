@@ -26,6 +26,10 @@ def create():
         
         return game
 
+def restart(g):
+        Dungeon.generate(g["dungeon"])
+        Player.setPosition(g["player"], 40, 20)
+
 def show(g):        
         # Affichage du donjon
         Dungeon.show(g["dungeon"])
