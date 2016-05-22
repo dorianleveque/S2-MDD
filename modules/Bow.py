@@ -36,3 +36,28 @@ def getSprite(b):
 def setSprite(b, sprite):
         b["sprite"] = sprite
         return
+
+if __name__ == "__main__":
+        test = True
+        print "TESTING Bow.py :",
+
+        # Test
+        bow = create()
+
+        setName(bow, "Arc de Link")
+        if not getName(bow) == "Arc de Link":
+                test = False
+
+        setDamage(bow, 100)
+        if not getDamage(bow) == 100:
+                test = False
+
+        setSprite(bow, "|)")
+        if not getSprite(bow) == "|)":
+                test = False
+
+        if test == True:
+                print "OK"
+        else:
+                print "FAILED"
+                raise RuntimeError("Test failed in Bow.py")
