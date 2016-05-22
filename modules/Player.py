@@ -18,8 +18,8 @@ import Utils
 def create():
         #creation d'un joueur:
         player=dict()
-        player["x"] = 2
-        player["y"] = 2
+        player["x"] = 1
+        player["y"] = 1
         player["health"] = 100
         player["xp"] = 0
         player["strength"] = 1
@@ -53,7 +53,7 @@ def move(player, direction):
 
 def show(p):
         Utils.goto(p["x"]+2, p["y"]+2)
-        Utils.write(p["sprite"]+'\n')
+        Utils.write(p["sprite"]+'\n')        
 
 def getHealth(p):
         return p["health"]

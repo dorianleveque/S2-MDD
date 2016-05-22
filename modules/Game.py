@@ -54,7 +54,7 @@ def interact(g, key):
         #elif key == "p":                      # appel de la fonction pause
 #                return "pause"
 
-#def collider(g):
+#def collide(g):
         ## Permet de gerer les colisions des entites 
         
 
