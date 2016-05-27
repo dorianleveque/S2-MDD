@@ -18,11 +18,26 @@ import Entity
 def create():
         mob = dict()
         mob["type"] = ""
+        mob["state"] = "normal"
+        mob["dir"] = (0, 0)
         mob["entity"] = Entity.create(-1, -1, -1, -1, -1, -1, "")
         mob["damage"] = -1
         return mob
 
-def live(m):
+def live(m, dt):
+        x, y = Entity.getPosition(m["entity"])
+
+        if m["type"] == "zombie":
+                m["dir"] = (-m["dir"](0), m["dir"](1))
+        elif m["type"] == "soldier":
+                m["dir"] = (-m["dir"](0), m["dir"](1))
+        elif m["type"] == "boss":
+                m["dir"] = (
+                x = 
+                y = m["dir"] = 
+
+        Entity.setPosition(m["entity"], x, y)
+
         return
 
 def show(m):

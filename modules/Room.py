@@ -80,6 +80,11 @@ def create(dungeonName, roomName):
                                 Chest.addItem(chest, bow)
         return r
 
+def liveMobs(r, dt):
+        for currentMob in r["mobs"]:
+                Utils.goto(x+2, y+1)
+                Mob.live(currentMob, dt)
+
 def show(r):
         # Refresh doors
         drawDoors(r)
