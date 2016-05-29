@@ -44,7 +44,6 @@ def init():
         os.system('setterm -cursor off')
         #os.system('setterm -repeat off')
         
-
         Menu.setCurrentWindow(menu, "mainMenu")
 
 def run():
@@ -73,13 +72,14 @@ def interact():
         if isData():                                    #si une touche est appuyee
                 read = sys.stdin.read(1)
                 
-                if Menu.gameWindow(menu):
-                        Menu.interact(menu, read)
-                        Game.interact(game, read)
+                #if Menu.gameWindow(menu):
+                        #Menu.interact(menu, read)
+                        #Game.interact(game, read)
                         
-                else:
-                        Menu.interact(menu, read)
-                        
+                #else:
+                        #Menu.interact(menu, read)
+                Menu.interact(menu, read)
+                
                 if read == "\x1b": 
                         quit()                          # \x1b = touche echap / appel de la fonction qui permet de quitter le jeu
                         
@@ -92,7 +92,7 @@ def interact():
 
 def isData():
         #recuperation des elements clavier
-        return select.select([sys.stdin], [], [], 0.0) == ([sys.stdin], [], [])
+        return select.select([sys.stdin], [], [], 0.0) == ([sys.stdin], [], [])     
 
 def quit():
         global old_settings

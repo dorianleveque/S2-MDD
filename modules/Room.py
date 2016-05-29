@@ -15,6 +15,8 @@ from xml.dom.minidom import parse
 # Modules personnalisés
 import Chest
 import Arrow
+import Entity
+import Player
 import Mob
 import Utils
 
@@ -23,6 +25,7 @@ def create(dungeonName, roomName):
         r = dict()
         r["background"]=[]
         r["mobs"]=[]
+        r["player"]=Player.create()
         r["chests"]=[]
         r["arrows"]=[]
         r["upRoom"]=None
@@ -47,13 +50,20 @@ def create(dungeonName, roomName):
         nb_mobs = mobs.length
         for i in range(nb_mobs):
                 mob = Mob.create()
-                Mob.setType(mob, mobs[i].getAttribute("type"))
-                Mob.setPosition(mob, int(mobs[i].getAttribute("x")), int(mobs[i].getAttribute("y")))
-                Mob.setHealth(mob, int(mobs[i].getAttribute("health")))
-                Mob.setStrength(mob, float(mobs[i].getAttribute("strength")))
-                Mob.setResistance(mob, float(mobs[i].getAttribute("resistance")))
-                Mob.setDamage(mob, int(mobs[i].getAttribute("damage")))
-                Mob.setSprite(mob, mobs[i].firstChild.nodeValue)
+                #Mob.setType(mob, mobs[i].getAttribute("type"))
+                #Mob.setPosition(mob, int(mobs[i].getAttribute("x")), int(mobs[i].getAttribute("y")))
+                #Mob.setHealth(mob, int(mobs[i].getAttribute("health")))
+                #Mob.setStrength(mob, float(mobs[i].getAttribute("strength")))
+                #Mob.setResistance(mob, float(mobs[i].getAttribute("resistance")))
+                #Mob.setDamage(mob, int(mobs[i].getAttribute("damage")))
+                #Mob.setSprite(mob, mobs[i].firstChild.nodeValue)
+                Entity.setType(mob, mobs[i].getAttribute("type"))
+                Entity.setPosition(mob, int(mobs[i].getAttribute("x")), int(mobs[i].getAttribute("y")))
+                Entity.setHealth(mob, int(mobs[i].getAttribute("health")))
+                Entity.setStrength(mob, float(mobs[i].getAttribute("strength")))
+                Entity.setResistance(mob, float(mobs[i].getAttribute("resistance")))
+                Entity.setDamage(mob, int(mobs[i].getAttribute("damage")))
+                Entity.setSprite(mob, mobs[i].firstChild.nodeValue)
                 r["mobs"].append(mob)
         
         # Récupération des coffres
@@ -80,10 +90,37 @@ def create(dungeonName, roomName):
                                 Chest.addItem(chest, bow)
         return r
 
-def liveMobs(r, dt):
+def liveMobs(r,g):
         for currentMob in r["mobs"]:
-                Utils.goto(x+2, y+1)
-                Mob.live(currentMob, dt)
+                Mob.live(currentMob)
+
+def move():
+        Entity.move(player,dt)
+        Entity.move(mob,dt)
+
+def interact():
+        return
+
+
+#def collide():
+        #x, y = Player.getPosition(g["player"])
+        #currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
+
+        #if (key == "z") and (Room.get(currentRoom, x, y-1) == " "): 
+                #y = y - 1             # le joueur se déplace vers Direction Haut
+        #elif (key == "q") and (Room.get(currentRoom, x-1, y) == " "): 
+                #x = x - 1             # le joueur se déplace vers Direction Gauche
+        #elif (key == "s") and (Room.get(currentRoom, x, y+1) == " "): 
+                #y = y + 1             # le joueur se déplace vers Direction Bas
+        #elif (key == "d") and (Room.get(currentRoom, x+1, y) == " "): 
+                #x = x + 1             # le joueur se déplace vers Direction Droite
+def collide():
+        x, y = Entity.getPosition(r["player"])
+        
+
+        return
+
+        
 
 def show(r):
         # Refresh doors
@@ -103,15 +140,19 @@ def show(r):
         
         # Affichage des mobs
         for currentMob in r["mobs"]:
-                x, y = Mob.getPosition(currentMob)
-                Utils.goto(x+2, y+1)
-                Mob.show(currentMob)
+                Entity.show(currentMob)
+
+        # Affichage du joueur
+        Entity.show(r["player"])
         
         # Affichage des projectiles
         for currentArrow in r["arrows"]:
                 x, y = Arrow.getPosition(currentArrow)
                 Utils.goto(x+2, y+1)
                 Arrow.show(currentArrow)
+
+def getEntityPosition(r):
+        return Entity.getPosition(r)
 
 def drawDoors(r):
         # Affichage des portes

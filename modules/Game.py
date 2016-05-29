@@ -13,46 +13,50 @@
 
 # Modules personnalisés
 import Dungeon
-import Room
-import Player
 
 def create():
         game = dict()
-        game["player"] = Player.create()
         game["dungeon"] = Dungeon.create("forest")
-        
-        Dungeon.generate(game["dungeon"])
-        Player.setPosition(game["player"], 40, 20)
-        
+        Dungeon.generate(game["dungeon"])        
         return game
 
 def restart(g):
         Dungeon.generate(g["dungeon"])
-        Player.setPosition(g["player"], 40, 20)
 
 def show(g):        
         # Affichage du donjon
         Dungeon.show(g["dungeon"])
-        
-        # Affichage du joueur
-        Player.show(g["player"])
 
 def interact(g, key):
-        x, y = Player.getPosition(g["player"])
-        currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
+        keyControler = dict()
+        key["Up"] = 'z'
+        key["Down"] = 's'
+        key["Left"] = 'q'
+        key["Right"] = 'd'
+        key["Action"] = 'x'
+        
+        if
 
-        if (key == "z") and (Room.get(currentRoom, x, y-1) == " "): 
-                y = y - 1             # le joueur se déplace vers Direction Haut
-        elif (key == "q") and (Room.get(currentRoom, x-1, y) == " "): 
-                x = x - 1             # le joueur se déplace vers Direction Gauche
-        elif (key == "s") and (Room.get(currentRoom, x, y+1) == " "): 
-                y = y + 1             # le joueur se déplace vers Direction Bas
-        elif (key == "d") and (Room.get(currentRoom, x+1, y) == " "): 
-                x = x + 1             # le joueur se déplace vers Direction Droite
+def collide():
+        Dungeon.collide()
+        
+        
+        
+        x, y = Entity.getPosition(r["player"])
+        #currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
+
+        #if (key == "z") and (Room.get(currentRoom, x, y-1) == " "): 
+                #y = y - 1             # le joueur se déplace vers Direction Haut
+        #elif (key == "q") and (Room.get(currentRoom, x-1, y) == " "): 
+                #x = x - 1             # le joueur se déplace vers Direction Gauche
+        #elif (key == "s") and (Room.get(currentRoom, x, y+1) == " "): 
+                #y = y + 1             # le joueur se déplace vers Direction Bas
+        #elif (key == "d") and (Room.get(currentRoom, x+1, y) == " "): 
+                #x = x + 1             # le joueur se déplace vers Direction Droite
 
         #if(Room.get(currentRoom, x, y - 1) == " "):
 
-        Player.setPosition(g["player"], x, y)
+        #Player.setPosition(g["player"], x, y)
         switchRoom(g)
         
         #elif key == "p":                      # appel de la fonction pause
@@ -62,12 +66,15 @@ def interact(g, key):
         ## Permet de gerer les colisions des entites 
         
 
-#def move(g):
+def move(g):
         # Permet de deplacer les entite
-
+        Dungeon.liveMobs()
+        Dungeon.move()
+        
+        
 
 def switchRoom(g):
-        x, y = Player.getPosition(g["player"])
+        #x, y = Player.getPosition(g["player"])
         currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
 
         if x < 2:
@@ -85,8 +92,3 @@ def switchRoom(g):
         if y > 38: # Taille max en y des salles
                 Dungeon.setCurrentRoom(g["dungeon"], Room.getDownRoom(currentRoom))
                 y = 2
-
-        Player.setPosition(g["player"], x, y)
-
-
-

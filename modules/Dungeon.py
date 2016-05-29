@@ -22,7 +22,6 @@ def create(name):
         d = dict()
         d["name"] = name
         d["currentRoom"] = None
-
         return d
 
 def generate(d):
@@ -92,8 +91,18 @@ def pickUpRandomRoom(remainingRooms):
 
 def show(d):
         Room.show(d["currentRoom"])
-        #Utils.goto(100, 42)
-        #Utils.write(str(d["currentRoom"])+'\n')
+
+def interact():
+        Room.interact()
+
+def collide():
+        Room.collide()
+
+def move():
+        Room.liveMob(d["currentRoom"])
+
+
+
 
 def getCurrentRoom(d):
         return d["currentRoom"]
