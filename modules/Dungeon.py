@@ -25,6 +25,10 @@ def create(name):
         return d
 
 def generate(d):
+        x, y = 0, 0
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        placedRooms = []
+
         # On récupère la liste des salles possibles pour ce donjon
         roomFiles = os.listdir("./assets/rooms/" + d["name"] + "/")
         roomsTotalNumber = len(roomFiles)
@@ -34,53 +38,63 @@ def generate(d):
                 remainingRooms.append(room)
         
         # On choisit aléatoirement la première salle
-        d["currentRoom"] = pickUpRandomRoom(remainingRooms)
-        
-        # Appel de la fonction récursive pour déterminer les salles adjacentes
-        recursiveGeneration(d, remainingRooms, d["currentRoom"], 1, roomsTotalNumber)
+        placedRooms.append((pickUpRandomRoom(remainingRooms), 0, 0))
 
-# Cette fonction génère les salles adjacentes à une case donnée. Elle est, par construction, récursive.
-# Elle etudie pour chaque direction, s'il faut mettre (ou non), une salle aléatoire prise dans la liste des salles restantes.
-# Si oui, alors la fonction se rappelle-elle même pour définir les salles adjacentes de la salle venant d'être placé.
-def recursiveGeneration(d, remainingRooms, currentRoom, roomLevel, roomsTotalNumber):
-        # Réglage des coefficients
-        depthCoefficient = 0.1
-        remainingRoomCoefficient = 1
-        
-        if(len(remainingRooms) == 0):
-                return
-        
-        for door in ["up", "down", "left", "right"]:
-                # Calcule la probabilité
-                #depthDrivenCoefficient = math.exp(-(roomLevel * depthCoefficient))
-                #remainingRoomDrivenCoefficient = remainingRoomCoefficient*(len(remainingRooms) / roomsTotalNumber)
-                #probability = int(round(depthDrivenCoefficient*remainingRoomDrivenCoefficient*random.random()+0.5, 0))
-                probability = int(round(random.random(), 0))
+        # Tant qu'il reste des salles
+        while not(len(remainingRooms) == 0):
+                # On en prend une au hasard
+                currentRoom = pickUpRandomRoom(remainingRooms)
+
+                # On se déplace sur la "grille" fictive (+x vers la droite, +y vers le haut)
+                dx, dy = directions[random.randint(0, 3)]
+                x, y = x + dx, y + dy
+
+                # S'il y a déja une salle, alors on continue
+                while not(getRoomByPosition(placedRooms, x, y) == -1):
+                        x, y = x + dx, y + dy
+
+                placedRooms.append((currentRoom, x, y))
+
+        # Définit la première room
+        d["currentRoom"] = placedRooms[0][0]
+
+        # On place les portes correctement
+        for currentPlacedRoom in placedRooms:
+                currentRoom, x, y = currentPlacedRoom
                 
-                if(roomLevel >= 7):     # Sécurité afin d'éviter d'avoir des donjons trop profonds
-                        p = 0
+                for direction in range(0, 4):
+                        dx, dy = directions[direction]
+                        adjx, adjy = x + dx, y + dy
 
-                if((probability >= 1) and (len(remainingRooms) != 0)):
-                        addRoom = pickUpRandomRoom(remainingRooms)
+                        addRoom = getRoomByPosition(placedRooms, adjx, adjy)
 
-                        if door == "up":
-                                if(Room.getUpRoom(currentRoom) == None):
-                                        Room.setUpRoom(currentRoom, addRoom)
-                                        Room.setDownRoom(addRoom, currentRoom)
-                        elif door == "down":
-                                if(Room.getDownRoom(currentRoom) == None):
-                                        Room.setDownRoom(currentRoom, addRoom)
-                                        Room.setUpRoom(addRoom, currentRoom)
-                        elif door == "left":
-                                if(Room.getLeftRoom(currentRoom) == None):
-                                        Room.setLeftRoom(currentRoom, addRoom)
-                                        Room.setRightRoom(addRoom, currentRoom)
-                        elif door == "right":
-                                if(Room.getRightRoom(currentRoom) == None):
-                                        Room.setRightRoom(currentRoom, addRoom)
-                                        Room.setLeftRoom(addRoom, currentRoom)
+                        if not(addRoom == -1):
+                                if direction == 0:
+                                        if(Room.getUpRoom(currentRoom) == None):
+                                                Room.setUpRoom(currentRoom, addRoom)
+                                                Room.setDownRoom(addRoom, currentRoom)
+                                elif direction == 1:
+                                        if(Room.getRightRoom(currentRoom) == None):
+                                                Room.setRightRoom(currentRoom, addRoom)
+                                                Room.setLeftRoom(addRoom, currentRoom)
+                                elif direction == 2:
+                                        if(Room.getDownRoom(currentRoom) == None):
+                                                Room.setDownRoom(currentRoom, addRoom)
+                                                Room.setUpRoom(addRoom, currentRoom)
+                                elif direction == 3:
+                                        if(Room.getLeftRoom(currentRoom) == None):
+                                                Room.setLeftRoom(currentRoom, addRoom)
+                                                Room.setRightRoom(addRoom, currentRoom)
 
-                        recursiveGeneration(d, remainingRooms, addRoom, roomLevel + 1, roomsTotalNumber)
+                Room.drawDoors(currentRoom)
+
+def getRoomByPosition(placedRooms, x, y):
+        for currentPlacedRoom in placedRooms:
+                if (x == currentPlacedRoom[1]) and (y == currentPlacedRoom[2]):
+                        return currentPlacedRoom[0]
+        
+        return -1
+
 
 # Renvoie une salle prise aléatoirement dans la liste des salles restantes et l'enleve de la liste
 def pickUpRandomRoom(remainingRooms):

@@ -85,8 +85,6 @@ def create():
 
         #return
 
-
-
 #def show(m):
         #Entity.show(m)
         #return
