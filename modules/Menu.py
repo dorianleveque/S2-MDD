@@ -249,8 +249,6 @@ def showTexts(menu):
 
 
 def interact(menu, key):
-   
-
         if key == "z": 
                 changeSelectedButton(menu, "buttonUp")
 

@@ -115,7 +115,25 @@ def collide():
 def move():
         Room.liveMob(d["currentRoom"])
 
+def switchRoom(d):
+        x, y = Room.getEntityPosition(d["currentRoom"])
+        currentRoom = getCurrentRoom(d)
 
+        if x < 2:
+                Dungeon.setCurrentRoom(d, Room.getLeftRoom(currentRoom))
+                x = 78
+        
+        if x > 78: # Taille max en x des salles
+                Dungeon.setCurrentRoom(d, Room.getRightRoom(currentRoom))
+                x = 2
+
+        if y < 2:
+                Dungeon.setCurrentRoom(d, Room.getUpRoom(currentRoom))
+                y = 38
+
+        if y > 38: # Taille max en y des salles
+                Dungeon.setCurrentRoom(d, Room.getDownRoom(currentRoom))
+                y = 2
 
 
 def getCurrentRoom(d):

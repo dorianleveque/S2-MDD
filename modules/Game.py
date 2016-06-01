@@ -13,10 +13,13 @@
 
 # Modules personnalisés
 import Dungeon
+import Settings
 
 def create():
         game = dict()
         game["dungeon"] = Dungeon.create("forest")
+        game["keySetting"] = Settings.create()
+        print game["keySetting"]
         Dungeon.generate(game["dungeon"])        
         return game
 
@@ -28,14 +31,7 @@ def show(g):
         Dungeon.show(g["dungeon"])
 
 def interact(g, key):
-        keyControler = dict()
-        key["Up"] = 'z'
-        key["Down"] = 's'
-        key["Left"] = 'q'
-        key["Right"] = 'd'
-        key["Action"] = 'x'
-        
-        if
+        return
 
 def collide():
         Dungeon.collide()
@@ -92,3 +88,7 @@ def switchRoom(g):
         if y > 38: # Taille max en y des salles
                 Dungeon.setCurrentRoom(g["dungeon"], Room.getDownRoom(currentRoom))
                 y = 2
+                
+if __name__ == "__main__":
+        game = create()
+        print game
