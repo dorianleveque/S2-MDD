@@ -103,37 +103,26 @@ def pickUpRandomRoom(remainingRooms):
         del remainingRooms[index]
         return room
 
-def show(d):
-        Room.show(d["currentRoom"])
-
-def interact():
-        Room.interact()
-
-def collide():
-        Room.collide()
-
-def move():
-        Room.liveMob(d["currentRoom"])
-
 def switchRoom(d):
-        x, y = Room.getEntityPosition(d["currentRoom"])
+        x, y = Room.getEntityPosition(getCurrentRoom(d), "player")
         currentRoom = getCurrentRoom(d)
 
         if x < 2:
-                Dungeon.setCurrentRoom(d, Room.getLeftRoom(currentRoom))
+                setCurrentRoom(d, Room.getLeftRoom(currentRoom))
                 x = 78
         
         if x > 78: # Taille max en x des salles
-                Dungeon.setCurrentRoom(d, Room.getRightRoom(currentRoom))
+                setCurrentRoom(d, Room.getRightRoom(currentRoom))
                 x = 2
 
         if y < 2:
-                Dungeon.setCurrentRoom(d, Room.getUpRoom(currentRoom))
+                setCurrentRoom(d, Room.getUpRoom(currentRoom))
                 y = 38
 
         if y > 38: # Taille max en y des salles
-                Dungeon.setCurrentRoom(d, Room.getDownRoom(currentRoom))
+                setCurrentRoom(d, Room.getDownRoom(currentRoom))
                 y = 2
+        Room.setEntityPosition(getCurrentRoom(d), "player", x, y)
 
 
 def getCurrentRoom(d):
@@ -149,3 +138,23 @@ def getName(d):
 def setName(d, name):
         d["name"] = name
         return
+
+def show(d):
+        Room.show(d["currentRoom"])
+
+#def interact():
+        #Room.interact()
+
+#def collide():
+        #Room.collide()
+
+#def move(d):
+        #Room.liveMob(d["currentRoom"])
+def getEntityPosition(d, entity):
+        return Room.getEntityPosition(getCurrentRoom(d), entity)
+
+def setEntityPosition(d, entity, x, y):
+        return Room.setEntityPosition(getCurrentRoom(d), entity, x, y)
+
+def get(d, x, y):
+        return Room.get(d, x, y)

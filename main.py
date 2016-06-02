@@ -52,16 +52,16 @@ def run():
         while True:
 
                 if Menu.gameWindow(menu):
-                        if(n % 10):
+                        #if(n % 10):
                                 #effacer la console 
                                 #sys.stdout.write("\033[2J")
-                                Menu.show(menu)
-                                Game.show(game)
+                        Menu.show(menu)
+                        Game.run(game)
                 else:
                         if refresh==True:
                                 Menu.show(menu)
                 interact()
-                time.sleep(0.02)
+                time.sleep(0.2)
                 n += 1
 
 def interact(): 
@@ -71,13 +71,14 @@ def interact():
         #gestion des evenements clavier
         if isData():                                    #si une touche est appuyee
                 read = sys.stdin.read(1)
-                
+                time.sleep(0.2)
                 #if Menu.gameWindow(menu):
                         #Menu.interact(menu, read)
                         #Game.interact(game, read)
                         
                 #else:
                         #Menu.interact(menu, read)
+                Game.interact(game, read)
                 Menu.interact(menu, read)
                 
                 if read == "\x1b": 
