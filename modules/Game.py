@@ -49,10 +49,10 @@ def interact(g, keyRead):
                         if keyM[keyName]["status"] == False: keyM[keyName]["status"] = True
                         else: keyM[keyName]["status"] = False 
                 else: keyM[keyName]["status"] = False 
-        
-        Dungeon.switchRoom(getDungeon(g))
 
 def collide(g):
+        Dungeon.switchRoom(getDungeon(g))
+        
         # recuperation de la position du joueur
         x, y = Dungeon.getEntityPosition(getDungeon(g), "player")
         currentRoom = Dungeon.getCurrentRoom(getDungeon(g))
