@@ -25,7 +25,8 @@ def create(dungeonName, roomName):
         r = dict()
         r["background"]=[]
         r["mobs"]=[]
-        r["player"]=Player.create()
+        r["player"]=[]
+        r["player"].append(Player.create())
         r["chests"]=[]
         r["arrows"]=[]
         r["upRoom"]=None
@@ -90,17 +91,9 @@ def create(dungeonName, roomName):
                                 Chest.addItem(chest, bow)
         return r
 
-def liveMobs(r,g):
+def liveMob(r):
         for currentMob in r["mobs"]:
                 Mob.live(currentMob)
-
-def move():
-        Entity.move(player,dt)
-        Entity.move(mob,dt)
-
-def interact():
-        return
-
 
 #def collide():
         #x, y = Player.getPosition(g["player"])
@@ -114,14 +107,6 @@ def interact():
                 #y = y + 1             # le joueur se déplace vers Direction Bas
         #elif (key == "d") and (Room.get(currentRoom, x+1, y) == " "): 
                 #x = x + 1             # le joueur se déplace vers Direction Droite
-def collide():
-        x, y = Entity.getPosition(r["player"])
-        
-
-        return
-
-        
-
 def show(r):
         # Refresh doors
         drawDoors(r)
@@ -143,16 +128,14 @@ def show(r):
                 Entity.show(currentMob)
 
         # Affichage du joueur
-        Entity.show(r["player"])
+        for currentPlayer in r["player"]:
+                Entity.show(currentPlayer)
         
         # Affichage des projectiles
         for currentArrow in r["arrows"]:
                 x, y = Arrow.getPosition(currentArrow)
                 Utils.goto(x+2, y+1)
                 Arrow.show(currentArrow)
-
-def getEntityPosition(r):
-        return Entity.getPosition(r)
 
 def drawDoors(r):
         # Affichage des portes
@@ -192,7 +175,7 @@ def getChestByPosition(r, x, y):
 def getMobByPosition(r, x, y):
         # On parcourt la liste des mobs de la salle
         for currentMob in r["mobs"]:
-                if Mob.getPosition(currentMob) == (x,y):
+                if Entity.getPosition(currentMob) == (x,y):
                         return currentMob
         
         return None
@@ -232,6 +215,14 @@ def get(r, x, y):
                 return "C"
         else:
                 return r["background"][y][x].encode("utf-8")
+        
+def getEntityPosition(r, entity):
+        for currentEntity in r[entity]:
+                return Entity.getPosition(currentEntity)
+
+def setEntityPosition(r, entity, x, y):
+        for currentEntity in r[entity]:
+                return Entity.setPosition(currentEntity, x, y)
 
 # Tests
 if __name__ == "__main__":
@@ -239,5 +230,8 @@ if __name__ == "__main__":
         Utils.goto(0, 0)
         setUpRoom(room, "anotherRoom")
         show(room)
+        print getEntityPosition(room, "player")
+        setEntityPosition(room, "player", 20, 30)
+        print getEntityPosition(room, "player")
 
         

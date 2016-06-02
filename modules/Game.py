@@ -18,27 +18,58 @@ import Settings
 def create():
         game = dict()
         game["dungeon"] = Dungeon.create("forest")
-        game["keySetting"] = Settings.create()
-        print game["keySetting"]
-        Dungeon.generate(game["dungeon"])        
+        
+        settings = Settings.create()
+        game["keyManager"] = dict()
+        for keyName in settings:
+                dataKey = dict()
+                dataKey.update({"key": settings[keyName], "status": False})
+                game["keyManager"].update({keyName: dataKey})
+                
+        Dungeon.generate(game["dungeon"])
         return game
 
 def restart(g):
         Dungeon.generate(g["dungeon"])
 
+def run(g):
+        show(g)
+        collide(g)
+        #move(g)
+
 def show(g):        
-        # Affichage du donjon
-        Dungeon.show(g["dungeon"])
+        # Affichage de la salle
+        dungeon = getDungeon(g)
+        Dungeon.show(dungeon)
 
-def interact(g, key):
-        return
+def interact(g, keyRead):
+        keyM = g["keyManager"]
+        for keyName in keyM:
+                if keyM[keyName]["key"] == keyRead:
+                        if keyM[keyName]["status"] == False: keyM[keyName]["status"] = True
+                        else: keyM[keyName]["status"] = False 
+                else: keyM[keyName]["status"] = False 
+        
+        Dungeon.switchRoom(getDungeon(g))
 
-def collide():
-        Dungeon.collide()
+def collide(g):
+        # recuperation de la position du joueur
+        x, y = Dungeon.getEntityPosition(getDungeon(g), "player")
+        currentRoom = Dungeon.getCurrentRoom(getDungeon(g))
+        keyM = g["keyManager"]
         
+        if keyM["Up"]["status"] == True and Dungeon.get(currentRoom, x, y-1) == " ":
+                #movePlayer(direction)
+                Dungeon.setEntityPosition(getDungeon(g), "player", x, y-1)
+        if keyM["Left"]["status"] == True and Dungeon.get(currentRoom, x-2, y) == " ":
+                Dungeon.setEntityPosition(getDungeon(g), "player", x-2, y)
+        if keyM["Down"]["status"] == True and Dungeon.get(currentRoom, x, y+1) == " ":
+                Dungeon.setEntityPosition(getDungeon(g), "player", x, y+1)
+        if keyM["Right"]["status"] == True and Dungeon.get(currentRoom, x+2, y) == " ":
+                Dungeon.setEntityPosition(getDungeon(g), "player", x+2, y)
+                
         
-        
-        x, y = Entity.getPosition(r["player"])
+        #x, y = Entity.getPosition(r["player"])
         #currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
 
         #if (key == "z") and (Room.get(currentRoom, x, y-1) == " "): 
@@ -53,42 +84,24 @@ def collide():
         #if(Room.get(currentRoom, x, y - 1) == " "):
 
         #Player.setPosition(g["player"], x, y)
-        switchRoom(g)
+
         
         #elif key == "p":                      # appel de la fonction pause
 #                return "pause"
 
-#def collide(g):
-        ## Permet de gerer les colisions des entites 
+def movePlayer(direction):
+        x, y = Dungeon.getEntityPosition(getDungeon(g), "player")
+        vx, vy = Dungeon.getEntitySpeed(getDungeon(g), "player")
         
 
 def move(g):
-        # Permet de deplacer les entite
-        Dungeon.liveMobs()
-        Dungeon.move()
+        # Permet de deplacer les entitees
+        #Dungeon.liveMobs()
+        Dungeon.move(g["dungeon"])
         
+def getDungeon(g):
+        return g["dungeon"]
         
-
-def switchRoom(g):
-        #x, y = Player.getPosition(g["player"])
-        currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
-
-        if x < 2:
-                Dungeon.setCurrentRoom(g["dungeon"], Room.getLeftRoom(currentRoom))
-                x = 78
-        
-        if x > 78: # Taille max en x des salles
-                Dungeon.setCurrentRoom(g["dungeon"], Room.getRightRoom(currentRoom))
-                x = 2
-
-        if y < 2:
-                Dungeon.setCurrentRoom(g["dungeon"], Room.getUpRoom(currentRoom))
-                y = 38
-
-        if y > 38: # Taille max en y des salles
-                Dungeon.setCurrentRoom(g["dungeon"], Room.getDownRoom(currentRoom))
-                y = 2
-                
 if __name__ == "__main__":
         game = create()
         print game
