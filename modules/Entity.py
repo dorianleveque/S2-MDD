@@ -76,11 +76,11 @@ def move(e, dt):
         #elif (key == "d") and (Room.get(currentRoom, x+1, y) == " "): 
                 #x = x + 1             # le joueur se déplace vers Direction Droite
 
-def show(e):
+def show(e, color="white"):
         x,y = getPosition(e)
         sprite = getSprite(e)
         Utils.goto(x+2, y+2)
-        Utils.write(sprite+'\n')
+        Utils.write(sprite+'\n', color)
         
 def getType(e):
         return e["type"]

@@ -129,7 +129,7 @@ def show(r):
 
         # Affichage du joueur
         for currentPlayer in r["player"]:
-                Entity.show(currentPlayer)
+                Entity.show(currentPlayer, "green")
         
         # Affichage des projectiles
         for currentArrow in r["arrows"]:
