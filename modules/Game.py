@@ -61,12 +61,12 @@ def collide(g):
         if keyM["Up"]["status"] == True and Dungeon.get(currentRoom, x, y-1) == " ":
                 #movePlayer(direction)
                 Dungeon.setEntityPosition(getDungeon(g), "player", x, y-1)
-        if keyM["Left"]["status"] == True and Dungeon.get(currentRoom, x-2, y) == " ":
-                Dungeon.setEntityPosition(getDungeon(g), "player", x-2, y)
+        if keyM["Left"]["status"] == True and Dungeon.get(currentRoom, x-1, y) == " ":
+                Dungeon.setEntityPosition(getDungeon(g), "player", x-1, y)
         if keyM["Down"]["status"] == True and Dungeon.get(currentRoom, x, y+1) == " ":
                 Dungeon.setEntityPosition(getDungeon(g), "player", x, y+1)
-        if keyM["Right"]["status"] == True and Dungeon.get(currentRoom, x+2, y) == " ":
-                Dungeon.setEntityPosition(getDungeon(g), "player", x+2, y)
+        if keyM["Right"]["status"] == True and Dungeon.get(currentRoom, x+1, y) == " ":
+                Dungeon.setEntityPosition(getDungeon(g), "player", x+1, y)
                 
         
         #x, y = Entity.getPosition(r["player"])

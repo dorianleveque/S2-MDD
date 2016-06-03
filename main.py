@@ -71,14 +71,14 @@ def interact():
         #gestion des evenements clavier
         if isData():                                    #si une touche est appuyee
                 read = sys.stdin.read(1)
-                #if Menu.gameWindow(menu):
-                        #Menu.interact(menu, read)
-                        #Game.interact(game, read)
+                if Menu.gameWindow(menu):
+                        Menu.interact(menu, read)
+                        Game.interact(game, read)
                         
-                #else:
-                        #Menu.interact(menu, read)
-                Game.interact(game, read)
-                Menu.interact(menu, read)
+                else:
+                        Menu.interact(menu, read)
+                #Game.interact(game, read)
+                #Menu.interact(menu, read)
                 
                 if read == "\x1b": 
                         quit()                          # \x1b = touche echap / appel de la fonction qui permet de quitter le jeu
