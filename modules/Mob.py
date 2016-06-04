@@ -13,11 +13,16 @@
 import random
 # Modules personnalisés
 import Utils
+import math
+import random
+import Entity
 
 def create():
         mob = dict()
         mob["x"]=3
         mob["y"]=2
+        mob["vx"]=0
+        mob["vy"]=0
         mob["health"]=100
         mob["xp"]=0.0
         mob["strength"]=1
@@ -25,65 +30,50 @@ def create():
         mob["sprite"]="M"
         mob["type"] = ""
         mob["state"] = "normal"
-        mob["dir"] = (0, 0)
         mob["damage"] = -1
         return mob
 
-#def setDirection(m):
-        #direction = [(0,-1),(0,1),(-1,0)(1,0)]
-        #m["dir"] = direction[random.randint(0,3)]
-
-#def getDirection(m):
-        #return mob["dir"]
-
-#def setState(m):
-        #state = ["normal", "angry", "freeze"]
-        #currentState = getState
+def live(m, p, rDetec, dt):
+        # recuperation de la position du mob
+        mX, mY = Entity.getPosition(m)
+        mvX, mvY = Entity.getSpeed(m)
         
-        
-
-#def getState(m):
-        #return m["state"]
-
-#def live(m):
-        #x, y = Entity.getPosition(m["entity"])
-
-        ##if mob["type"] == "zombie":
-                ##if mob["state"] == "normal":    
-                        
-                        ##Entity.collide()
+        keepSameDirection = random.randbool()
+                if not keepSameDirection: 
+                        direction = [(0,1),(0,-1),(-1,0),(1,0)]
+                        mvX, mvY = direction[random.randint(0,3)]
                         
                         
-                ##elif mob["state"] == "angry":
-                        
-                        
-                ##elif mob["state"] == "freeze":  
-
-                        
+        if state(m, p, rDetec) == "normal":    
+                Entity.setSpeed(mvX/2, mvY/2)
                 
-        ##elif mob["type"] == "soldier":
-                ##if mob["state"] == "normal":
-                ##elif mob["state"] == "angry":
-                ##elif mob["state"] == "freeze": 
                 
-        ##elif mob["type"] == "boss":
-                ##if mob["state"] == "normal":
-                ##elif mob["state"] == "angry":
-                ##elif mob["state"] == "freeze": 
-        
-        
-        ###if m["type"] == "zombie":
-                ###m["dir"] = (-m["dir"](0), m["dir"](1))
-        ###elif m["type"] == "soldier":
-                ###m["dir"] = (-m["dir"](0), m["dir"](1))
-        ###elif m["type"] == "boss":
-                ###m["dir"] = (
-                ###x = 
-                ###y = m["dir"] = 
+        elif state(m, p, rDetec) == "angry":
+                Entity.setSpeed(2*mvX, 2*mvY)
+                        
+        elif state(m, p, rDetec) == "freeze":
+                Entity.setSpeed(0, 0)
 
-        #Entity.setPosition(m["entity"], x, y)
+        return Entity.simulate(m, dt)
 
-        #return
+def state(m, p, rDetec):
+        # recuperation de la position du mob
+        mX, mY = Entity.getPosition(m)
+        
+        # recuperation de la position du joueur 
+        pX, pY = Entity.getPosition(p)
+        
+        # Position du joueur par rapport au mob:
+        playerPosition = math.sqrt((pX-mX)**2 + (pY-mY)**2)
+        
+        if playerPosition <= rDetec :
+                m["state"] = "angry"
+        else : 
+                state = ["normal", "freeze"]
+                m["state"] = state[random.randint(0,1)  
+       
+        return m["state"]
+
 
 #def show(m):
         #Entity.show(m)

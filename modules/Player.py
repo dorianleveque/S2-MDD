@@ -14,17 +14,21 @@
 # Modules personnalisés
 import Chest
 import Utils
+import Entity
 
 def create():
         #creation d'un joueur:
         player=dict()
         player["x"]=40
         player["y"]=20
+        player["vx"]=0
+        player["vy"]=0
         player["health"]=100
         player["xp"]=0.0
         player["strength"]=1
         player["resistance"]=1
         player["damage"] = 0
+        player["type"] = "player"
         player["sprite"]="P"
         player["inventory"] = Chest.create()
         return player
