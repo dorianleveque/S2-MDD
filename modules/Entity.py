@@ -45,13 +45,13 @@ def setSpeed(e,vx,vy):
         e["vy"] = vy
 
 
-def move(e, dt):
+def simulate(e, dt):
         x,y = getPosition(e)
         vx,vy = getSpeed(e)
         
         x = x + vx * dt
         y = y + vy * dt
-        setPosition(e,x,y)
+        return (x, y)
         
         
         #if direction == "up":
