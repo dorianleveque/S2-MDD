@@ -14,6 +14,7 @@
 # Modules personnalisés
 import Dungeon
 import Settings
+import Entity
 
 def create():
         game = dict()
@@ -33,14 +34,13 @@ def restart(g):
         Dungeon.generate(g["dungeon"])
 
 def run(g):
-        show(g)
-        collide(g)
-        #move(g)
+        player = Dungeon.getPlayer(g["dungeon"])
+        if keyM["Up"]["status"] == True:
+                Entity.setSpeed
 
-def show(g):        
-        # Affichage de la salle
-        dungeon = getDungeon(g)
-        Dungeon.show(dungeon)
+        Dungeon.run(g["dungeon"])
+        
+        Dungeon.show(g["dungeon"])
 
 def interact(g, keyRead):
         keyM = g["keyManager"]
@@ -48,25 +48,25 @@ def interact(g, keyRead):
                 if keyM[keyName]["key"] == keyRead:
                         if keyM[keyName]["status"] == False: keyM[keyName]["status"] = True
                         else: keyM[keyName]["status"] = False 
-                else: keyM[keyName]["status"] = False 
+                else: keyM[keyName]["status"] = False
 
 def collide(g):
-        Dungeon.switchRoom(getDungeon(g))
+        Dungeon.switchRoom(g["dungeon"])
         
         # recuperation de la position du joueur
-        x, y = Dungeon.getEntityPosition(getDungeon(g), "player")
-        currentRoom = Dungeon.getCurrentRoom(getDungeon(g))
+        x, y = Dungeon.getPlayer(g["dungeon"], "player")
+        currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
         keyM = g["keyManager"]
         
-        if keyM["Up"]["status"] == True and Dungeon.get(currentRoom, x, y-1) == " ":
+        if keyM["Up"]["status"] == True and Dungeon.isFree(currentRoom, x, y-1):
                 #movePlayer(direction)
-                Dungeon.setEntityPosition(getDungeon(g), "player", x, y-1)
-        if keyM["Left"]["status"] == True and Dungeon.get(currentRoom, x-1, y) == " ":
-                Dungeon.setEntityPosition(getDungeon(g), "player", x-1, y)
-        if keyM["Down"]["status"] == True and Dungeon.get(currentRoom, x, y+1) == " ":
-                Dungeon.setEntityPosition(getDungeon(g), "player", x, y+1)
-        if keyM["Right"]["status"] == True and Dungeon.get(currentRoom, x+1, y) == " ":
-                Dungeon.setEntityPosition(getDungeon(g), "player", x+1, y)
+                Dungeon.getP(g["dungeon"], "player", x, y-1)
+        if keyM["Left"]["status"] == True and Dungeon.isFree(currentRoom, x-1, y):
+                Dungeon.setEntityPosition(g["dungeon"], "player", x-1, y)
+        if keyM["Down"]["status"] == True and Dungeon.isFree(currentRoom, x, y+1):
+                Dungeon.setEntityPosition(g["dungeon"]), "player", x, y+1)
+        if keyM["Right"]["status"] == True and Dungeon.isFree(currentRoom, x+1, y):
+                Dungeon.setEntityPosition(g["dungeon"], "player", x+1, y)
                 
         
         #x, y = Entity.getPosition(r["player"])
@@ -88,10 +88,6 @@ def collide(g):
         
         #elif key == "p":                      # appel de la fonction pause
 #                return "pause"
-
-def movePlayer(direction):
-        x, y = Dungeon.getEntityPosition(getDungeon(g), "player")
-        vx, vy = Dungeon.getEntitySpeed(getDungeon(g), "player")
         
 
 def move(g):
