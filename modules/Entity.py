@@ -78,6 +78,8 @@ def simulate(e, dt):
 
 def show(e, color="white"):
         x,y = getPosition(e)
+        x = int(round(x))
+        y = int(round(y))
         sprite = getSprite(e)
         Utils.goto(x+2, y+2)
         Utils.write(sprite+'\n', color)

@@ -36,7 +36,7 @@ def create():
         return player
 
 def live(p, dt):
-        return Entity.move(p, dt)
+        return Entity.simulate(p, dt)
 
 #def getPosition(player):
         #x = player["x"]

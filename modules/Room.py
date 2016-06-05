@@ -25,7 +25,6 @@ def create(dungeonName, roomName):
         r = dict()
         r["background"]=[]
         r["entity"]=[]
-        r["entity"].append(Player.create())
         r["chests"]=[]
         r["arrows"]=[]
         r["upRoom"]=None
@@ -95,8 +94,14 @@ def getPlayer(r):
                 if(Entity.getType(currentEntity) == "player"):
                         return currentEntity
 
+def addEntity(r, e):
+       r["entity"] .append(e)
+
+def removeEntity(r, e):
+        r["entity"].remove(e) 
+
 def run(r, dt):
-        player = Room.getPlayer(r)
+        player = getPlayer(r)
 
         for currentEntity in r["entity"]:
                 if(Entity.getType(currentEntity) == "player"):
@@ -108,7 +113,7 @@ def run(r, dt):
                 if(Entity.getType(currentEntity) == "boss"):
                         newX, newY = Mob.live(currentEntity, player, 12, dt)
 
-                if Room.isFree(r, newX, newY):
+                if isFree(r, newX, newY):
                         Entity.setPosition(currentEntity, newX, newY)
 
 #def movePlayer(direction):
@@ -227,7 +232,7 @@ def setRightRoom(r, right_room):
         #drawDoors(r)
 
 def isFree(r, x, y):
-        if r["background"][y][x].encode("utf-8") == " ":
+        if r["background"][int(round(y))][int(round(x))].encode("utf-8") == " ":
                 return True
         else:
                 return False

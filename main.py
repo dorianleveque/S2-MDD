@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 ##################################################################
-##								##
-##	     The Legend Of Zelda - A Link to the Rogue		##
-##	    Un projet de Methode de Developpement (MDD) 	##
-##								##
-##			      Main.py				##
-##								##
-## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     01/04/2016 ##
+##                                                              ##
+##           The Legend Of Zelda - A Link to the Rogue          ##
+##          Un projet de Methode de Developpement (MDD)         ##
+##                                                              ##
+##                            Main.py                           ##
+##                                                              ##
+## LEVEQUE Dorian & ROUE Evan   S2P     ENIB         01/04/2016 ##
 ##################################################################
 
 # Modules système
@@ -30,6 +30,7 @@ old_settings = termios.tcgetattr(sys.stdin)
 
 # Donnee du jeu
 direction = "None"
+dt = 0.02
 
 game = Game.create()
 menu = Menu.create()
@@ -46,22 +47,24 @@ def init():
         
         Menu.setCurrentWindow(menu, "mainMenu")
 
+        Menu.show(menu)
+
 def run():
         n = 0
         global game, menu
         while True:
-
+                interact()
                 if Menu.gameWindow(menu):
+                        Game.run(game, dt)
                         if(n % 10):
                                 #effacer la console 
                                 #sys.stdout.write("\033[2J")
                                 Menu.show(menu)
-                                Game.run(game)
+                                Game.show(game)
                 else:
                         if refresh==True:
                                 Menu.show(menu)
-                interact()
-                time.sleep(0.02)
+                time.sleep(dt)
                 n += 1
 
 def interact(): 
