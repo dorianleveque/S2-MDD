@@ -150,11 +150,17 @@ def show(d):
 
 #def move(d):
         #Room.liveMob(d["currentRoom"])
+
+
+
 def getEntityPosition(d, entity):
         return Room.getEntityPosition(getCurrentRoom(d), entity)
 
 def setEntityPosition(d, entity, x, y):
         return Room.setEntityPosition(getCurrentRoom(d), entity, x, y)
 
-def get(d, x, y):
-        return Room.get(d, x, y)
+def getPlayer(d):
+        return Room.getPlayer(d["currentRoom"])
+
+def isFree(d, x, y):
+        return Room.isFree(d, x, y)

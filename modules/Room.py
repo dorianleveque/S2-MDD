@@ -24,9 +24,8 @@ def create(dungeonName, roomName):
         # -- Initialisation du dictionnaire --
         r = dict()
         r["background"]=[]
-        r["mobs"]=[]
-        r["player"]=[]
-        r["player"].append(Player.create())
+        r["entity"]=[]
+        r["entity"].append(Player.create())
         r["chests"]=[]
         r["arrows"]=[]
         r["upRoom"]=None
@@ -65,7 +64,7 @@ def create(dungeonName, roomName):
                 Entity.setResistance(mob, float(mobs[i].getAttribute("resistance")))
                 Entity.setDamage(mob, int(mobs[i].getAttribute("damage")))
                 Entity.setSprite(mob, mobs[i].firstChild.nodeValue)
-                r["mobs"].append(mob)
+                r["entity"].append(mob)
         
         # Récupération des coffres
         chests = rootBeacon.getElementsByTagName("chest")
@@ -91,9 +90,32 @@ def create(dungeonName, roomName):
                                 Chest.addItem(chest, bow)
         return r
 
-def liveMob(r):
-        for currentMob in r["mobs"]:
-                Mob.live(currentMob)
+def getPlayer(r):
+        for currentEntity in r["entity"]:
+                if(Entity.getType(currentEntity) == "player"):
+                        return currentEntity
+
+def run(r, dt):
+        player = Room.getPlayer(r)
+
+        for currentEntity in r["entity"]:
+                if(Entity.getType(currentEntity) == "player"):
+                        newX, newY = Player.live(currentEntity, dt)
+                if(Entity.getType(currentEntity) == "skeleton"):
+                        newX, newY = Mob.live(currentEntity, player, 3, dt)
+                if(Entity.getType(currentEntity) == "guardian"):
+                        newX, newY = Mob.live(currentEntity, player, 6, dt)
+                if(Entity.getType(currentEntity) == "boss"):
+                        newX, newY = Mob.live(currentEntity, player, 12, dt)
+
+                if Room.isFree(r, newX, newY):
+                        Entity.setPosition(currentEntity, newX, newY)
+
+#def movePlayer(direction):
+        #x, y = Dungeon.getEntityPosition(getDungeon(g), "player")
+        #vx, vy = Dungeon.getEntitySpeed(getDungeon(g), "player")
+
+        
 
 #def collide():
         #x, y = Player.getPosition(g["player"])
@@ -123,13 +145,9 @@ def show(r):
                 Utils.goto(x+2, y+1)
                 Chest.show(currentChest)
         
-        # Affichage des mobs
-        for currentMob in r["mobs"]:
-                Entity.show(currentMob)
-
-        # Affichage du joueur
-        for currentPlayer in r["player"]:
-                Entity.show(currentPlayer, "green")
+        # Affichage des entités
+        for currentEntity in r["entity"]:
+                Entity.show(currentEntity)
         
         # Affichage des projectiles
         for currentArrow in r["arrows"]:
@@ -208,21 +226,22 @@ def setRightRoom(r, right_room):
         r["rightRoom"] = right_room
         #drawDoors(r)
 
-def get(r, x, y):
-        if getMobByPosition(r, x, y) != None:
-                return "M"
-        elif getChestByPosition(r, x, y) != None:
-                return "C"
+def isFree(r, x, y):
+        if r["background"][y][x].encode("utf-8") == " ":
+                return True
         else:
-                return r["background"][y][x].encode("utf-8")
+                return False
         
-def getEntityPosition(r, entity):
-        for currentEntity in r[entity]:
-                return Entity.getPosition(currentEntity)
+def getEntityPosition(r, type):
+        for currentEntity in r["entity"]:
+                if Entity.getType(currentEntity) == type:
+                        return Entity.getPosition(currentEntity)
 
-def setEntityPosition(r, entity, x, y):
-        for currentEntity in r[entity]:
-                return Entity.setPosition(currentEntity, x, y)
+def setEntityPosition(r, type, x, y):
+        for currentEntity in r["entity"]:
+                if Entity.getType(currentEntity) == type:
+                        Entity.setPosition(currentEntity, x, y)
+                        return
 
 # Tests
 if __name__ == "__main__":

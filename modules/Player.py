@@ -12,6 +12,7 @@
 # Modules systèmes
 
 # Modules personnalisés
+import Entity
 import Chest
 import Utils
 import Entity
@@ -23,6 +24,7 @@ def create():
         player["y"]=20
         player["vx"]=0
         player["vy"]=0
+        player["type"]="player"
         player["health"]=100
         player["xp"]=0.0
         player["strength"]=1
@@ -32,6 +34,9 @@ def create():
         player["sprite"]="P"
         player["inventory"] = Chest.create()
         return player
+
+def live(p, dt):
+        return Entity.move(p, dt)
 
 #def getPosition(player):
         #x = player["x"]
