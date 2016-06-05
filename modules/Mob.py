@@ -39,9 +39,9 @@ def live(m, p, rDetec, dt):
         mvX, mvY = Entity.getSpeed(m)
         
         keepSameDirection = random.randbool()
-                if not keepSameDirection: 
-                        direction = [(0,1),(0,-1),(-1,0),(1,0)]
-                        mvX, mvY = direction[random.randint(0,3)]
+        if not keepSameDirection: 
+                direction = [(0,1),(0,-1),(-1,0),(1,0)]
+                mvX, mvY = direction[random.randint(0,3)]
                         
                         
         if state(m, p, rDetec) == "normal":    
@@ -70,7 +70,7 @@ def state(m, p, rDetec):
                 m["state"] = "angry"
         else : 
                 state = ["normal", "freeze"]
-                m["state"] = state[random.randint(0,1)  
+                m["state"] = state[random.randint(0,1)]
        
         return m["state"]
 
