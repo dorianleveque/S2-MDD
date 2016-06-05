@@ -16,6 +16,8 @@ import random
 
 # Modules personnalisés
 import Room
+import Entity
+import Player
 import Utils
 
 def create(name):
@@ -88,6 +90,9 @@ def generate(d):
 
                 Room.drawDoors(currentRoom)
 
+        # On place le joueur dans la 1ere salle
+        Room.addEntity(d["currentRoom"], Player.create())
+
 def getRoomByPosition(placedRooms, x, y):
         for currentPlacedRoom in placedRooms:
                 if (x == currentPlacedRoom[1]) and (y == currentPlacedRoom[2]):
@@ -104,26 +109,31 @@ def pickUpRandomRoom(remainingRooms):
         return room
 
 def switchRoom(d):
-        x, y = Room.getEntityPosition(getCurrentRoom(d), "player")
-        currentRoom = getCurrentRoom(d)
+        oldRoom = d["currentRoom"]
+        player = Room.getPlayer(oldRoom)
+        x, y = Entity.getPosition(player)
 
-        if x < 2:
-                setCurrentRoom(d, Room.getLeftRoom(currentRoom))
-                x = 78
+        if x < 2 or x > 78 or y < 2 or y > 38:
+                Room.removeEntity(oldRoom, player)
+
+                if x < 2:
+                        setCurrentRoom(d, Room.getLeftRoom(oldRoom))
+                        x = 78
         
-        if x > 78: # Taille max en x des salles
-                setCurrentRoom(d, Room.getRightRoom(currentRoom))
-                x = 2
+                if x > 78: # Taille max en x des salles
+                        setCurrentRoom(d, Room.getRightRoom(oldRoom))
+                        x = 2
 
-        if y < 2:
-                setCurrentRoom(d, Room.getUpRoom(currentRoom))
-                y = 38
+                if y < 2:
+                        setCurrentRoom(d, Room.getUpRoom(oldRoom))
+                        y = 38
 
-        if y > 38: # Taille max en y des salles
-                setCurrentRoom(d, Room.getDownRoom(currentRoom))
-                y = 2
-        Room.setEntityPosition(getCurrentRoom(d), "player", x, y)
+                if y > 38: # Taille max en y des salles
+                        setCurrentRoom(d, Room.getDownRoom(oldRoom))
+                        y = 2
 
+                Entity.setPosition(player, x, y)
+                Room.addEntity(d["currentRoom"], player)
 
 def getCurrentRoom(d):
         return d["currentRoom"]
@@ -138,6 +148,10 @@ def getName(d):
 def setName(d, name):
         d["name"] = name
         return
+
+def run(d, dt):
+        Room.run(d["currentRoom"], dt)
+        switchRoom(d)
 
 def show(d):
         Room.show(d["currentRoom"])
