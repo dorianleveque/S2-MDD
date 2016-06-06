@@ -43,7 +43,9 @@
         </background>
 
         <mobs>
-        
+                <mob type="guardian" health="100" x="40" y="20" strength="1" resistance="1" damage="0">
+M
+                </mob>
         </mobs>
 
         <chests>

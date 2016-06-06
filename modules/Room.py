@@ -11,6 +11,7 @@
 
 # Modules système
 from xml.dom.minidom import parse
+from string import *
 
 # Modules personnalisés
 import Chest
@@ -62,7 +63,7 @@ def create(dungeonName, roomName):
                 Entity.setStrength(mob, float(mobs[i].getAttribute("strength")))
                 Entity.setResistance(mob, float(mobs[i].getAttribute("resistance")))
                 Entity.setDamage(mob, int(mobs[i].getAttribute("damage")))
-                Entity.setSprite(mob, mobs[i].firstChild.nodeValue)
+                Entity.setSprite(mob, strip(mobs[i].firstChild.nodeValue))
                 r["entity"].append(mob)
         
         # Récupération des coffres
@@ -135,9 +136,6 @@ def run(r, dt):
         #elif (key == "d") and (Room.get(currentRoom, x+1, y) == " "): 
                 #x = x + 1             # le joueur se déplace vers Direction Droite
 def show(r):
-        # Refresh doors
-        drawDoors(r)
-
         # Affichage du fond
         for y in range(0, len(r["background"])):
                 for x in range(0, len(r["background"][y])):

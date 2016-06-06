@@ -38,21 +38,28 @@ def live(m, p, rDetec, dt):
         mX, mY = Entity.getPosition(m)
         mvX, mvY = Entity.getSpeed(m)
         
-        keepSameDirection = random.randbool()
+        keepSameDirection = bool(random.getrandbits(1))
         if not keepSameDirection: 
-                direction = [(0,1),(0,-1),(-1,0),(1,0)]
+                direction = [(0,8),(0,-8),(-16,0),(16,0)]
                 mvX, mvY = direction[random.randint(0,3)]
-                        
-                        
-        if state(m, p, rDetec) == "normal":    
-                Entity.setSpeed(mvX/2, mvY/2)
-                
-                
-        elif state(m, p, rDetec) == "angry":
-                Entity.setSpeed(2*mvX, 2*mvY)
-                        
-        elif state(m, p, rDetec) == "freeze":
-                Entity.setSpeed(0, 0)
+
+        # Gestion des transitions
+        oldState = m["state"]
+        newState = state(m, p, rDetec)
+
+        if oldState != newState:
+                transition = True
+        else:
+                transition = False
+
+        if newState == "normal":
+                mvX, mvY =  mvX, mvY
+        elif newState == "angry" and transition == True:
+                mvX, mvY = 4*mvX, 4*mvY
+        elif newState == "freeze" and transition == True:
+                mvX, mvY = 0, 0
+
+        Entity.setSpeed(m, mvX, mvY)
 
         return Entity.simulate(m, dt)
 

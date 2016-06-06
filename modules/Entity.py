@@ -120,6 +120,12 @@ def getSprite(e):
 def setSprite(e, sprite):
        e["sprite"] = sprite
 
+def getDamage(e):
+        return e["damage"]
+
+def setDamage(e, damage):
+        e["damage"] = damage
+
 if __name__ == "__main__":
        e = create(2, 2, 300, 0, 1, 1, "Test")
        show(e)
