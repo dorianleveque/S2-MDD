@@ -53,16 +53,27 @@ def init():
 
 def run():
         n = 0
-        global game, menu
+        gameState = "run"
+        global game, menu, refresh
+        
         while True:
                 interact()
                 if Menu.gameWindow(menu):
-                        Game.run(game, dt)
-                        if(n % 10):
-                                #effacer la console 
-                                #sys.stdout.write("\033[2J")
-                                Menu.show(menu)
-                                Game.show(game)
+                        gameState = Game.run(game, dt)
+                        if gameState == "run":
+                                if(n % 10):
+                                        #effacer la console 
+                                        #sys.stdout.write("\033[2J")
+                                        Menu.show(menu)
+                                        Game.show(game)
+                        elif gameState == "lose":
+                                Menu.setCurrentWindow(menu, "loseMenu")
+                                Menu.show()
+                                gameState = "run"
+                        elif gameState == "win":
+                                Menu.setCurrentWindow(menu, "winMenu")
+                                Menu.show()
+                                gameState = "run"
                 else:
                         if refresh==True:
                                 Menu.show(menu)
@@ -113,7 +124,7 @@ def changeKey():
         if isData():
                 keyUpdate = True
         
-        if 
+        #if 
         key = sys.stdin.read(1)
         Utils.goto(0,44)
         Utils.write(key, "white")

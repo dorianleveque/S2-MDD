@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 ##################################################################
-##								##
-##	     The Legend Of Zelda - A Link to the Rogue		##
-##	    Un projet de Methode de Developpement (MDD) 	##
-##								##
-##			    Settings.py				##
-##								##
-## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     31/05/2016 ##
+##                                                                ##
+##             The Legend Of Zelda - A Link to the Rogue                ##
+##            Un projet de Methode de Developpement (MDD)         ##
+##                                                                ##
+##                            Settings.py                                ##
+##                                                                ##
+## LEVEQUE Dorian & ROUE Evan         S2P         ENIB             31/05/2016 ##
 ##################################################################
 
 def create():

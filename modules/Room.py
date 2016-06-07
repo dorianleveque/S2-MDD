@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 ##################################################################
-##								##
-##	     The Legend Of Zelda - A Link to the Rogue		##
-##	    Un projet de Methode de Developpement (MDD) 	##
-##								##
-##			      Room.py				##
-##								##
-## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     01/04/2016 ##
+##                                                                ##
+##             The Legend Of Zelda - A Link to the Rogue                ##
+##            Un projet de Methode de Developpement (MDD)         ##
+##                                                                ##
+##                              Room.py                                ##
+##                                                                ##
+## LEVEQUE Dorian & ROUE Evan         S2P         ENIB             01/04/2016 ##
 ##################################################################
 
 # Modules système
@@ -50,13 +50,6 @@ def create(dungeonName, roomName):
         nb_mobs = mobs.length
         for i in range(nb_mobs):
                 mob = Mob.create()
-                #Mob.setType(mob, mobs[i].getAttribute("type"))
-                #Mob.setPosition(mob, int(mobs[i].getAttribute("x")), int(mobs[i].getAttribute("y")))
-                #Mob.setHealth(mob, int(mobs[i].getAttribute("health")))
-                #Mob.setStrength(mob, float(mobs[i].getAttribute("strength")))
-                #Mob.setResistance(mob, float(mobs[i].getAttribute("resistance")))
-                #Mob.setDamage(mob, int(mobs[i].getAttribute("damage")))
-                #Mob.setSprite(mob, mobs[i].firstChild.nodeValue)
                 Entity.setType(mob, mobs[i].getAttribute("type"))
                 Entity.setPosition(mob, int(mobs[i].getAttribute("x")), int(mobs[i].getAttribute("y")))
                 Entity.setHealth(mob, int(mobs[i].getAttribute("health")))
@@ -81,7 +74,7 @@ def create(dungeonName, roomName):
                                 bonus = Bonus.create()
                                 Bonus.setName(bonus, item.getAttribute("name"))
                                 Bonus.setAmount(bonus, item.getAttribute("amount"))
-                                Chest.addItem(chest, bonus)
+                                Chest.addBonus(chest, bonus)
                         elif item.nodeName == "bow":
                                 bow = Bow.create()
                                 Bow.setName(bow, item.getAttribute("name"))
@@ -120,19 +113,33 @@ def run(r, dt):
                         newHealth = health - (Arrow.getDamage(currentArrow)/resistance)
                         Entity.setHealth(hurtedEntity, newHealth)
                         r["arrows"].remove(currentArrow)
-         
+        
         for currentEntity in r["entity"]:
-                if(Entity.getType(currentEntity) == "player"):
+                if Entity.getType(currentEntity) == "player":
                         newX, newY = Player.live(currentEntity, dt)
-                if(Entity.getType(currentEntity) == "skeleton"):
+                if Entity.getType(currentEntity) == "ghost":
                         newX, newY = Mob.live(currentEntity, player, 3, dt)
-                if(Entity.getType(currentEntity) == "guardian"):
+                if Entity.getType(currentEntity) == "guardian":
                         newX, newY = Mob.live(currentEntity, player, 6, dt)
-                if(Entity.getType(currentEntity) == "boss"):
+                if Entity.getType(currentEntity) == "boss":
                         newX, newY = Mob.live(currentEntity, player, 12, dt)
 
-                if isFree(r, newX, newY): #and getEntityByPosition(r, newX, newY) == -1:
+                # Déplacement autorisé s'il n'y pas d'obstacle ou de mob / joueur
+                if isFree(r, newX, newY) and getEntityByPosition(r, newX, newY, currentEntity) == -1:
                         Entity.setPosition(currentEntity, newX, newY)
+                
+                # Despawn du monstre quand sa vie tombe à 0
+                if Entity.getHealth(currentEntity) == 0 and Entity.getType(currentEntity) != "player":
+                        r["entity"].remove(currentEntity)
+                
+                # Si on a tué le Boss, alors on a gagné
+                if Entity.getHealth(currentEntity) == 0 and Entity.getType(currentEntity) == "boss":
+                        Entity.setMaxHealth(player, Entity.getMaxHealth(player) + 50)
+                        Entity.setHealth(player, Entity.setMaxHealth(player))
+                        
+                        return "win"
+
+        return ""
 
 def launchArrow(r, entity):
         arrow = Arrow.create()
@@ -143,29 +150,32 @@ def launchArrow(r, entity):
         ax, ay = ax + evx, ay + evy
         
         Arrow.setPosition(arrow, ax, ay)
-        Arrow.setSpeed(arrow, evx*30, evy*30)
+        Arrow.setSpeed(arrow, evx*60, evy*30)
         Arrow.setDamage(arrow, Entity.getDamage(entity)*Entity.getStrength(entity))
         
         r["arrows"].append(arrow)
 
-#def movePlayer(direction):
-        #x, y = Dungeon.getEntityPosition(getDungeon(g), "player")
-        #vx, vy = Dungeon.getEntitySpeed(getDungeon(g), "player")
+def openChest(r):
+        player = getPlayer(r)
+        px, py = Entity.getPosition(player)
 
-        
+        for (dx, dy) in [(-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1)]:
+                cx, cy = px + dx, py + dy
+                chest = getChestByPosition(r, cx, cy)
+                if chest != -1:
+                        items = Chest.getItems(chest)
+                        for item in items:
+                                Chest.addItem(Player.getInventory(player), item)
+                        bonus = Chest.getBonus(chest)
+                        for b in bonus:
+                                name = Bonus.getName(b)
+                                if name == "health":
+                                        Player.setHealth(player, Player.getHealth(player) + Bonus.getAmount(b))
+                                elif name == "strength":
+                                        Player.setStrength(player, Player.getStrength(player) + Bonus.getAmount(b))
+                                elif name == "resistance":
+                                        Player.setResistance(player, Player.getResistance(player) + Bonus.getAmount(b))
 
-#def collide():
-        #x, y = Player.getPosition(g["player"])
-        #currentRoom = Dungeon.getCurrentRoom(g["dungeon"])
-
-        #if (key == "z") and (Room.get(currentRoom, x, y-1) == " "): 
-                #y = y - 1             # le joueur se déplace vers Direction Haut
-        #elif (key == "q") and (Room.get(currentRoom, x-1, y) == " "): 
-                #x = x - 1             # le joueur se déplace vers Direction Gauche
-        #elif (key == "s") and (Room.get(currentRoom, x, y+1) == " "): 
-                #y = y + 1             # le joueur se déplace vers Direction Bas
-        #elif (key == "d") and (Room.get(currentRoom, x+1, y) == " "): 
-                #x = x + 1             # le joueur se déplace vers Direction Droite
 def show(r):
         # Affichage du fond
         for y in range(0, len(r["background"])):
@@ -222,14 +232,15 @@ def getChestByPosition(r, x, y):
         
         return -1
 
-def getEntityByPosition(r, x, y):
+def getEntityByPosition(r, x, y, skipEntity = None):
         # On parcourt la liste des entités de la salle
         for currentEntity in r["entity"]:
-                ex, ey = Entity.getPosition(currentEntity)
-                ex, ey = int(round(ex)), int(round(ey))
-                
-                if (ex, ey) == (int(round(x)), int(round(y))):
-                        return currentEntity
+                if currentEntity != skipEntity:
+                        ex, ey = Entity.getPosition(currentEntity)
+                        ex, ey = int(round(ex)), int(round(ey))
+                        
+                        if (ex, ey) == (int(round(x)), int(round(y))):
+                                return currentEntity
         
         return -1
 

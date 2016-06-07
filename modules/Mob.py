@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 ##################################################################
-##								##
-##	     The Legend Of Zelda - A Link to the Rogue		##
-##	    Un projet de Methode de Developpement (MDD) 	##
-##								##
-##			      Mob.py				##
-##								##
-## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     01/04/2016 ##
+##                                                                ##
+##             The Legend Of Zelda - A Link to the Rogue                ##
+##            Un projet de Methode de Developpement (MDD)         ##
+##                                                                ##
+##                              Mob.py                                ##
+##                                                                ##
+## LEVEQUE Dorian & ROUE Evan         S2P         ENIB             01/04/2016 ##
 ##################################################################
 
 # Modules système
@@ -53,10 +53,8 @@ def live(m, p, rDetec, dt):
         else:
                 transition = False
 
-        if newState == "normal":
-                mvX, mvY =  mvX, mvY
-        elif newState == "angry" and transition == True:
-                mvX, mvY = 4*mvX, 4*mvY
+        if newState == "angry" and transition == True:
+                mvX, mvY = 2*mvX, 2*mvY
         elif newState == "freeze" and transition == True:
                 mvX, mvY = 0, 0
 
@@ -74,11 +72,10 @@ def state(m, p, rDetec):
         # Position du joueur par rapport au mob:
         playerPosition = math.sqrt((pX-mX)**2 + (pY-mY)**2)
         
-        if playerPosition <= rDetec :
+        if playerPosition <= rDetec:
                 m["state"] = "angry"
-        else : 
-                state = ["normal", "freeze"]
-                m["state"] = state[random.randint(0,1)]
+        else:
+                m["state"] = "freeze"
        
         return m["state"]
 
