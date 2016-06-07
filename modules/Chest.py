@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 ##################################################################
-##								##
-##	     The Legend Of Zelda - A Link to the Rogue		##
-##	    Un projet de Methode de Developpement (MDD) 	##
-##								##
-##			      Chest.py				##
-##								##
-## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     01/04/2016 ##
+##                                                                ##
+##             The Legend Of Zelda - A Link to the Rogue                ##
+##            Un projet de Methode de Developpement (MDD)         ##
+##                                                                ##
+##                              Chest.py                                ##
+##                                                                ##
+## LEVEQUE Dorian & ROUE Evan         S2P         ENIB             01/04/2016 ##
 ##################################################################
 
 # Modules personnalisés
@@ -15,13 +15,18 @@ import Bonus
 
 def create():
         chest = dict()
-        chest["content"]=[]
+        chest["items"]=[]
+        chest["bonus"]=[]
         chest["x"]=-1
         chest["y"]=-1
         return chest
 
 def addItem(c, i):
-        c["content"].append(i)
+        c["items"].append(i)
+        return
+        
+def addBonus(c, b):
+        c["bonus"].append(b)
         return
 
 def getPosition(c):
@@ -32,11 +37,14 @@ def setPosition(c, x, y):
         c["y"] = y
         return
 
-def getContent(c):
-        return c["content"]
+def getItems(c):
+        return c["items"]
+
+def getBonus(c):
+        return c["bonus"]
         
-def isInside(c, item):    # test du getContent
-        if item in c["content"]:
+def isInside(c, item):
+        if item in c["items"]:
                 return True
         else:
                 return False
