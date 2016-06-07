@@ -15,13 +15,12 @@ import select
 # Modules personnalisés
 import Utils
 
-
 # constructeur du menu #
 def create():
         menu = dict()
         menu["current"] = dict()
         menu["windows"] = dict()       # dictionnaire contenant toutes les informations de chaque fenetres 
-        menu["transitions"] = []       # liste de nom des fenetres precedemment parcouru                  #<-------------- A MODIFIER
+        menu["temp"] = []               # liste de nom de fenetre temporaire pour savoir d'où on vient 
         
         # recuperation des infos du fichier xml pour la construction du menu
         path = "assets/menu/Menu.xml"           # chemin d'acces du fichier xml
@@ -43,8 +42,6 @@ def create():
         windowNodes = rootElement.getElementsByTagName("windows")       # windowNodes est une liste de toutes les balises windows
         windowSize = windowNodes.length
         
-        
-        
         # Pour chaque balise se nommant "windows" de la liste "windowNodes", 
         # on récupère son nom ("windowName") et ses donnees ("data") pour les placées dans le dictionnaire "menu",
         # qui aura pour clé le nom de celle-ci.
@@ -55,8 +52,6 @@ def create():
                                 
                 windowName = windowTag.getAttribute("name")
                 #print windowTag.attributes.keys()  #permet de recuperer le nom de chaque attribut
-                
-                
                 
                 #Recuperation des donnees de chaque fenetre                      #Data
                 data = []
@@ -101,12 +96,10 @@ def create():
                         
                         text["form"] = []                               # Recuperation de la forme de text à affecter
                         parameterForm = thisText.getAttribute("form")        
-                        for i in parameterForm.split(", "):
+                        for i in parameterForm.split("/"):
                                 text["form"].append(i)
                         
                         texts.append(text)                              # Ajout du dictionnaire de donnees text à la liste texts de la fenetre i
-                
-                
                 
                 #Recuperation des buttons de la fenetre
                 button=dict()
@@ -126,10 +119,10 @@ def create():
                         y = thisButton.getAttribute("y")
                         dataButton["position"] = (x,y)
                         
-                        dataButton["target"] = []
-                        target = thisButton.getAttribute("target")
-                        for i in target.split(", "):
-                                dataButton["target"].append(i)
+                        dataButton["cmd"] = []
+                        cmd = thisButton.getAttribute("cmd")
+                        for c in cmd.split("/"):
+                                dataButton["cmd"].append(c)                        
                         
                         button["list"].append(dataButton)
                         
@@ -154,11 +147,11 @@ def setCurrentWindow(menu, windowName):
 
 # Renvoie le nom de la fenetre courante
 def getCurrentWindowName(menu):
-        return menu["current"]["name"]
+        return "'"+menu["current"]["name"]+"'"
 
 # Savoir si on se trouve dans la fenetre de jeu
 def gameWindow(menu):
-        if getCurrentWindowName(menu) == "game":
+        if getCurrentWindowName(menu) == "'game'":
                 return True
         else:
                 return False
@@ -190,7 +183,7 @@ def showFrame(menu):
                 for y in range(0, len(frame)):
                         Utils.goto(0, y)
                         for x in range(0, len(frame[y])):
-                                Utils.write(frame[y][x], 'white', 'black')
+                                Utils.write(frame[y][x], 'dark gray', 'black')
                         Utils.write("\n")
 
 
@@ -247,35 +240,12 @@ def showTexts(menu):
                 Utils.goto(x,y)
                 Utils.write(text+"\n", color, backgroundColor, form)
 
-
-def interact(menu, key):
-        if key == "z": 
-                changeSelectedButton(menu, "buttonUp")
-
-        elif key == "s":
-                changeSelectedButton(menu, "buttonDown")
-        
-        elif key == "d":
-                changeSelectedButton(menu, "confirm")
-                
-        elif key == "p":
-                if gameWindow(menu):
-                        target = []
-                        target.append("pause")
-                        changeCurrentWindow(menu, target)
-
 def changeSelectedButton(menu, action):
         
-        # Changer le bouton selectionne de la fenetre     
+        # Changer le bouton selectionne de la fenetre
         buttonSelected = getButtonSelected(menu)
         buttonList = getButtonList(menu)
-        
-        # Recherche de l'index dans buttonList
-        index = 0
-        for i in range(0, len(buttonList)):
-                if buttonList[i]["name"] == buttonSelected:
-                        break
-                index += 1
+        index = getIndexOfSelectedButton(menu, buttonList, buttonSelected)
         
         if action == "buttonUp":
                 if index-1 >= 0:
@@ -284,35 +254,27 @@ def changeSelectedButton(menu, action):
         elif action == "buttonDown":
                 if index+1 <= len(buttonList)-1:
                         setButtonSelected(menu, buttonList[index+1]["name"])
-        
-        # Valider le choix de la fenetre
-        elif action == "confirm":
-                if gameWindow(menu) == False:
-                        changeCurrentWindow(menu, buttonList[index]["target"])                  # Changement de fenetre
 
 
-def addPreviousWindow(menu, previousWindow):
-        menu["transitions"].append(previousWindow)
+def addTemporyCommande(menu, commande):
+        menu["temp"].append(commande)
 
-def getPreviousWindow(menu):
-        return menu["transitions"]
+def executeTemporyCommandes(menu):
+        tempList = menu["temp"]
+        for t in tempList:
+                exec t
+                tempList.remove(t)
+                        
+def getIndexOfSelectedButton(menu, buttonList, buttonSelected):         # renvoie l'index du bouton selectionne de la liste button
+        # Recherche de l'index dans buttonList
+        index = 0
+        for i in range(0, len(buttonList)):
+                if buttonList[i]["name"] == buttonSelected:
+                        return index
+                index += 1
 
-
-def changeCurrentWindow(menu, buttonTargetList):
-        
-        # Recherche dans la liste du bouton selectionne si celui-ci contient plus de 1 cible (target). On pourra considerer
-        # ainsi qu'il s'agit du bouton retour.
-        
-        if len(buttonTargetList) >= 2: 
-                index = getPreviousWindow(menu)
-                setCurrentWindow(menu, index[-1]) 
-                del index[-1]
-        
-        elif len(buttonTargetList) == 1:
-                if buttonTargetList[0] != ' ':
-                        addPreviousWindow(menu, getCurrentWindowName(menu))
-                        setCurrentWindow(menu, buttonTargetList[0])
-
+def getButtonActions(menu, index):
+        return menu["current"]["data"]["buttons"]["list"][index]["cmd"] # renvoie la liste de commande du bouton selectionne et valide
 
 
 if __name__ == "__main__":
@@ -321,21 +283,21 @@ if __name__ == "__main__":
         setCurrentWindow(menu,"mainMenu")
         
         print menu["current"]
+        
+        addTemporyCommande(menu,'setCurrentWindow(menu,'+getCurrentWindowName(menu)+')')
+        print menu["temp"]
+        print getTemporyCommandes(menu) 
+        print menu["temp"]
+        setCurrentWindow(menu, 'options')
+        print menu["current"]
+        exec getTemporyCommandes(menu)
+        
+        print menu["current"]
+        #print getButtonActions(menu, getIndexOfSelectedButton(menu, getButtonList(menu), getButtonSelected(menu)))
+        #print executButtonAction(menu, getButtonActions(menu, getIndexOfSelectedButton(menu, getButtonList(menu), getButtonSelected(menu))))
         ##setCurrentWindow(menu,"Options")
         #print menu["current"]
         #print getCurrentWindowName(menu)
         #print getCurrentWindowData(menu)
         #print getCurrentWindowBackgroundContent(menu)
         #show(menu)
-        #def isData():
-                ##recuperation des elements clavier
-                #return select.select([sys.stdin], [], [], 0.0) == ([sys.stdin], [], [])
-        
- 
-        
-        #while True:
-                #getCurrentWindowButtonSelected(menu)
-                #if isData():
-                        #key = sys.stdin.read(1)
-                        #interact(menu, key)
-        
