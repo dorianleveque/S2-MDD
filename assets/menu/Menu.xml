@@ -1,47 +1,47 @@
 <menu>
 <frame name="frame">
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░                                                                                                               ░░
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+███████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+██                                                                                                               ██
+███████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 </frame>
                 
 <windows name="mainMenu">
@@ -83,11 +83,12 @@
 <text x="70" y="36" color="white" backgroundColor="black" form="bold">Press escape to quit</text>
 <text x="45" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | confirm : Press 'd'</text>
 
-<button x="70" y="28" target="game">Start game</button>
-<button x="70" y="30" target="options">Options</button>
-<button x="70" y="32" target="help">Help</button>
-<button x="70" y="34" target="credits">Credits</button>
-<buttons x="70" y="36" target="quit">Quit Game</buttons>
+<button x="70" y="28" cmd="g=Game.create()/Game.restart(g)/Menu.setCurrentWindow(menu,'game')">Start game</button>
+<button x="70" y="30" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName(menu)+')')/Menu.setCurrentWindow(menu,'options')">Options</button>
+<button x="70" y="32" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName(menu)+')')/Menu.setCurrentWindow(menu,'help')">Help</button>
+<button x="70" y="34" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName(menu)+')')/Menu.setCurrentWindow(menu,'credits')">Credits</button>
+<buttons x="70" y="36" cmd="Main.quit()">Quit Game</buttons>
+
 
 
 </windows>
@@ -111,7 +112,13 @@
                  \___________/  \_________________________________________________________________/
 </background>
 <text x="40" y="26" color="light gray" backgroundColor="black">Comming soon ... (in Prototype 2)</text>
-<button x="100" y="40" target="mainMenu, pause">Return</button>
+<button x="20" y="20" cmd="changeKey()">z</button>
+<button x="20" y="23" cmd="">s</button>
+<button x="20" y="26" cmd="">q</button>
+<button x="20" y="29" cmd="">d</button>
+<button x="20" y="32" cmd="">w</button>
+
+<button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">Return</button>
 </windows>
 
 <windows name="credits">
@@ -133,7 +140,7 @@
                    \_____________| \____________________________________________________________/
 </background>
 <text x="40" y="26" color="light gray" backgroundColor="black">Comming soon ... (in Prototype 2)</text>
-<button x="100" y="40" target="mainMenu">Return</button>
+<button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">Return</button>
 </windows>
         
 <windows name="help">
@@ -155,7 +162,7 @@
                                /_____\    /_____\  \_________________________________/
 </background>
 <text x="40" y="26" color="light gray" backgroundColor="black">Comming soon ... (in Prototype 2)</text>
-<button x="100" y="40" target="mainMenu">Return</button>
+<button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">Return</button>
 </windows>
 
 <windows name="pause">
@@ -176,56 +183,56 @@
                        /     \    __________________________________________________
                       /_______\   \________________________________________________/
 </background>
-<button x="50" y="20" target="game">Resume game</button>
-<button x="50" y="22" target="options">Options</button>
-<button x="50" y="24" target="mainMenu">Return to title menu</button>
-<button x="50" y="26" target="Game.restart(g)">Restart (comming soon in Prototype 2)</button>
+<button x="50" y="20" cmd="Menu.setCurrentWindow(menu,'game')">Resume game</button>
+<button x="50" y="22" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName(menu)+')')/Menu.setCurrentWindow(menu,'options')">Options</button>
+<button x="50" y="24" cmd="Menu.setCurrentWindow(menu,'mainMenu')">Return to title menu</button>
+<button x="50" y="26" cmd="g=Game.create()/Game.restart(g)">Restart (comming soon in Prototype 2)</button>
 </windows>
 
 <windows name="game">
-<background color="white" backgroundColor="black">
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░                                                                                ░░                             ░░
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+<background color="dark gray" backgroundColor="black">
+███████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+██                                                                                ██                             ██
+███████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 </background>
 </windows>
 </menu>

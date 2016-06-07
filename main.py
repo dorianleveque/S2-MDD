@@ -23,6 +23,8 @@ sys.path.append('./modules/')
 import Game
 import Player
 import Menu
+import Settings
+import Utils
 
 
 # Interaction clavier
@@ -68,30 +70,49 @@ def run():
                 n += 1
 
 def interact(): 
-        global direction, refresh, game
+        global direction, refresh, game, menu
        
         refresh = False
         #gestion des evenements clavier
         if isData():                                    #si une touche est appuyee
-                read = sys.stdin.read(1)
-                if Menu.gameWindow(menu):
-                        Menu.interact(menu, read)
-                        Game.interact(game, read)
+                refresh = True                
+                key = sys.stdin.read(1)
+                if Menu.gameWindow(menu):               # si on est sur le fenetre de jeu alors ...
+                        Game.interact(game, key)
                         
-                else:
-                        Menu.interact(menu, read)
-                #Game.interact(game, read)
-                #Menu.interact(menu, read)
+                        if key == "p":
+                                Menu.setCurrentWindow(menu, "pause")       # faire apparaitre le menu Pause
                 
-                if read == "\x1b": 
+                else: 
+                        if key == "z": 
+                                Menu.changeSelectedButton(menu, "buttonUp")
+
+                        elif key == "s":
+                                Menu.changeSelectedButton(menu, "buttonDown")
+                        
+                        elif key == "d":
+                                # Execute les commandes présentent dans la liste de commande à executer du bouton selectionne
+                                buttonCmdList = Menu.getButtonActions(menu, Menu.getIndexOfSelectedButton(menu, Menu.getButtonList(menu), Menu.getButtonSelected(menu)))
+                                for cmd in buttonCmdList:
+                                        exec cmd
+
+                
+                if key == "\x1b": 
                         quit()                          # \x1b = touche echap / appel de la fonction qui permet de quitter le jeu
                         
-                refresh = True
+                
                 
                 
         while isData():
                 sys.stdin.read(5)
                 #termios.tcflush(sys.stdin, termios.TCIFLUSH)   # Permet de vider, le buffer des touches d'entree
+
+
+def changeKey():
+        if isData():
+                key = sys.stdin.read(1)
+                Utils.goto(0,44)
+                Utils.write(key, "white")
 
 def isData():
         #recuperation des elements clavier
