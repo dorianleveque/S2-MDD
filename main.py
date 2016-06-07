@@ -109,10 +109,14 @@ def interact():
 
 
 def changeKey():
+        keyUpdate =False
         if isData():
-                key = sys.stdin.read(1)
-                Utils.goto(0,44)
-                Utils.write(key, "white")
+                keyUpdate = True
+        
+        if 
+        key = sys.stdin.read(1)
+        Utils.goto(0,44)
+        Utils.write(key, "white")
 
 def isData():
         #recuperation des elements clavier
