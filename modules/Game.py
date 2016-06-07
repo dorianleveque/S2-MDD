@@ -15,6 +15,7 @@
 import Dungeon
 import Settings
 import Entity
+import Utils
 
 def create():
         game = dict()
@@ -38,7 +39,30 @@ def run(g, dt):
 
 def show(g):
         Dungeon.show(g["dungeon"])
+        
+        # -- Interface du joueur --
+        player = Dungeon.getPlayer(g["dungeon"])
+        offsetX = 84
+        offsetY = 2
+        
+        # Clear
+        for i in range(1, 41):
+                Utils.goto(offsetX, i+1)
+                Utils.write(29*" "+"\n")
 
+        #
+        Utils.goto(offsetX+1, offsetY+1)
+        Utils.write("Link", "green")
+        
+        # Health
+        health = Entity.getHealth(player)
+        maxHealth = Entity.getMaxHealth(player)
+        Utils.goto(offsetX+1, offsetY+3)
+        Utils.write("Health : " + str(health) + " / " + str(maxHealth))
+        Utils.goto(offsetX+1, offsetY+4)
+        healthBar = int(round((health/maxHealth)*26))*"♥"
+        Utils.write(healthBar.decode("utf-8"), "red")
+        
 def interact(g, keyRead):
         keyM = g["keyManager"]
 #        for keyName in keyM:
@@ -59,6 +83,8 @@ def interact(g, keyRead):
                 Entity.setSpeed(player, -playerSpeedValue*2, 0)
         elif keyM["Right"]["key"] == keyRead:
                 Entity.setSpeed(player, playerSpeedValue*2, 0)
+        elif keyM["Action"]["key"] == keyRead:
+                Dungeon.launchArrow(g["dungeon"], player)
 
 def getDungeon(g):
         return g["dungeon"]

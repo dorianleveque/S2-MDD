@@ -26,6 +26,7 @@ def create():
         player["vy"]=0
         player["type"]="player"
         player["health"]=100
+        player["maxHealth"]=100
         player["xp"]=0.0
         player["strength"]=1
         player["resistance"]=1

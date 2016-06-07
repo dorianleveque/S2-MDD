@@ -44,6 +44,16 @@ def setSpeed(e,vx,vy):
         e["vx"] = vx
         e["vy"] = vy
 
+def getDirection(e):
+        dx, dy = 0, 0
+        
+        if e["vx"] != 0:
+                dx = int(round(e["vx"] / abs(e["vx"])))
+        
+        if e["vy"] != 0:
+                dy = int(round(e["vy"] / abs(e["vy"])))
+        
+        return (dx, dy)
 
 def simulate(e, dt):
         x,y = getPosition(e)
@@ -95,6 +105,12 @@ def getHealth(e):
 
 def setHealth(e, health):
         e["health"] = health
+        
+def getMaxHealth(e):
+        return e["maxHealth"]
+
+def setMaxHealth(e, maxHealth):
+        e["maxHealth"] = maxHealth
 
 def getXp(e):
         return e["xp"]

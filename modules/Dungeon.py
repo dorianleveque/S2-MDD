@@ -175,6 +175,9 @@ def setEntityPosition(d, entity, x, y):
 
 def getPlayer(d):
         return Room.getPlayer(d["currentRoom"])
+        
+def launchArrow(d, player):
+        return Room.launchArrow(d["currentRoom"], player)
 
 def isFree(d, x, y):
         return Room.isFree(d, x, y)

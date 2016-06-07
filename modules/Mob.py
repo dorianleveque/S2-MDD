@@ -24,6 +24,7 @@ def create():
         mob["vx"]=0
         mob["vy"]=0
         mob["health"]=100
+        mob["maxHealth"]=100
         mob["xp"]=0.0
         mob["strength"]=1
         mob["resistance"]=1
