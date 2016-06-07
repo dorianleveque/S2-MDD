@@ -84,9 +84,9 @@
 <text x="45" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | confirm : Press 'd'</text>
 
 <button x="70" y="28" cmd="g=Game.create()/Game.restart(g)/Menu.setCurrentWindow(menu,'game')">Start game</button>
-<button x="70" y="30" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName(menu)+')')/Menu.setCurrentWindow(menu,'options')">Options</button>
-<button x="70" y="32" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName(menu)+')')/Menu.setCurrentWindow(menu,'help')">Help</button>
-<button x="70" y="34" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName(menu)+')')/Menu.setCurrentWindow(menu,'credits')">Credits</button>
+<button x="70" y="30" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'options')">Options</button>
+<button x="70" y="32" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'help')">Help</button>
+<button x="70" y="34" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'credits')">Credits</button>
 <buttons x="70" y="36" cmd="Main.quit()">Quit Game</buttons>
 
 
@@ -110,13 +110,28 @@
                \ \ \       / / / /___\             /___\    /___\  \_______/  /___\    \__||______/
                 \   \_____/   / ___________________________________________________________________
                  \___________/  \_________________________________________________________________/
+                 
+                 
+                 
+                 
+                 
+                 
+                 
 </background>
-<text x="40" y="26" color="light gray" backgroundColor="black">Comming soon ... (in Prototype 2)</text>
-<button x="20" y="20" cmd="changeKey()">z</button>
-<button x="20" y="23" cmd="">s</button>
-<button x="20" y="26" cmd="">q</button>
-<button x="20" y="29" cmd="">d</button>
-<button x="20" y="32" cmd="">w</button>
+<text x="30" y="18" color="light gray" backgroundColor="black" form="bold/underline">Control Settings</text>
+<text x="30" y="20" color="light red" backgroundColor="black" >To change Key press 'd' and then press the new key</text>
+
+<text x="24" y="23" color="light gray" backgroundColor="black">Move Up</text>
+<text x="24" y="26" color="light gray" backgroundColor="black">Move Down</text>
+<text x="24" y="29" color="light gray" backgroundColor="black">Move Left</text>
+<text x="24" y="32" color="light gray" backgroundColor="black">Move Right</text>
+<text x="24" y="35" color="light gray" backgroundColor="black">Action</text>
+
+<button x="20" y="23" cmd="changeKey('Up')">z</button>
+<button x="20" y="26" cmd="changeKey('Down')">s</button>
+<button x="20" y="29" cmd="changeKey('Left')">q</button>
+<button x="20" y="32" cmd="changeKey('Right')">d</button>
+<button x="20" y="35" cmd="changeKey('Action')">w</button>
 
 <button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">Return</button>
 </windows>
@@ -184,7 +199,7 @@
                       /_______\   \________________________________________________/
 </background>
 <button x="50" y="20" cmd="Menu.setCurrentWindow(menu,'game')">Resume game</button>
-<button x="50" y="22" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName(menu)+')')/Menu.setCurrentWindow(menu,'options')">Options</button>
+<button x="50" y="22" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'options')">Options</button>
 <button x="50" y="24" cmd="Menu.setCurrentWindow(menu,'mainMenu')">Return to title menu</button>
 <button x="50" y="26" cmd="g=Game.create()/Game.restart(g)">Restart (comming soon in Prototype 2)</button>
 </windows>

@@ -60,11 +60,18 @@ def show(g):
         Utils.goto(offsetX+1, offsetY+3)
         Utils.write("Health : " + str(health) + " / " + str(maxHealth))
         Utils.goto(offsetX+1, offsetY+4)
-        healthBar = int(round((health/maxHealth)*26))*"♥"
+        healthBar = int(round((health/maxHealth)*10))*"♥ "
         Utils.write(healthBar.decode("utf-8"), "red")
         
-def interact(g, keyRead):
+def interact(g, settings, keyRead):
+        # chargement des nouvelles touches:   
         keyM = g["keyManager"]
+        for keyName in keyM:
+                for k in settings:
+                        if keyName == k:
+                                keyM[keyName]["key"] = settings[k]
+
+
 #        for keyName in keyM:
 #                if keyM[keyName]["key"] == keyRead:
 #                        if keyM[keyName]["status"] == False:
@@ -73,7 +80,7 @@ def interact(g, keyRead):
 #                else: keyM[keyName]["status"] = False"""
         
         player = Dungeon.getPlayer(g["dungeon"])
-        playerSpeedValue = 20
+        playerSpeedValue = 15
 
         if keyM["Up"]["key"] == keyRead:
                 Entity.setSpeed(player, 0, -playerSpeedValue)
@@ -86,8 +93,6 @@ def interact(g, keyRead):
         elif keyM["Action"]["key"] == keyRead:
                 Dungeon.launchArrow(g["dungeon"], player)
 
-def getDungeon(g):
-        return g["dungeon"]
         
 if __name__ == "__main__":
         game = create()
