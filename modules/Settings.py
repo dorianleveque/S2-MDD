@@ -30,6 +30,7 @@ def setKey(keyGame,keyName,key):
 # Test
 if __name__ == "__main__":
         gameSettings = create()
+        print gameSettings
 
         print getKey(gameSettings,'Up')
         
