@@ -9,6 +9,10 @@
 ## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     01/04/2016 ##
 ##################################################################
 
+# Modules personnalisés
+import Utils
+import Entity
+
 def create():
         arrow = dict()
         arrow["x"] = -1
@@ -16,7 +20,10 @@ def create():
         arrow["vx"] = -1
         arrow["vy"] = -1
         arrow["damage"] = -1
-        return
+        return arrow
+
+def live(a, dt):
+        return Entity.simulate(a, dt)
 
 def getPosition(a):
         return (a["x"], a["y"])
@@ -40,3 +47,19 @@ def getDamage(a):
 def setDamage(a, damage):
         a["damage"] = damage
         return
+
+def show(a):
+        direction = Entity.getDirection(a)
+        sprite = "*"
+        
+        if direction == (1, 0):
+                sprite = "→"
+        elif direction == (-1, 0):
+                sprite = "←"
+        elif direction == (0, 1):
+                sprite = "↓"
+        elif direction == (0, -1):
+                sprite = "↑"
+        
+        Utils.goto(int(round(a["x"]+2)), int(round(a["y"]+2)))
+        Utils.write(sprite.decode("utf-8"))

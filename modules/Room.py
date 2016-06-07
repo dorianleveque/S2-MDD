@@ -96,7 +96,7 @@ def getPlayer(r):
                         return currentEntity
 
 def addEntity(r, e):
-       r["entity"] .append(e)
+       r["entity"].append(e)
 
 def removeEntity(r, e):
         r["entity"].remove(e) 
@@ -104,6 +104,23 @@ def removeEntity(r, e):
 def run(r, dt):
         player = getPlayer(r)
 
+        for currentArrow in r["arrows"]:
+                newX, newY = Arrow.live(currentArrow, dt)
+                
+                if isFree(r, newX, newY):
+                        Entity.setPosition(currentArrow, newX, newY)
+                else:
+                        r["arrows"].remove(currentArrow)
+                
+                # Si une entité (Mob ou Joueur) a été touché, il faut lui enlever de la vie
+                hurtedEntity = getEntityByPosition(r, newX, newY)
+                if hurtedEntity != -1:
+                        health = Entity.getHealth(hurtedEntity)
+                        resistance = Entity.getResistance(hurtedEntity)
+                        newHealth = health - (Arrow.getDamage(currentArrow)/resistance)
+                        Entity.setHealth(hurtedEntity, newHealth)
+                        r["arrows"].remove(currentArrow)
+         
         for currentEntity in r["entity"]:
                 if(Entity.getType(currentEntity) == "player"):
                         newX, newY = Player.live(currentEntity, dt)
@@ -114,8 +131,22 @@ def run(r, dt):
                 if(Entity.getType(currentEntity) == "boss"):
                         newX, newY = Mob.live(currentEntity, player, 12, dt)
 
-                if isFree(r, newX, newY):
+                if isFree(r, newX, newY): #and getEntityByPosition(r, newX, newY) == -1:
                         Entity.setPosition(currentEntity, newX, newY)
+
+def launchArrow(r, entity):
+        arrow = Arrow.create()
+        
+        ax, ay = Entity.getPosition(entity)
+        evx, evy = Entity.getDirection(entity)
+        
+        ax, ay = ax + evx, ay + evy
+        
+        Arrow.setPosition(arrow, ax, ay)
+        Arrow.setSpeed(arrow, evx*30, evy*30)
+        Arrow.setDamage(arrow, Entity.getDamage(entity)*Entity.getStrength(entity))
+        
+        r["arrows"].append(arrow)
 
 #def movePlayer(direction):
         #x, y = Dungeon.getEntityPosition(getDungeon(g), "player")
@@ -154,8 +185,6 @@ def show(r):
         
         # Affichage des projectiles
         for currentArrow in r["arrows"]:
-                x, y = Arrow.getPosition(currentArrow)
-                Utils.goto(x+2, y+1)
                 Arrow.show(currentArrow)
 
 def drawDoors(r):
@@ -191,15 +220,18 @@ def getChestByPosition(r, x, y):
                 if Chest.getPosition(currentChest) == (x,y):
                         return currentChest
         
-        return None
+        return -1
 
-def getMobByPosition(r, x, y):
-        # On parcourt la liste des mobs de la salle
-        for currentMob in r["mobs"]:
-                if Entity.getPosition(currentMob) == (x,y):
-                        return currentMob
+def getEntityByPosition(r, x, y):
+        # On parcourt la liste des entités de la salle
+        for currentEntity in r["entity"]:
+                ex, ey = Entity.getPosition(currentEntity)
+                ex, ey = int(round(ex)), int(round(ey))
+                
+                if (ex, ey) == (int(round(x)), int(round(y))):
+                        return currentEntity
         
-        return None
+        return -1
 
 def getUpRoom(r):
         return r["upRoom"]
@@ -230,7 +262,9 @@ def setRightRoom(r, right_room):
         #drawDoors(r)
 
 def isFree(r, x, y):
-        if r["background"][int(round(y))][int(round(x))].encode("utf-8") == " ":
+        if x > 79 or x < 1 or y > 39 or y < 1:
+                return False
+        elif r["background"][int(round(y))][int(round(x))].encode("utf-8") == " ":
                 return True
         else:
                 return False
