@@ -116,24 +116,24 @@ def switchRoom(d):
         player = Room.getPlayer(oldRoom)
         x, y = Entity.getPosition(player)
 
-        if x < 2 or x > 78 or y < 2 or y > 38:
+        if x < 2 or x > 77 or y < 1 or y > 38:
                 Room.removeEntity(oldRoom, player)
 
                 if x < 2:
                         setCurrentRoom(d, Room.getLeftRoom(oldRoom))
-                        x = 78
+                        x = 77
         
-                if x > 78: # Taille max en x des salles
+                if x > 77: # Taille max en x des salles
                         setCurrentRoom(d, Room.getRightRoom(oldRoom))
                         x = 2
 
-                if y < 2:
+                if y < 1:
                         setCurrentRoom(d, Room.getUpRoom(oldRoom))
                         y = 38
 
                 if y > 38: # Taille max en y des salles
                         setCurrentRoom(d, Room.getDownRoom(oldRoom))
-                        y = 2
+                        y = 1
 
                 Entity.setPosition(player, x, y)
                 Room.addEntity(d["currentRoom"], player)
