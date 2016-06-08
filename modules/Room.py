@@ -282,7 +282,7 @@ def setRightRoom(r, right_room):
         #drawDoors(r)
 
 def isFree(r, x, y):
-        if x > 79 or x < 1 or y > 39 or y < 1:
+        if x > 79 or x < 0 or y > 39 or y < 0:
                 return False
         elif r["background"][int(round(y))][int(round(x))].encode("utf-8") == " ":
                 return True
