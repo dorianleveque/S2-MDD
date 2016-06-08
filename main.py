@@ -119,12 +119,14 @@ def changeKey(keyName):
                 Menu.showButtons(menu)
                 
         Menu.setButtonSelectedState(menu, False)
-        read = sys.stdin.read(1)     
+        read = sys.stdin.read(1)  
+        canChange = True
         for key in settings:
-                if key == keyName:
-                        if read != settings[key] and read != 'p':
-                                Settings.setKey(settings,keyName,read)
-                                Menu.setButtonName(menu, read)
+                if read == settings[key] or read == 'p':
+                        canChange = False
+        if canChange:
+                Settings.setKey(settings,keyName,read)
+                Menu.setButtonName(menu, read)
         Menu.showButtons(menu)
 
 def isData():
