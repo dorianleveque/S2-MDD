@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 ##################################################################
-##								##
-##	     The Legend Of Zelda - A Link to the Rogue		##
-##	    Un projet de Methode de Developpement (MDD) 	##
-##								##
-##			     Dungeon.py	        		##
-##								##
-## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     01/04/2016 ##
+##                                                                ##
+##             The Legend Of Zelda - A Link to the Rogue                ##
+##            Un projet de Methode de Developpement (MDD)         ##
+##                                                                ##
+##                             Dungeon.py                                ##
+##                                                                ##
+## LEVEQUE Dorian & ROUE Evan         S2P         ENIB             01/04/2016 ##
 ##################################################################
 
 # Modules système
@@ -26,7 +26,7 @@ def create(name):
         d["currentRoom"] = None
         return d
 
-def generate(d):
+def generate(d, player = None):
         x, y = 0, 0
         directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
         placedRooms = []
@@ -52,7 +52,7 @@ def generate(d):
                 x, y = x + dx, y + dy
 
                 # S'il y a déja une salle, alors on continue
-                while not(getRoomByPosition(placedRooms, x, y) == -1):
+                while getRoomByPosition(placedRooms, x, y) != -1:
                         x, y = x + dx, y + dy
 
                 placedRooms.append((currentRoom, x, y))
@@ -91,7 +91,10 @@ def generate(d):
                 Room.drawDoors(currentRoom)
 
         # On place le joueur dans la 1ere salle
-        Room.addEntity(d["currentRoom"], Player.create())
+        if player != None:
+                Room.addEntity(d["currentRoom"], player)
+        else:
+                Room.addEntity(d["currentRoom"], Player.create())
 
 def getRoomByPosition(placedRooms, x, y):
         for currentPlacedRoom in placedRooms:
@@ -150,8 +153,8 @@ def setName(d, name):
         return
 
 def run(d, dt):
-        Room.run(d["currentRoom"], dt)
         switchRoom(d)
+        return Room.run(d["currentRoom"], dt)        
 
 def show(d):
         Room.show(d["currentRoom"])

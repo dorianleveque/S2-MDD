@@ -18,7 +18,10 @@ import Entity
 import Utils
 
 def create():
-        game = dict()
+	return init()
+
+def init():
+	game = dict()
         game["dungeon"] = Dungeon.create("forest")
         
         settings = Settings.create()
@@ -31,11 +34,21 @@ def create():
         Dungeon.generate(game["dungeon"])
         return game
 
+def regen(g):
+	Dungeon.generate(g["dungeon"], Dungeon.getPlayer(g["dungeon"]))
+
 def restart(g):
-        Dungeon.generate(g["dungeon"])
+        g = init()
 
 def run(g, dt):
-        Dungeon.run(g["dungeon"], dt)
+        if Dungeon.run(g["dungeon"], dt) == "win":
+		return "win"
+
+        player = Dungeon.getPlayer(g["dungeon"])
+        if Entity.getHealth(player) <= 0:
+                return "lose"
+        
+        return "run"
 
 def show(g):
         Dungeon.show(g["dungeon"])
@@ -50,7 +63,7 @@ def show(g):
                 Utils.goto(offsetX, i+1)
                 Utils.write(29*" "+"\n")
 
-        #
+        # Link
         Utils.goto(offsetX+1, offsetY+1)
         Utils.write("Link", "green")
         

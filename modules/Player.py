@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 ##################################################################
-##								##
-##	     The Legend Of Zelda - A Link to the Rogue		##
-##	    Un projet de Methode de Developpement (MDD) 	##
-##								##
-##			     Player.py	        		##
-##								##
-## LEVEQUE Dorian & ROUE Evan 	S2P 	ENIB	     09/04/2016 ##
+##                                                                ##
+##             The Legend Of Zelda - A Link to the Rogue                ##
+##            Un projet de Methode de Developpement (MDD)         ##
+##                                                                ##
+##                             Player.py                                ##
+##                                                                ##
+## LEVEQUE Dorian & ROUE Evan         S2P         ENIB             09/04/2016 ##
 ##################################################################
 
 # Modules systèmes
@@ -30,7 +30,7 @@ def create():
         player["xp"]=0.0
         player["strength"]=1
         player["resistance"]=1
-        player["damage"] = 0
+        player["damage"] = 10
         player["type"] = "player"
         player["sprite"]="P"
         player["inventory"] = Chest.create()
@@ -49,7 +49,7 @@ def live(p, dt):
         #player["y"] = y
 
 #def show(player):
-	#x, y = getPosition(player)
+        #x, y = getPosition(player)
         #Utils.goto(x+2, y+2)
         #Utils.write(player["sprite"]+'\n')
 
