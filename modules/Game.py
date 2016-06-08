@@ -18,10 +18,7 @@ import Entity
 import Utils
 
 def create():
-	return init()
-
-def init():
-	game = dict()
+        game = dict()
         game["dungeon"] = Dungeon.create("forest")
         
         settings = Settings.create()
@@ -32,14 +29,12 @@ def init():
                 game["keyManager"].update({keyName: dataKey})
                 
         Dungeon.generate(game["dungeon"])
+
         return game
 
-def regen(g):
-	Dungeon.generate(g["dungeon"], Dungeon.getPlayer(g["dungeon"]))
-
 def restart(g):
-        g = init()
-
+	Dungeon.generate(g["dungeon"], Dungeon.getPlayer(g["dungeon"]))
+        
 def run(g, dt):
         if Dungeon.run(g["dungeon"], dt) == "win":
 		return "win"
@@ -92,7 +87,7 @@ def show(g):
         Utils.write("Damage : " + str(damage))
         
 def interact(g, settings, keyRead):
-        # chargement des nouvelles touches:   
+        # Actualiser les nouvelles touches du fichier settings:   
         keyM = g["keyManager"]
         for keyName in keyM:
                 for k in settings:
@@ -100,12 +95,12 @@ def interact(g, settings, keyRead):
                                 keyM[keyName]["key"] = settings[k]
 
 
-#        for keyName in keyM:
-#                if keyM[keyName]["key"] == keyRead:
-#                        if keyM[keyName]["status"] == False:
-#                                keyM[keyName]["status"] = True
-#                        else: keyM[keyName]["status"] = False 
-#                else: keyM[keyName]["status"] = False"""
+       #for keyName in keyM:
+               #if keyM[keyName]["key"] == keyRead:
+                       #if keyM[keyName]["status"] == False:
+                               #keyM[keyName]["status"] = True
+                       #else: keyM[keyName]["status"] = False 
+               #else: keyM[keyName]["status"] = False
         
         player = Dungeon.getPlayer(g["dungeon"])
         playerSpeedValue = 15
