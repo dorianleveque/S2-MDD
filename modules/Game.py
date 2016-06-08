@@ -73,12 +73,12 @@ def show(g):
         # Strength
         strength = Entity.getStrength(player)
         Utils.goto(offsetX+1, offsetY+6)
-        Utils.write("Strength : + " + str((strength-1)*100) + "%")
+        Utils.write("Strength : + " + str(int((strength-1)*100)) + "%")
         
         # Resistance
         resistance = Entity.getResistance(player)
         Utils.goto(offsetX+1, offsetY+8)
-        Utils.write("Resistance : + " + str((resistance-1)*100) + "%")
+        Utils.write("Resistance : + " + str(int((resistance-1)*100)) + "%")
         
         # Damage
         damage = Entity.getDamage(player)

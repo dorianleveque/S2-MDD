@@ -74,7 +74,7 @@ def create(dungeonName, roomName):
                         if item.nodeName == "bonus":
                                 bonus = Bonus.create()
                                 Bonus.setName(bonus, item.getAttribute("name"))
-                                Bonus.setAmount(bonus, item.getAttribute("amount"))
+                                Bonus.setAmount(bonus, float(item.getAttribute("amount")))
                                 Chest.addBonus(chest, bonus)
                         elif item.nodeName == "bow":
                                 bow = Bow.create()
@@ -87,9 +87,9 @@ def create(dungeonName, roomName):
         return r
 
 def getPlayer(r):
-        for currentEntity in r["entity"]:
-                if(Entity.getType(currentEntity) == "player"):
-                        return currentEntity
+        for i in range(0, len(r["entity"])):
+                if(Entity.getType(r["entity"][i]) == "player"):
+                        return r["entity"][i]
 
 def addEntity(r, e):
        r["entity"].append(e)
@@ -187,11 +187,11 @@ def openChest(r):
                         for b in bonus:
                                 name = Bonus.getName(b)
                                 if name == "health":
-                                        Player.setHealth(player, Player.getHealth(player) + Bonus.getAmount(b))
+                                        Entity.setHealth(player, Entity.getHealth(player) + Bonus.getAmount(b))
                                 elif name == "strength":
-                                        Player.setStrength(player, Player.getStrength(player) + Bonus.getAmount(b))
+                                        Entity.setStrength(player, Entity.getStrength(player) + Bonus.getAmount(b))
                                 elif name == "resistance":
-                                        Player.setResistance(player, Player.getResistance(player) + Bonus.getAmount(b))
+                                        Entity.setResistance(player, Entity.getResistance(player) + Bonus.getAmount(b))
 
                         r["chests"].remove(chest)
 
@@ -205,7 +205,7 @@ def show(r):
         # Affichage des coffres
         for currentChest in r["chests"]:
                 x, y = Chest.getPosition(currentChest)
-                Utils.goto(x+2, y+1)
+                Utils.goto(x+2, y+2)
                 Utils.write("C")
         
         # Affichage des entités
