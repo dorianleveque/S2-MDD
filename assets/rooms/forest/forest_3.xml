@@ -68,10 +68,10 @@
                         <item type="bonus" name="heal" amount="10"></item>
                 </chest>
                 <chest x="28" y="4">
-                        <item type="bonus" name="strength" amount="10"></item>
+                        <item type="bonus" name="strength" amount="0.40"></item>
                 </chest>
                 <chest x="71" y="16">
-                        <item type="bonus" name="strength" amount="10"></item>
+                        <item type="bonus" name="strength" amount="0.15"></item>
                 </chest>
                 
         </chests>
