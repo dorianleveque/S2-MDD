@@ -14,18 +14,6 @@
 # Modules personnalisés
 import Utils
 
-#def create(entity, x, y, health, xp, strength, resistance, sprite):
-        ## creation d'une entité :
-        #entity["x"] = x
-        #entity["y"] = y
-        #entity["health"] = health
-        #entity["xp"] = xp
-        #entity["strength"] = strength
-        #entity["resistance"] = resistance
-        #entity["sprite"] = sprite
-        
-        #return entity
-
 def getPosition(e):
         x = e["x"]
         y = e["y"]

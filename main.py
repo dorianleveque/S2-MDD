@@ -66,11 +66,11 @@ def run():
                                         Game.show(game)
                         elif gameState == "lose":
                                 Menu.setCurrentWindow(menu, "lose")
-                                Menu.show()
+                                Menu.show(menu)
                                 gameState = "run"
                         elif gameState == "win":
                                 Menu.setCurrentWindow(menu, "win")
-                                Menu.show()
+                                Menu.show(menu)
                                 gameState = "run"
                 else:
                         if refresh==True:
