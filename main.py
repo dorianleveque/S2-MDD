@@ -100,7 +100,7 @@ def interact():
                         
                         elif key == "d":
                                 # Execute les commandes présentent dans la liste de commande à executer du bouton selectionne
-                                buttonCmdList = Menu.getButtonActions(menu, Menu.getIndexOfSelectedButton(menu, Menu.getButtonList(menu), Menu.getButtonSelectedName(menu)))
+                                buttonCmdList = Menu.getButtonList(menu, Menu.getIndexOfSelectedButton(menu, Menu.getButtonList(menu), Menu.getButtonSelected(menu,"name")),"cmd")
                                 
                                 for cmd in buttonCmdList:
                                         exec cmd
@@ -115,10 +115,10 @@ def interact():
 
 def changeKey(keyName):        
         while not isData():     # Tant qu'il n'y a pas d'autres touche de rentrée
-                Menu.setButtonSelectedState(menu, True)
+                Menu.setButtonSelected(menu, "state", True)
                 Menu.showButtons(menu)
                 
-        Menu.setButtonSelectedState(menu, False)
+        Menu.setButtonSelected(menu, "state", False)
         read = sys.stdin.read(1)  
         canChange = True
         for key in settings:

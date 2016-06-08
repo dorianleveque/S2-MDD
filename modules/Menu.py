@@ -203,37 +203,37 @@ def showBackground(menu):
 
 
 # Renvoie la liste des boutons de la fenetre courante
-def getButtonList(menu):
+def getButtonList(menu, index=None, target=None):
         windowName = getCurrentWindowName(menu)
-        return menu["windows"][windowName]["buttons"]["list"]       # renvoie un dictionnaire {'name'= nom du bouton affiche dans terminal, 'position' = tupple (x,y), 'target' = liste de nom de fenetre}
+        if index == None and target==None:
+                return menu["windows"][windowName]["buttons"]["list"]# renvoie un dictionnaire {'name'= nom du bouton affiche dans terminal, 'position' = tupple (x,y), 'cmd' = liste de commande}
+        else:
+                return menu["windows"][windowName]["buttons"]["list"][index][target]
 
-# Renvoie le bouton selectionne 
-def getButtonSelectedName(menu):
+def setButtonList(menu, index, target, object):
         windowName = getCurrentWindowName(menu)
-        return menu["windows"][windowName]["buttons"]["selected"]["name"]   # renvoie le nom du bouton selectionne
+        menu["windows"][windowName]["buttons"]["list"][index][target] = object
+        
+#--------------        
+        
+def getButtonSelected(menu, target):
+        windowName = getCurrentWindowName(menu)
+        return menu["windows"][windowName]["buttons"]["selected"][target]   # renvoie le target du bouton selectionne
 
-# Affecter un bouton selectionne
-def setButtonSelectedName(menu, buttonName):
+def setButtonSelected(menu, target, t):
         windowName = getCurrentWindowName(menu)
-        menu["windows"][windowName]["buttons"]["selected"]["name"] = buttonName     # Définie le bouton nom selectionne
-
-def getButtonSelectedState(menu):
-        windowName = getCurrentWindowName(menu)
-        return menu["windows"][windowName]["buttons"]["selected"]["state"]   # renvoie l'etat du bouton selectionne Vrai ou Faux
-
-def setButtonSelectedState(menu, state):
-        windowName = getCurrentWindowName(menu)
-        menu["windows"][windowName]["buttons"]["selected"]["state"] = state         # Definie l'etat du bouton selectionnee
+        menu["windows"][windowName]["buttons"]["selected"][target] = t      # Definie l'object du target du bouton selectionnee
+        
         
 
 def setButtonName(menu, newKey):
         windowName = getCurrentWindowName(menu)
         buttonList = getButtonList(menu)
-        buttonSelected = getButtonSelectedName(menu)
+        buttonSelected = getButtonSelected(menu, "name")
         index = getIndexOfSelectedButton(menu, buttonList, buttonSelected)
         
-        menu["windows"][windowName]["buttons"]["list"][index]["name"] = newKey
-        setButtonSelectedName(menu, newKey)                
+        setButtonList(menu, index, "name", newKey)
+        setButtonSelected(menu, "name", newKey)                
 
 
 def showButtons(menu):
@@ -243,8 +243,8 @@ def showButtons(menu):
                 x, y = button["position"]
                 
                 Utils.goto(x,y)
-                if name == getButtonSelectedName(menu):
-                        if getButtonSelectedState(menu):
+                if name == getButtonSelected(menu, "name"):
+                        if getButtonSelected(menu, "state"):
                                 Utils.write("> "+name+"\n", "black", "red")
                         else:
                                 Utils.write("> "+name+"\n", "black", "white")
@@ -271,17 +271,17 @@ def showTexts(menu):
 def changeSelectedButton(menu, action):
         
         # Changer le bouton selectionne de la fenetre      
-        buttonSelected = getButtonSelectedName(menu)
+        buttonSelected = getButtonSelected(menu, "name")
         buttonList = getButtonList(menu)
         index = getIndexOfSelectedButton(menu, buttonList, buttonSelected)
         
         if action == "buttonUp":
                 if index-1 >= 0:
-                        setButtonSelectedName(menu, buttonList[index-1]["name"])
+                        setButtonSelected(menu, "name", buttonList[index-1]["name"])
                         
         elif action == "buttonDown":
                 if index+1 <= len(buttonList)-1:
-                        setButtonSelectedName(menu, buttonList[index+1]["name"])
+                        setButtonSelected(menu, "name", buttonList[index+1]["name"])
 
 
 def addTemporyCommande(menu, commande):
@@ -301,16 +301,14 @@ def getIndexOfSelectedButton(menu, buttonList, buttonSelected):         # renvoi
                         return index
                 index += 1
 
-def getButtonActions(menu, index):
-        windowName = getCurrentWindowName(menu)
-        return menu["windows"][windowName]["buttons"]["list"][index]["cmd"] # renvoie la liste de commande du bouton selectionne et valide
-
-
 if __name__ == "__main__":
         #initialisation
         menu = create()
         setCurrentWindow(menu,"mainMenu")
         
+        print getButtonList(menu)
+        print " "
+        print getButtonList(menu, 0, "name")
         print menu["current"]
         
         addTemporyCommande(menu,'setCurrentWindow(menu,'+getCurrentWindowName(menu)+')')
@@ -322,11 +320,13 @@ if __name__ == "__main__":
         exec getTemporyCommandes(menu)
         
         print menu["current"]
-        #print getButtonActions(menu, getIndexOfSelectedButton(menu, getButtonList(menu), getButtonSelectedName(menu)))
-        #print executButtonAction(menu, getButtonActions(menu, getIndexOfSelectedButton(menu, getButtonList(menu), getButtonSelectedName(menu))))
-        ##setCurrentWindow(menu,"Options")
-        #print menu["current"]
-        #print getCurrentWindowName(menu)
-        #print getCurrentWindowData(menu)
-        #print getCurrentWindowBackgroundContent(menu)
-        #show(menu)
+        
+        
+        print getButtonActions(menu, getIndexOfSelectedButton(menu, getButtonList(menu), getButtonSelectedName(menu)))
+        print executButtonAction(menu, getButtonActions(menu, getIndexOfSelectedButton(menu, getButtonList(menu), getButtonSelectedName(menu))))
+        #setCurrentWindow(menu,"Options")
+        print menu["current"]
+        print getCurrentWindowName(menu)
+        print getCurrentWindowData(menu)
+        print getCurrentWindowBackgroundContent(menu)
+        show(menu)
