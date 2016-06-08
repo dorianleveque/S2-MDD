@@ -49,6 +49,8 @@ M
         </mobs>
 
         <chests>
-        
+                <chest x="40" y="10">
+                        <item type="bonus" name="heal" amount="10"></item>
+                </chest>
         </chests>
 </room>

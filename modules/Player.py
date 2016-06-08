@@ -15,7 +15,7 @@
 import Entity
 import Chest
 import Utils
-import Entity
+import Bow
 
 def create():
         #creation d'un joueur:
@@ -30,10 +30,19 @@ def create():
         player["xp"]=0.0
         player["strength"]=1
         player["resistance"]=1
-        player["damage"] = 10
         player["type"] = "player"
         player["sprite"]="P"
         player["inventory"] = Chest.create()
+        player["selectedBow"] = 0
+        
+        bow = Bow.create()
+        Bow.setName(bow, "Link's Bow")
+        Bow.setSprite(bow, '(')
+        Bow.setDamage(bow, 10)
+        
+        Chest.addItem(player["inventory"], bow)
+        player["damage"] = Bow.getDamage(bow)
+        
         return player
 
 def live(p, dt):
@@ -80,8 +89,8 @@ def live(p, dt):
 #def getDamage(player):
         #return player["damage"]
 
-#def getSelectedBow(player):
-        #return Chest.getContent(player["inventory"])[player["selectedBow"]]
+def getSelectedBow(player):
+        return Chest.getItems(player["inventory"])[player["selectedBow"]]
 
 #def getInventory(player):
        #return player["inventory"]

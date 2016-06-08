@@ -137,13 +137,15 @@
 <text x="24" y="26" color="light gray" backgroundColor="black">Move Down</text>
 <text x="24" y="29" color="light gray" backgroundColor="black">Move Left</text>
 <text x="24" y="32" color="light gray" backgroundColor="black">Move Right</text>
-<text x="24" y="35" color="light gray" backgroundColor="black">Action</text>
+<text x="24" y="35" color="light gray" backgroundColor="black">Shoot</text>
+<text x="24" y="38" color="light gray" backgroundColor="black">Open Chest</text>
 
 <button x="20" y="23" cmd="changeKey('Up')">z</button>
 <button x="20" y="26" cmd="changeKey('Down')">s</button>
 <button x="20" y="29" cmd="changeKey('Left')">q</button>
 <button x="20" y="32" cmd="changeKey('Right')">d</button>
-<button x="20" y="35" cmd="changeKey('Action')">w</button>
+<button x="20" y="35" cmd="changeKey('Shoot')">e</button>
+<button x="20" y="38" cmd="changeKey('Chest')">a</button>
 
 <button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">RETURN</button>
 </windows>
@@ -306,7 +308,7 @@
          #/%        #((.      
          @@@,                                   
 </background>        
-<button x="50" y="22" cmd="Game.restart(game)">RESTART</button>
+<button x="50" y="22" cmd="Game.restart(game)/Menu.setCurrentWindow(menu,'game')">RESTART</button>
 <button x="50" y="24" cmd="Menu.setCurrentWindow(menu,'mainMenu')">RETURN TO TITLE MENU</button>
 <button x="50" y="26" cmd="Menu.setCurrentWindow(menu,'mainMenu')">QUIT GAME</button>
 </windows>
@@ -330,7 +332,7 @@
     \___________________________________________________________________________________________________________/
 </background>
 
-<button x="50" y="22" cmd="Game.restart(game)">RETRY</button>
+<button x="50" y="22" cmd="Game.regen(game)/Menu.setCurrentWindow(menu,'game')">RETRY</button>
 <button x="50" y="24" cmd="Menu.setCurrentWindow(menu,'mainMenu')">RETURN TO TITLE MENU</button>
 <button x="50" y="26" cmd="Menu.setCurrentWindow(menu,'mainMenu')">QUIT GAME</button>
 </windows>

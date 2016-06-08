@@ -159,17 +159,6 @@ def run(d, dt):
 def show(d):
         Room.show(d["currentRoom"])
 
-#def interact():
-        #Room.interact()
-
-#def collide():
-        #Room.collide()
-
-#def move(d):
-        #Room.liveMob(d["currentRoom"])
-
-
-
 def getEntityPosition(d, entity):
         return Room.getEntityPosition(getCurrentRoom(d), entity)
 
@@ -181,6 +170,9 @@ def getPlayer(d):
         
 def launchArrow(d, player):
         return Room.launchArrow(d["currentRoom"], player)
+        
+def openChest(d):
+        return Room.openChest(d["currentRoom"])
 
 def isFree(d, x, y):
         return Room.isFree(d, x, y)
