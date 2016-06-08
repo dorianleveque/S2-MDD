@@ -80,14 +80,13 @@
 </background>
 
 <text x="3" y="41" color="red" backgroundColor="black" form="bold">Version: Alpha | Prototype 2</text>
-<text x="70" y="36" color="white" backgroundColor="black" form="bold">Press escape to quit</text>
 <text x="45" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | confirm : Press 'd'</text>
 
-<button x="70" y="28" cmd="g=Game.create()/Game.restart(g)/Menu.setCurrentWindow(menu,'game')">Start game</button>
-<button x="70" y="30" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'options')">Options</button>
-<button x="70" y="32" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'help')">Help</button>
-<button x="70" y="34" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'credits')">Credits</button>
-<buttons x="70" y="36" cmd="Main.quit()">Quit Game</buttons>
+<button x="70" y="28" cmd="Game.restart(game)/Menu.setCurrentWindow(menu,'game')">START GAME</button>
+<button x="70" y="30" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'options')">OPTIONS</button>
+<button x="70" y="32" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'help')">HELP</button>
+<button x="70" y="34" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'credits')">CREDITS</button>
+<button x="70" y="36" cmd="quit()">QUIT GAME</button>
 
 
 
@@ -133,7 +132,7 @@
 <button x="20" y="32" cmd="changeKey('Right')">d</button>
 <button x="20" y="35" cmd="changeKey('Action')">w</button>
 
-<button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">Return</button>
+<button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">RETURN</button>
 </windows>
 
 <windows name="credits">
@@ -141,12 +140,12 @@
 
                     _____________
                    /             |
-                  /   _________  |___________ __________ _________   _____  ___________    ______
-                 / / /         \ |\   _____  \\   _____ |\   ____ \  \   / |  __   __  |  /  __  |
-                / / /           \| | |     \  \| |     \| | |    \ \  | |  | /  | |  \ | /  /  \ |
-                | | |              | |      | || |        | |     \ \ | |  |/   | |   \||  |    \|
-                | | |              | |_____/  /| |_____/| | |      | || |       | |      \   \
-                |   |              |     ____/ |  _____ | | |      | || |       | |       \    \
+                  /   _________  |_________   __________ _________   _____  ___________    ______
+                 / / /         \ |\   ___  \  \   _____ |\   ____ \  \   / |  __   __  |  /  __  |
+                / / /           \| | |   \  \  | |     \| | |    \ \  | |  | /  | |  \ | /  /  \ |
+                | | |              | |    | |  | |        | |     \ \ | |  |/   | |   \||  |    \|
+                | | |              | |___/  /  | |_____/| | |      | || |       | |      \   \
+                |   |              |     __/   |  _____ | | |      | || |       | |       \    \
                 | | |              | |\  \     | |     \| | |      | || |       | |         \   \
                 | | |              | | \  \    | |        | |     / / | |       | |     |\    |  |
                 \ \ \           /| | |  \  \_  | |_____/| | |____/ /  | |       | |     | \__/  /
@@ -155,7 +154,7 @@
                    \_____________| \____________________________________________________________/
 </background>
 <text x="40" y="26" color="light gray" backgroundColor="black">Comming soon ... (in Prototype 2)</text>
-<button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">Return</button>
+<button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">RETURN</button>
 </windows>
         
 <windows name="help">
@@ -177,7 +176,7 @@
                                /_____\    /_____\  \_________________________________/
 </background>
 <text x="40" y="26" color="light gray" backgroundColor="black">Comming soon ... (in Prototype 2)</text>
-<button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">Return</button>
+<button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">RETURN</button>
 </windows>
 
 <windows name="pause">
@@ -198,10 +197,10 @@
                        /     \    __________________________________________________
                       /_______\   \________________________________________________/
 </background>
-<button x="50" y="20" cmd="Menu.setCurrentWindow(menu,'game')">Resume game</button>
-<button x="50" y="22" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'options')">Options</button>
-<button x="50" y="24" cmd="Menu.setCurrentWindow(menu,'mainMenu')">Return to title menu</button>
-<button x="50" y="26" cmd="g=Game.create()/Game.restart(g)">Restart (comming soon in Prototype 2)</button>
+<button x="50" y="20" cmd="Menu.setCurrentWindow(menu,'game')">RESUME GAME</button>
+<button x="50" y="22" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'options')">OPTIONS</button>
+<button x="50" y="24" cmd="Menu.setCurrentWindow(menu,'mainMenu')">RETURN TO TITLE MENU</button>
+<button x="50" y="26" cmd="Game.restart(game)/Menu.setCurrentWindow(menu,'game')">RESTART</button>
 </windows>
 
 <windows name="game">
@@ -249,5 +248,36 @@
 ██                                                                                ██                             ██
 ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 </background>
+</windows>
+<windows name="win">
+<background>
+
+        
+        
+</background>        
+</windows>
+<windows name="lose">
+<background>        
+      __________                                               _________
+     /   _____  |                                             /   ___   \
+    /   /     \ |    ___     ____            _____________   /   /   \   \ _____      ______________ _________ 
+   / / /       \|    \  \    \   \          /  /\   _____ | / / /     \ \ \\   /      \  /\   _____ |\   ___  \
+  / / /              / _ \    |   \        /  |  | |     \|/ / /       \ \ \\  \      / /  | |     \| | |   \  \
+  | | |             / / \ \   |    \      /   |  | |       | | |       | | | \  \    / /   | |        | |    | |
+  | | |            / /___\ \  |     \    / /| |  | |_____/|| | |       | | | \  \    / /   | |_____/| | |___/  /
+  |   |            |  ___  |  | |\   \  / / | |  |  _____ ||   |       |   |  \  \  / /    |  _____ | |     __/
+  | | |            | /   \ |  | | \   \/ /  | |  | |     \|| | |       | | |   \  \ / /    | |     \| | |\  \    
+  | | |      ______| |   | |  | |  \    /   | |  | |       | | |       | | |   \  \/ /     | |        | | \  \ 
+  \ \ \      \    /| |   | |  | |   \  /    | |  | |_____/|\ \ \       / / /    \   /      | |_____/| | |  \  \_ 
+   \ \ \      |  |/___\ /___\/___\   \/    /___\/_________| \ \ \     / / /      \_/      /_________|/___\  \___\
+    \   \_____/  |                                           \   \___/   /
+     \___________/                                            \_________/
+    _____________________________________________________________________________________________________________
+    \___________________________________________________________________________________________________________/
+</background>
+
+<button x="50" y="22" cmd="Game.restart(game)">RETRY</button>
+<button x="50" y="24" cmd="Menu.setCurrentWindow(menu,'mainMenu')">RETURN TO TITLE MENU</button>
+<button x="50" y="26" cmd="Menu.setCurrentWindow(menu,'mainMenu')">QUIT GAME</button>
 </windows>
 </menu>
