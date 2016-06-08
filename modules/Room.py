@@ -12,6 +12,7 @@
 # Modules système
 from xml.dom.minidom import parse
 from string import *
+import random
 
 # Modules personnalisés
 import Chest

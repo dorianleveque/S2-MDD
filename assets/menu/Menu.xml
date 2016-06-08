@@ -319,7 +319,7 @@
 </background>
 </windows>
 <windows name="win">
-<background>
+<background color="white" backgroundColor="black">
         ______            ____
         \    /            \  /
          \   \            / /  _____    ______   ___________     _______    ___________  _____  ____
@@ -364,10 +364,10 @@
 </background>        
 <button x="50" y="22" cmd="Game.restart(game)/Menu.setCurrentWindow(menu,'game')">RESTART</button>
 <button x="50" y="24" cmd="Menu.setCurrentWindow(menu,'mainMenu')">RETURN TO TITLE MENU</button>
-<button x="50" y="26" cmd="Menu.setCurrentWindow(menu,'mainMenu')">QUIT GAME</button>
+<button x="50" y="26" cmd="quit()">QUIT GAME</button>
 </windows>
 <windows name="lose">
-<background>        
+<background color="white" backgroundColor="black">        
       __________                                               _________
      /   _____  |                                             /   ___   \
     /   /     \ |    ___     ____            _____________   /   /   \   \ _____      ______________ _________ 
@@ -386,8 +386,8 @@
     \___________________________________________________________________________________________________________/
 </background>
 
-<button x="50" y="22" cmd="Game.regen(game)/Menu.setCurrentWindow(menu,'game')">RETRY</button>
+<button x="50" y="22" cmd="Game.restart(game)/Menu.setCurrentWindow(menu,'game')">RETRY</button>
 <button x="50" y="24" cmd="Menu.setCurrentWindow(menu,'mainMenu')">RETURN TO TITLE MENU</button>
-<button x="50" y="26" cmd="Menu.setCurrentWindow(menu,'mainMenu')">QUIT GAME</button>
+<button x="50" y="26" cmd="quit()">QUIT GAME</button>
 </windows>
 </menu>
