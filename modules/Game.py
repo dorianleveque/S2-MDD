@@ -22,11 +22,11 @@ def create():
         game["dungeon"] = Dungeon.create("forest")
         
         settings = Settings.create()
-        game["keyManager"] = dict()
-        for keyName in settings:
-                dataKey = dict()
-                dataKey.update({"key": settings[keyName], "status": False})
-                game["keyManager"].update({keyName: dataKey})
+        game["keyManager"] = settings
+        #for keyName in settings:
+                #dataKey = dict()
+                #dataKey.update({"key": settings[keyName]})
+                #game["keyManager"].update({keyName: dataKey})
                 
         Dungeon.generate(game["dungeon"])
         return game
@@ -91,44 +91,28 @@ def interact(g, settings, keyRead):
         for keyName in keyM:
                 for k in settings:
                         if keyName == k:
-                                keyM[keyName]["key"] = settings[k]
+                                keyM[keyName] = settings[k]      
 
-
-       #for keyName in keyM:
-               #if keyM[keyName]["key"] == keyRead:
-                       #if keyM[keyName]["status"] == False:
-                               #keyM[keyName]["status"] = True
-                       #else: keyM[keyName]["status"] = False 
-               #else: keyM[keyName]["status"] = False
-        Utils.goto(5, 44)
-        print(g["keyManager"])
-        
-        
-        if keyM["Up"]["key"] == keyRead:
-                keyM["Up"]["status"] = True
-        elif keyM["Down"]["key"] == keyRead:
-                keyM["Up"]["status"] = False
-        
-        
-        
-        
         player = Dungeon.getPlayer(g["dungeon"])
         playerSpeedValue = 15
 
-        if keyM["Up"]["status"]:
+        if keyM["Up"] == keyRead:
                 Entity.setSpeed(player, 0, -playerSpeedValue)
                 
-        elif keyM["Down"]["status"]:
+        elif keyM["Down"] == keyRead:
                 Entity.setSpeed(player, 0, playerSpeedValue)
                 
-        elif keyM["Left"]["status"]:
+        elif keyM["Left"] == keyRead:
                 Entity.setSpeed(player, -playerSpeedValue*2, 0)
                 
-        elif keyM["Right"]["status"]:
+        elif keyM["Right"] == keyRead:
                 Entity.setSpeed(player, playerSpeedValue*2, 0)
                 
-        elif keyM["Shoot"]["status"]:
+        elif keyM["Shoot"] == keyRead:
                 Dungeon.launchArrow(g["dungeon"], player)
+                
+        elif keyM["Chest"] == keyRead:
+                Dungeon.openChest(g["dungeon"])
         
 if __name__ == "__main__":
         game = create()
