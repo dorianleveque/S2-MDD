@@ -2,7 +2,7 @@
         <background>
 ████████████████████████████████████████████████████████████████████████████████
 ████████████████████████████████████████████████████████████████████████████████
-███                          ███                ███                          ███
+███                                                                          ███
 ███                                                                          ███
 ███                                                                          ███
 ███                                                                          ███
@@ -15,49 +15,49 @@
 ███                       ███        ██████        ███                       ███
 ███                       ███        ██████        ███                       ███
 ███         █████████████████        ██████        █████████████████         ███
-████        █████████████████        ██████        █████████████████        ████
-███                                                                          ███
-███                                                                          ███
-███                                                                          ███
-███                                                                          ███
-███                                                                          ███
-███                                                                          ███
-███                                                                          ███
-███                                                                          ███
-████        █████████████████        ██████        █████████████████        ████
-███         █████████████████        ██████        █████████████████         ███
-███                       ███        ██████        ███                       ███
-███                       ███        ██████        ███                       ███
-███                       ███        ██████        ███                       ███
-███                       ███        ██████        ███                       ███
-███                       ███        ██████        ███                       ███
-███         █████████████████        ██████        █████████████████         ███
 ███         █████████████████        ██████        █████████████████         ███
 ███                                                                          ███
 ███                                                                          ███
 ███                                                                          ███
 ███                                                                          ███
-███                          ███                ███                          ███
+███                                                                          ███
+███                                                                          ███
+███                                                                          ███
+███                                                                          ███
+███         █████████████████        ██████        █████████████████         ███
+███         █████████████████        ██████        █████████████████         ███
+███                       ███        ██████        ███                       ███
+███                       ███        ██████        ███                       ███
+███                       ███        ██████        ███                       ███
+███                       ███        ██████        ███                       ███
+███                       ███        ██████        ███                       ███
+███         █████████████████        ██████        █████████████████         ███
+███         █████████████████        ██████        █████████████████         ███
+███                                                                          ███
+███                                                                          ███
+███                                                                          ███
+███                                                                          ███
+███                                                                          ███
 ████████████████████████████████████████████████████████████████████████████████
 ████████████████████████████████████████████████████████████████████████████████
         </background>
 
         <mobs>
-                <mob type="guardian" health="50" x="20" y="18" strength="1" resistance="1" damage="2">
+                <mob type="guardian" health="50" x="20" y="18" strength="1" resistance="1" damage="10">G
                 </mob>
-                <mob type="guardian" health="50" x="27" y="23" strength="1" resistance="1" damage="2">
+                <mob type="guardian" health="50" x="27" y="23" strength="1" resistance="1" damage="10">G
                 </mob>
-                <mob type="guardian" health="50" x="57" y="19" strength="1" resistance="1" damage="2">
+                <mob type="guardian" health="50" x="57" y="19" strength="1" resistance="1" damage="10">G
                 </mob>
-                <mob type="guardian" health="50" x="50" y="23" strength="1" resistance="1" damage="2">
+                <mob type="guardian" health="50" x="50" y="23" strength="1" resistance="1" damage="10">G
                 </mob>
-                <mob type="ghost" health="50" x="13" y="29" strength="2" resistance="1" damage="5">
+                <mob type="ghost" health="50" x="13" y="29" strength="2" resistance="1" damage="25">O
                 </mob>
-                <mob type="ghost" health="50" x="66" y="29" strength="2" resistance="1" damage="5">
+                <mob type="ghost" health="50" x="66" y="29" strength="2" resistance="1" damage="25">O
                 </mob>
-                <mob type="ghost" health="50" x="14" y="12" strength="2" resistance="1" damage="5">
+                <mob type="ghost" health="50" x="14" y="12" strength="2" resistance="1" damage="25">O
                 </mob>
-                <mob type="ghost" health="50" x="65" y="12" strength="2" resistance="1" damage="5">
+                <mob type="ghost" health="50" x="65" y="12" strength="2" resistance="1" damage="25">O
                 </mob>
         </mobs>
 

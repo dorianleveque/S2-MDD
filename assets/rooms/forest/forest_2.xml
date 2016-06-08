@@ -43,7 +43,7 @@
         </background>
 
         <mobs>
-                <mob type="boss" health="50" x="40" y="20" strength="4" resistance="10" damage="5">
+                <mob type="boss" health="50" x="40" y="20" strength="4" resistance="10" damage="5">B
                 </mob>
                 
         </mobs>
