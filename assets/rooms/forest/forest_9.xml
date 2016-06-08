@@ -43,19 +43,19 @@
         </background>
 
         <mobs>
-                <mob type="guardian" health="50" x="40" y="20" strength="1" resistance="1" damage="2">
+                <mob type="guardian" health="50" x="40" y="20" strength="1" resistance="1" damage="10">G
                 </mob>
-                <mob type="guardian" health="50" x="40" y="15" strength="1" resistance="1" damage="2">
+                <mob type="guardian" health="50" x="40" y="15" strength="1" resistance="1" damage="10">G
                 </mob>
-                <mob type="guardian" health="50" x="32" y="22" strength="1" resistance="1" damage="2">
+                <mob type="guardian" health="50" x="32" y="22" strength="1" resistance="1" damage="10">G
                 </mob>
-                <mob type="guardian" health="50" x="9" y="34" strength="1" resistance="1" damage="2">
+                <mob type="guardian" health="50" x="9" y="34" strength="1" resistance="1" damage="10">G
                 </mob>
-                <mob type="ghost" health="50" x="59" y="34" strength="1" resistance="1" damage="5">
+                <mob type="ghost" health="50" x="59" y="34" strength="2" resistance="1" damage="25">O
                 </mob>
-                <mob type="ghost" health="50" x="7" y="12" strength="1" resistance="1" damage="5">
+                <mob type="ghost" health="50" x="7" y="12" strength="2" resistance="1" damage="25">O
                 </mob>
-                <mob type="ghost" health="50" x="72" y="5" strength="1" resistance="1" damage="5">
+                <mob type="ghost" health="50" x="72" y="5" strength="2" resistance="1" damage="25">O
                 </mob>
                 
                 

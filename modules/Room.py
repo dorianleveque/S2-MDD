@@ -121,9 +121,18 @@ def run(r, dt):
                 if Entity.getType(currentEntity) == "player":
                         newX, newY = Player.live(currentEntity, dt)
                 if Entity.getType(currentEntity) == "ghost":
+                        
+                        # Le ghost lance des flèches sur le joueur:
+                        if random.randint(0, 100) < 2:
+                                launchArrow(r, currentEntity)
                         newX, newY = Mob.live(currentEntity, player, 3, dt)
                 if Entity.getType(currentEntity) == "guardian":
                         newX, newY = Mob.live(currentEntity, player, 6, dt)
+                        
+                        # Le guardian lance des flèches sur le joueur:
+                        if random.randint(0, 100) < 5:
+                                launchArrow(r, currentEntity)
+                        
                 if Entity.getType(currentEntity) == "boss":
                         newX, newY = Mob.live(currentEntity, player, 12, dt)
                         
