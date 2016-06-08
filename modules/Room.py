@@ -81,6 +81,8 @@ def create(dungeonName, roomName):
                                 Bow.setDamage(bow, int(item.getAttribute("damage")))
                                 Bow.setSprite(bow, item.firstChild.nodeValue)
                                 Chest.addItem(chest, bow)
+                r["chests"].append(chest)
+
         return r
 
 def getPlayer(r):
@@ -123,9 +125,13 @@ def run(r, dt):
                         newX, newY = Mob.live(currentEntity, player, 6, dt)
                 if Entity.getType(currentEntity) == "boss":
                         newX, newY = Mob.live(currentEntity, player, 12, dt)
+                        
+                        # Le boss peut lancer des fleches de maniere random
+                        if random.randint(0, 100) < 20:
+                                launchArrow(r, currentEntity)
 
-                # Déplacement autorisé s'il n'y pas d'obstacle ou de mob / joueur
-                if isFree(r, newX, newY) and getEntityByPosition(r, newX, newY, currentEntity) == -1:
+                # Déplacement autorisé s'il n'y pas d'obstacle ou de mob / joueur (ni de coffres)
+                if isFree(r, newX, newY) and getEntityByPosition(r, newX, newY, currentEntity) == -1 and getChestByPosition(r, newX, newY) == -1:
                         Entity.setPosition(currentEntity, newX, newY)
                 
                 # Despawn du monstre quand sa vie tombe à 0
@@ -135,8 +141,9 @@ def run(r, dt):
                 # Si on a tué le Boss, alors on a gagné
                 if Entity.getHealth(currentEntity) == 0 and Entity.getType(currentEntity) == "boss":
                         Entity.setMaxHealth(player, Entity.getMaxHealth(player) + 50)
-                        Entity.setHealth(player, Entity.setMaxHealth(player))
-                        
+                        Entity.setHealth(player, Entity.getMaxHealth(player))
+                        Entity.setStrength(player, Entity.getStrength() + 0.30)
+                        Entity.setResistance(player, Entity.getResistance() + 0.20)
                         return "win"
 
         return ""
@@ -176,6 +183,8 @@ def openChest(r):
                                 elif name == "resistance":
                                         Player.setResistance(player, Player.getResistance(player) + Bonus.getAmount(b))
 
+                        r["chests"].remove(chest)
+
 def show(r):
         # Affichage du fond
         for y in range(0, len(r["background"])):
@@ -187,7 +196,7 @@ def show(r):
         for currentChest in r["chests"]:
                 x, y = Chest.getPosition(currentChest)
                 Utils.goto(x+2, y+1)
-                Chest.show(currentChest)
+                Utils.write("C")
         
         # Affichage des entités
         for currentEntity in r["entity"]:
@@ -227,7 +236,7 @@ def drawDoor(r, x, y, w, h):
 def getChestByPosition(r, x, y):
         # On parcourt la liste des coffres de la salle
         for currentChest in r["chests"]:
-                if Chest.getPosition(currentChest) == (x,y):
+                if Chest.getPosition(currentChest) == (int(round(x)), int(round(y))):
                         return currentChest
         
         return -1

@@ -76,6 +76,21 @@ def show(g):
         healthBar = int(round((health/maxHealth)*10))*"♥ "
         Utils.write(healthBar.decode("utf-8"), "red")
         
+        # Strength
+        strength = Entity.getStrength(player)
+        Utils.goto(offsetX+1, offsetY+6)
+        Utils.write("Strength : + " + str((strength-1)*100) + "%")
+        
+        # Resistance
+        resistance = Entity.getResistance(player)
+        Utils.goto(offsetX+1, offsetY+8)
+        Utils.write("Resistance : + " + str((resistance-1)*100) + "%")
+        
+        # Damage
+        damage = Entity.getDamage(player)
+        Utils.goto(offsetX+1, offsetY+10)
+        Utils.write("Damage : " + str(damage))
+        
 def interact(g, settings, keyRead):
         # chargement des nouvelles touches:   
         keyM = g["keyManager"]
@@ -103,9 +118,10 @@ def interact(g, settings, keyRead):
                 Entity.setSpeed(player, -playerSpeedValue*2, 0)
         elif keyM["Right"]["key"] == keyRead:
                 Entity.setSpeed(player, playerSpeedValue*2, 0)
-        elif keyM["Action"]["key"] == keyRead:
+        elif keyM["Shoot"]["key"] == keyRead:
                 Dungeon.launchArrow(g["dungeon"], player)
-
+        elif keyM["Chest"]["key"] == keyRead:
+                Dungeon.openChest(g["dungeon"])
         
 if __name__ == "__main__":
         game = create()

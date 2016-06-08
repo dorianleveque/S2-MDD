@@ -15,7 +15,8 @@ def create():
         keyGame["Down"] = 's'
         keyGame["Left"] = 'q'
         keyGame["Right"] = 'd'
-        keyGame["Action"] = 'w'
+        keyGame["Shoot"] = 'e'
+        keyGame["Chest"] = 'a'
         return keyGame
 
 def getKey(keyGame,keyName):
