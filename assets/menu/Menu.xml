@@ -130,8 +130,8 @@
                  
                  
 </background>
-<text x="30" y="18" color="light gray" backgroundColor="black" form="bold/underline">Control Settings</text>
-<text x="30" y="20" color="light red" backgroundColor="black" >To change Key press 'd' and then press the new key</text>
+<text x="20" y="20" color="light gray" backgroundColor="black" form="bold/underline">Control Settings</text>
+<text x="50" y="22" color="light red" backgroundColor="black" >To change Key press 'd' and then press the new key</text>
 
 <text x="24" y="23" color="light gray" backgroundColor="black">Move Up</text>
 <text x="24" y="26" color="light gray" backgroundColor="black">Move Down</text>
@@ -167,8 +167,27 @@
                  \ \ \_________/ |/___\  \___\/_________|/________/  /___\     /___\    |______/
                   \              | ______________________________________________________________
                    \_____________| \____________________________________________________________/
+                   
+                   
+                   
+                   
+                   
+                                                                                .'.         .'.
+                                                                                |  \       /  |
+                                                                                '.  \  |  /  .'
+                                                                                  '. \\|// .'
+                                                                                    '-- --'
+                                                                                    .'/|\'.
+                                                                                   '..'|'..'
 </background>
-<text x="40" y="26" color="light gray" backgroundColor="black">This game was developped by Dorian LEVEQUE and Evan Roue, two </text>
+<text x="10" y="20" color="blue" backgroundColor="black">This game was developped by Dorian LEVEQUE and Evan Roue,</text>
+<text x="10" y="22" color="blue" backgroundColor="black">two students in first year of engineering school in the ENIB</text>
+<text x="10" y="24" color="blue" backgroundColor="black">in Brest.</text>
+
+<text x="10" y="28" color="blue" backgroundColor="black">Within the framework of our school (ENIB) in the course of </text>
+<text x="10" y="30" color="blue" backgroundColor="black">Method of Development, we had to realize and supply a game</text>
+<text x="10" y="32" color="blue" backgroundColor="black">in a terminal Linux before 6 weeks.</text>
+
 <button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">RETURN</button>
 </windows>
         
@@ -189,8 +208,43 @@
                                 | | |      | | | /_________|/_________|/___\          
                                 | | |      | | |   ___________________________________
                                /_____\    /_____\  \_________________________________/
+                               
+                               
+                               
+                               
+                                                                                    __
+                                                                                   /\ \
+                                                                                  /..\ \
+                                                                                 /....\ \
+                                                                                /......\ \
+                                                                               /........\ \
+                                                                              /__________\ \
+                                                                             /\ \        /\ \
+                                                                            /..\ \      /..\ \
+                                                                           /....\ \    /....\ \
+                                                                          /......\ \  /......\ \
+                                                                         /........\ \/........\ \
+                                                                        /__________\/__________\_\
+                                                                               
+                                                                               
 </background>
-<text x="40" y="26" color="light gray" backgroundColor="black">Comming soon ... (in Prototype 2)</text>
+<text x="10" y="20" color="yellow" backgroundColor="black" form="bold/underline">Rule of the game:</text>
+<text x="10" y="22" color="blue" backgroundColor="black">The purpose of the game is to evolve in a donjon, to collect chests</text>
+<text x="10" y="23" color="blue" backgroundColor="black">to improve your weapons and make them more powerful to overcome</text>
+<text x="10" y="24" color="blue" backgroundColor="black">monsters without dying.</text>
+
+<text x="10" y="26" color="light blue" backgroundColor="black">Also you only have one life, once you die and you leave the</text>
+<text x="10" y="27" color="light blue" backgroundColor="black">dungeon. When you want to replay, it will not be anymore</text>
+<text x="10" y="28" color="light blue" backgroundColor="black">the same donjon.</text>
+
+<text x="10" y="30" color="blue" backgroundColor="black">In every dungeon, there will be a boss. If you manage </text>
+<text x="10" y="31" color="blue" backgroundColor="black">to defeat him, you will go one level. You will reach</text>
+<text x="10" y="32" color="blue" backgroundColor="black">then another longer and more difficult donjon.</text>
+
+<text x="10" y="34" color="yellow" backgroundColor="black" form="bold/underline">How to play:</text>
+<text x="10" y="36" color="light blue" backgroundColor="black">To move in the donjon and execute the actions of the personage,</text>
+<text x="10" y="37" color="light blue" backgroundColor="black">press once the touch indicated in the menu options.</text>
+
 <button x="100" y="40" cmd="Menu.executeTemporyCommandes(menu)">RETURN</button>
 </windows>
 
