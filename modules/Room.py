@@ -154,8 +154,8 @@ def run(r, dt):
                 if Entity.getHealth(currentEntity) <= 0 and Entity.getType(currentEntity) == "boss":
                         Entity.setMaxHealth(player, Entity.getMaxHealth(player) + 50)
                         Entity.setHealth(player, Entity.getMaxHealth(player))
-                        Entity.setStrength(player, Entity.getStrength() + 0.30)
-                        Entity.setResistance(player, Entity.getResistance() + 0.20)
+                        Entity.setStrength(player, Entity.getStrength(player) + 0.30)
+                        Entity.setResistance(player, Entity.getResistance(player) + 0.20)
                         return "win"
 
         return ""
