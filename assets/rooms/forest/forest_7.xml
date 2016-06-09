@@ -57,7 +57,7 @@
                 <chest x="22" y="13">
                         <bonus name="health" amount="10"></bonus>
                 </chest>
-                <chest x="57" y="29">
+                <chest x="57" y="27">
                         <bonus name="strength" amount="0.35"></bonus>
                 </chest>
         </chests>
