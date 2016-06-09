@@ -55,10 +55,10 @@
 
         <chests>
                 <chest x="22" y="13">
-                        <item type="bonus" name="heal" amount="10"></item>
+                        <bonus name="health" amount="10"></bonus>
                 </chest>
-                <chest x="57" y="29">
-                        <item type="bonus" name="strength" amount="0.35"></item>
+                <chest x="57" y="27">
+                        <bonus name="strength" amount="0.35"></bonus>
                 </chest>
         </chests>
 </room>

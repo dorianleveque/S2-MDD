@@ -21,6 +21,8 @@ import Entity
 import Player
 import Mob
 import Utils
+import Bonus
+import Bow
 
 def create(dungeonName, roomName):
         # -- Initialisation du dictionnaire --
@@ -145,15 +147,15 @@ def run(r, dt):
                         Entity.setPosition(currentEntity, newX, newY)
                 
                 # Despawn du monstre quand sa vie tombe à 0
-                if Entity.getHealth(currentEntity) == 0 and Entity.getType(currentEntity) != "player":
+                if Entity.getHealth(currentEntity) <= 0 and Entity.getType(currentEntity) != "player":
                         r["entity"].remove(currentEntity)
                 
                 # Si on a tué le Boss, alors on a gagné
-                if Entity.getHealth(currentEntity) == 0 and Entity.getType(currentEntity) == "boss":
+                if Entity.getHealth(currentEntity) <= 0 and Entity.getType(currentEntity) == "boss":
                         Entity.setMaxHealth(player, Entity.getMaxHealth(player) + 50)
                         Entity.setHealth(player, Entity.getMaxHealth(player))
-                        Entity.setStrength(player, Entity.getStrength() + 0.30)
-                        Entity.setResistance(player, Entity.getResistance() + 0.20)
+                        Entity.setStrength(player, Entity.getStrength(player) + 0.30)
+                        Entity.setResistance(player, Entity.getResistance(player) + 0.20)
                         return "win"
 
         return ""
@@ -186,7 +188,7 @@ def openChest(r):
                         bonus = Chest.getBonus(chest)
                         for b in bonus:
                                 name = Bonus.getName(b)
-                                if name == "health":
+                                if name == "health" and Entity.getMaxHealth(player) != Entity.getHealth(player):
                                         Entity.setHealth(player, Entity.getHealth(player) + Bonus.getAmount(b))
                                 elif name == "strength":
                                         Entity.setStrength(player, Entity.getStrength(player) + Bonus.getAmount(b))

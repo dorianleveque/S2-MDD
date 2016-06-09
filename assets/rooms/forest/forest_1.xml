@@ -49,7 +49,7 @@
 
         <chests>
                 <chest x="40" y="10">
-                        <item type="bonus" name="heal" amount="10"></item>
+                        <bonus name="health" amount="10"></bonus>
                 </chest>
         </chests>
 </room>

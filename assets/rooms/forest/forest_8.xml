@@ -64,17 +64,17 @@
         </mobs>
 
         <chests>
-                <chest x="38" y="22">
-                        <item type="bonus" name="heal" amount="20"></item>
+                <chest x="38" y="20">
+                        <bonus name="health" amount="20"></bonus>
                 </chest>
                 <chest x="71" y="3">
-                        <item type="bonus" name="strength" amount="0.50"></item>
+                        <bonus name="strength" amount="0.50"></bonus>
                 </chest>
-                                <chest x="34" y="22">
-                        <item type="bonus" name="strength" amount="0.80"></item>
+                <chest x="34" y="20">
+                        <bonus name="strength" amount="0.80"></bonus>
                 </chest>
-                                <chest x="43" y="22">
-                        <item type="bonus" name="resistance" amount="0.80"></item>
+                <chest x="43" y="20">
+                        <bonus name="resistance" amount="0.80"></bonus>
                 </chest>
                 
         </chests>
