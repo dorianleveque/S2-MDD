@@ -65,13 +65,13 @@
 
         <chests>
                 <chest x="24" y="33">
-                        <item type="bonus" name="heal" amount="10"></item>
+                        <bonus name="health" amount="10"></bonus>
                 </chest>
                 <chest x="28" y="4">
-                        <item type="bonus" name="strength" amount="0.40"></item>
+                        <bonus name="strength" amount="0.40"></bonus>
                 </chest>
                 <chest x="71" y="16">
-                        <item type="bonus" name="strength" amount="0.15"></item>
+                        <bonus name="strength" amount="0.15"></bonus>
                 </chest>
                 
         </chests>
