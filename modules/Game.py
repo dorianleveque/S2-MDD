@@ -32,7 +32,9 @@ def create():
         return game
 
 def restart(g):
-	Dungeon.generate(g["dungeon"], Dungeon.getPlayer(g["dungeon"]))
+        player = Dungeon.getPlayer(g["dungeon"])
+        Entity.setHealth(player, Entity.getMaxHealth(player))
+	Dungeon.generate(g["dungeon"], player)
         
 def run(g, dt):
         if Dungeon.run(g["dungeon"], dt) == "win":
