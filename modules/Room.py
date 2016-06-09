@@ -21,6 +21,8 @@ import Entity
 import Player
 import Mob
 import Utils
+import Bonus
+import Bow
 
 def create(dungeonName, roomName):
         # -- Initialisation du dictionnaire --
@@ -186,7 +188,7 @@ def openChest(r):
                         bonus = Chest.getBonus(chest)
                         for b in bonus:
                                 name = Bonus.getName(b)
-                                if name == "health":
+                                if name == "health" and Entity.getMaxHealth(player) != Entity.getHealth(player):
                                         Entity.setHealth(player, Entity.getHealth(player) + Bonus.getAmount(b))
                                 elif name == "strength":
                                         Entity.setStrength(player, Entity.getStrength(player) + Bonus.getAmount(b))

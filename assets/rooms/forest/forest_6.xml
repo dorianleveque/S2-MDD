@@ -63,16 +63,16 @@
 
         <chests>
                 <chest x="20" y="27">
-                        <item type="bonus" name="heal" amount="10"></item>
+                        <bonus name="health" amount="10"></bonus>
                 </chest>
                 <chest x="30" y="53">
-                        <item type="bonus" name="strength" amount="0.35"></item>
+                        <bonus name="strength" amount="0.35"></bonus>
                 </chest>
                 <chest x="25" y="12">
-                        <item type="bonus" name="resistance" amount="0.5"></item>
+                        <bonus name="resistance" amount="0.5"></bonus>
                 </chest>
                 <chest x="59" y="14">
-                        <item type="bonus" name="heal" amount="10"></item>
+                        <bonus name="health" amount="10"></bonus>
                 </chest>
         </chests>
 </room>
