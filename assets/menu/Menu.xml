@@ -79,7 +79,7 @@
                                       =
 </background>
 
-<text x="3" y="41" color="red" backgroundColor="black" form="bold">Version: Alpha | Prototype 2</text>
+<text x="3" y="41" color="green" backgroundColor="black" form="bold">Version 1.0</text>
 <text x="45" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | confirm : Press 'd'</text>
 
 <button x="70" y="28" cmd="Game.restart(game)/Menu.setCurrentWindow(menu,'game')">START GAME</button>
