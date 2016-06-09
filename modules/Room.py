@@ -147,11 +147,11 @@ def run(r, dt):
                         Entity.setPosition(currentEntity, newX, newY)
                 
                 # Despawn du monstre quand sa vie tombe à 0
-                if Entity.getHealth(currentEntity) == 0 and Entity.getType(currentEntity) != "player":
+                if Entity.getHealth(currentEntity) <= 0 and Entity.getType(currentEntity) != "player":
                         r["entity"].remove(currentEntity)
                 
                 # Si on a tué le Boss, alors on a gagné
-                if Entity.getHealth(currentEntity) == 0 and Entity.getType(currentEntity) == "boss":
+                if Entity.getHealth(currentEntity) <= 0 and Entity.getType(currentEntity) == "boss":
                         Entity.setMaxHealth(player, Entity.getMaxHealth(player) + 50)
                         Entity.setHealth(player, Entity.getMaxHealth(player))
                         Entity.setStrength(player, Entity.getStrength() + 0.30)
