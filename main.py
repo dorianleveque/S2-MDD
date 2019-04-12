@@ -32,7 +32,7 @@ old_settings = termios.tcgetattr(sys.stdin)
 
 # Donnee du jeu
 direction = "None"
-dt = 0.02
+dt = 0.01
 
 game = Game.create()
 settings = Settings.create()
@@ -98,7 +98,7 @@ def interact():
                         elif key == "s":
                                 Menu.changeSelectedButton(menu, "buttonDown")
                         
-                        elif key == "d":
+                        elif key == "\n":
                                 # Execute les commandes présentent dans la liste de commande à executer du bouton selectionne
                                 buttonCmdList = Menu.getButtonList(menu, Menu.getIndexOfSelectedButton(menu, Menu.getButtonList(menu), Menu.getButtonSelected(menu,"name")),"cmd")
                                 
@@ -109,8 +109,8 @@ def interact():
                         quit()                          # \x1b = touche echap / appel de la fonction qui permet de quitter le jeu
         
         while isData():
-                sys.stdin.read(5)
-                #termios.tcflush(sys.stdin, termios.TCIFLUSH)   # Permet de vider, le buffer des touches d'entree
+                #sys.stdin.read(5)
+                termios.tcflush(sys.stdin, termios.TCIFLUSH)   # Permet de vider, le buffer des touches d'entree
 
 
 def changeKey(keyName):        

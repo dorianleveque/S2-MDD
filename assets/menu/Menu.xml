@@ -80,7 +80,7 @@
 </background>
 
 <text x="3" y="41" color="green" backgroundColor="black" form="bold">Version 1.0</text>
-<text x="45" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | confirm : Press 'd'</text>
+<text x="44" y="41" color="blue" backgroundColor="black">To navigate:  ↑ : Press 'z' | ↓ : Press 's' | confirm : Press 'ENTER'</text>
 
 <button x="70" y="28" cmd="Game.restart(game)/Menu.setCurrentWindow(menu,'game')">START GAME</button>
 <button x="70" y="30" cmd="Menu.addTemporyCommande(menu,'setCurrentWindow(menu,'+Menu.getCurrentWindowName2(menu)+')')/Menu.setCurrentWindow(menu,'options')">OPTIONS</button>
@@ -131,7 +131,7 @@
                  
 </background>
 <text x="20" y="20" color="light gray" backgroundColor="black" form="bold/underline">Control Settings</text>
-<text x="50" y="22" color="light red" backgroundColor="black" >To change Key press 'd' and then press the new key</text>
+<text x="50" y="22" color="light red" backgroundColor="black" >To change Key press 'ENTER' and then press the new key</text>
 
 <text x="24" y="23" color="light gray" backgroundColor="black">Move Up</text>
 <text x="24" y="26" color="light gray" backgroundColor="black">Move Down</text>
@@ -180,7 +180,7 @@
                                                                                     .'/|\'.
                                                                                    '..'|'..'
 </background>
-<text x="10" y="20" color="blue" backgroundColor="black">This game was developped by Dorian LEVEQUE and Evan Roue,</text>
+<text x="10" y="20" color="blue" backgroundColor="black">This game was developped by Dorian LEVEQUE and Evan ROUE,</text>
 <text x="10" y="22" color="blue" backgroundColor="black">two students in first year of engineering school in the ENIB</text>
 <text x="10" y="24" color="blue" backgroundColor="black">in Brest.</text>
 
